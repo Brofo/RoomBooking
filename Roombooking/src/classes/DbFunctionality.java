@@ -55,7 +55,7 @@ public class DbFunctionality {
         PreparedStatement insertUrl;
 
         try {
-            String ins ="insert into hallgeir.webadresse (url)  values (?)";
+            String ins ="insert into  RoombookingDB.Room(room_id)  values (?)";
 
             insertUrl = conn.prepareStatement(ins);
             insertUrl.setString(1,newAddress);           // Gir verdi til url
@@ -79,7 +79,7 @@ public class DbFunctionality {
         PreparedStatement getUrls;
 
         try {
-            getUrls = conn.prepareStatement("select * from webadresse order by ?");
+            getUrls = conn.prepareStatement("select * from RoombookingDB.Room order by ?");
             getUrls.setString(1,"url");
 
             ResultSet rset = getUrls.executeQuery();
@@ -89,19 +89,18 @@ public class DbFunctionality {
             out.println("The records selected are:" +"<br>");
             int rowCount = 0;
             while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                String nr = rset.getString("nr");
-                String url = rset.getString("url");
+                String url = rset.getString("room_id");
 
                 // out.println(rowCount +": " +snr + " , " + firstName + ", " + lastName +"<br>");
-                out.println("No: " +nr + " url: " +url +"<br>");
-                out.format(URL,url, nr, url);
+                out.println("Rom: " + url +"<br>");
+
 
                 out.println("<br>");
                 ++rowCount;
             }  // end while
             out.println("Total number of records = " + rowCount +"<br>");
 
-            out.format(URL,"index.html","Home","");
+            out.format(URL,"index.jsp","Home","");
 
         } // end try
         catch (SQLException ex) {
