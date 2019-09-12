@@ -13,10 +13,13 @@
   <body>
 
   <form action="Servlet">
-    Fullstendig url:   <input type="text" name="webUrl">
+    Fornavn: <input type="text" name="navn">
+    Dato<input type="date" id="start" name="dato"
+               min="2019-01-01"
+               max="2099-12-31">
 
-    <input type="submit" name ="action"   value="Registrer">
-    <input type="submit" name ="action"   value="Vis alle">
+    <input type="submit" name ="action"  value="Registrer">
+    <input type="submit" name ="action"  value="Vis alle">
 
     <br>
 

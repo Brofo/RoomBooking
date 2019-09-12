@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,29 +31,28 @@ public class Servlet extends HttpServlet {
         Throwable var4 = null;
 
         try {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title> Administrere websider </title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> Web sider </h1>");
-            String webUrl = request.getParameter("webUrl");
+
+            String fornavn = request.getParameter("navn");
+            String data = request.getParameter("dato");
             String action = request.getParameter("action");
+
             DbTool dbtool = new DbTool();
             Connection conn = dbtool.loggInn(out);
-            out.println("Tebage fra logginn");
+
+            out.println("Log in complete ");
             DbFunctionality dbfunctionality = new DbFunctionality();
+
             if (action.contains("Registrer")) {
-                out.println("Registrer valgt");
-                dbfunctionality.newUrl(webUrl, out, conn);
+                out.println("Registrer valgt ");
+                dbfunctionality.newName(fornavn, out, conn);
+                dbfunctionality.newDato(data,out,conn);
+
             } else if (action.contains("alle")) {
                 out.println("Valg, skrive alle tabeller");
-                dbfunctionality.printUrls(out, conn);
+                dbfunctionality.printName(out, conn);
             }
 
-            out.println("</body>");
-            out.println("</html>");
+
         } catch (Throwable var17) {
             var4 = var17;
             throw var17;
