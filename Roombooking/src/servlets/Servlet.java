@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +17,8 @@ import classes.DbFunctionality;
 
 
 @WebServlet(
-        name = "Servlet",
-        urlPatterns = {"/Servlet"}
+        name = "servlets.Servlet",
+        urlPatterns = {"/servlets.Servlet"}
 )
 public class Servlet extends HttpServlet {
     public Servlet() {
@@ -68,9 +67,7 @@ public class Servlet extends HttpServlet {
                     out.close();
                 }
             }
-
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
