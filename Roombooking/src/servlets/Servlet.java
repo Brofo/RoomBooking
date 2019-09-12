@@ -1,4 +1,4 @@
-//
+package servlets;//
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
@@ -17,26 +17,21 @@ import classes.DbFunctionality;
 
 
 @WebServlet(
-        name = "Servlet",
-        urlPatterns = {"/Servlet"}
+        name = "servlets.Servlet",
+        urlPatterns = {"/servlets.Servlet"}
 )
 public class Servlet extends HttpServlet {
     public Servlet() {
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Throwable var4 = null;
 
         try {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title> Administrere websider </title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> Web sider </h1>");
             String webUrl = request.getParameter("webUrl");
             String action = request.getParameter("action");
             DbTool dbtool = new DbTool();
@@ -51,8 +46,6 @@ public class Servlet extends HttpServlet {
                 dbfunctionality.printUrls(out, conn);
             }
 
-            out.println("</body>");
-            out.println("</html>");
         } catch (Throwable var17) {
             var4 = var17;
             throw var17;
@@ -68,9 +61,7 @@ public class Servlet extends HttpServlet {
                     out.close();
                 }
             }
-
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

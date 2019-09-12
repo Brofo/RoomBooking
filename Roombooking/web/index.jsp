@@ -12,15 +12,11 @@
   </head>
   <body>
 
-  <form action="Servlet">
+  <form action="servlets.Servlet">
     Fullstendig url:   <input type="text" name="webUrl">
 
     <input type="submit" name ="action"   value="Registrer">
     <input type="submit" name ="action"   value="Vis alle">
-
-    <br>
-
-
-
+  </form>
   </body>
 </html>
