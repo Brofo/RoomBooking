@@ -24,27 +24,33 @@ public class Servlet extends HttpServlet {
     public Servlet() {
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Throwable var4 = null;
 
         try {
-            String webUrl = request.getParameter("webUrl");
+
+            String fornavn = request.getParameter("navn");
+            String data = request.getParameter("dato");
             String action = request.getParameter("action");
+
             DbTool dbtool = new DbTool();
             Connection conn = dbtool.loggInn(out);
-            out.println("Tebage fra logginn");
+
+            out.println("Log in complete ");
             DbFunctionality dbfunctionality = new DbFunctionality();
+
             if (action.contains("Registrer")) {
-                out.println("Registrer valgt");
-                dbfunctionality.newUrl(webUrl, out, conn);
+                out.println("Registrer valgt ");
+                dbfunctionality.newName(fornavn, out, conn);
+                dbfunctionality.newDato(data,out,conn);
+
             } else if (action.contains("alle")) {
                 out.println("Valg, skrive alle tabeller");
-                dbfunctionality.printUrls(out, conn);
+                dbfunctionality.printName(out, conn);
             }
+
 
         } catch (Throwable var17) {
             var4 = var17;

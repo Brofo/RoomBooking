@@ -48,22 +48,37 @@ public class DbFunctionality {
     }
 
     /*
-        Skal inserte en ny url i tabellen webadresse i databasen. Url som
+        Skal inserte et nytt navn i tabellen webadresse i databasen. Navnet som
         settes inn er hentet fra formen.
     */
-    public void newUrl(String newAddress, PrintWriter out, Connection conn) {
-        PreparedStatement insertUrl;
+    public void newName(String newName, PrintWriter out, Connection conn) {
+        PreparedStatement insertName;
 
         try {
-            String ins ="insert into  RoombookingDB.Room(room_id)  values (?)";
+            String ins ="insert into  RoombookingDB.Customer(cus_name)  values (?)";
 
-            insertUrl = conn.prepareStatement(ins);
-            insertUrl.setString(1,newAddress);           // Gir verdi til url
-            insertUrl.executeUpdate();
-            out.println("Ny url lagret i DB: " +newAddress);
+            insertName = conn.prepareStatement(ins);
+            insertName.setString(1,newName);           // Gir verdi til sql
+            insertName.executeUpdate();
+            out.println("Nytt navn lagret i DB: " + newName);
         } // end try
         catch (SQLException ex) {
-            out.println("Ikke fått opprettet NY url " +ex);
+            out.println("Ikke fått opprettet nytt navn " +ex);
+        }
+    }
+
+    public void newDato(String newDato, PrintWriter out, Connection conn) {
+        PreparedStatement insertDato;
+
+        try {
+            String ins ="insert into  RoombookingDB.Orders(order_checkindate)  values (?)";
+            insertDato = conn.prepareStatement(ins);
+            insertDato.setString(1,newDato);           // Gir verdi til sql
+            insertDato.executeUpdate();
+            out.println("Ny Dato lagret i DB: " + newDato);
+        } // end try
+        catch (SQLException ex) {
+            out.println("Ikke fått opprettet nytt navn " +ex);
         }
     }
     
@@ -73,34 +88,31 @@ public class DbFunctionality {
         New here: use of %s in Strings
     */
 
-    public void printUrls(PrintWriter out, Connection conn)
+    public void printName(PrintWriter out, Connection conn)
     {
-        String URL  = "<a href='%s'>%s %s</a><br>";
-        PreparedStatement getUrls;
+        PreparedStatement getName;
 
         try {
-            getUrls = conn.prepareStatement("select * from RoombookingDB.Room order by ?");
-            getUrls.setString(1,"url");
+            getName = conn.prepareStatement("select * from RoombookingDB.Customer order by ?");
+            getName.setString(1,"navn");
 
-            ResultSet rset = getUrls.executeQuery();
+            ResultSet rset = getName.executeQuery();
 
             // Process the ResultSet by scrolling the cursor forward via next().
             //  For each row, retrieve the contents of the cells with getXxx(columnName).
             out.println("The records selected are:" +"<br>");
             int rowCount = 0;
             while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                String url = rset.getString("room_id");
+                String navn = rset.getString("cus_name");
 
                 // out.println(rowCount +": " +snr + " , " + firstName + ", " + lastName +"<br>");
-                out.println("Rom: " + url +"<br>");
+                out.println("Navn: " + navn +"<br>");
 
 
                 out.println("<br>");
                 ++rowCount;
             }  // end while
             out.println("Total number of records = " + rowCount +"<br>");
-
-            out.format(URL,"index.jsp","Home","");
 
         } // end try
         catch (SQLException ex) {
