@@ -13,15 +13,14 @@
   <body>
 
   <form action="Servlet">
-    Fornavn: <input type="text" name="navn">
-    Dato<input type="date" id="start" name="dato"
-               min="2019-01-01"
-               max="2099-12-31">
-
-    <input type="submit" name ="action"  value="Registrer">
-    <input type="submit" name ="action"  value="Vis alle">
+    Navn: <input type="text" name="navn">
+    Email: <input type="text" name="email">
+    Telefon: <input type="text" name="telefon">
+    <input type="submit" name ="action"  value="Bestille">
+    <input type="submit" name ="action"  value="Vis alle bestillinger">
 
     <br>
+  </form>
 
 
 
