@@ -7,22 +7,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>Rombukser</title>
-  </head>
-  <body>
+<head>
+  <title>Rombukser</title>
+</head>
+<body>
 
-  <form action="Servlet">
-    Navn: <input type="text" name="navn">
-    Email: <input type="text" name="email">
-    Telefon: <input type="text" name="telefon">
-    <input type="submit" name ="action"  value="Bestille">
-    <input type="submit" name ="action"  value="Vis alle bestillinger">
+<form action="Servlet">
+  Navn: <input type="text" name="navn">
+  Email: <input type="text" name="email">
+  Telefon: <input type="text" name="telefon">
+  <input type="submit" name ="action"  value="Bestille">
+  <input type="submit" name ="action"  value="Vis alle bestillinger">
 
-    <br>
-  </form>
+  <br>
+</form>
 
 
 
-  </body>
+</body>
 </html>
