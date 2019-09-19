@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.DbTool;
-import classes.DbFunctionality;
 import classes.RegisterCustomer;
+import classes.RoomTypes;
 
 
 @WebServlet(
@@ -23,9 +23,11 @@ import classes.RegisterCustomer;
 )
 public class Servlet extends HttpServlet {
    private RegisterCustomer regCus;
+   private RoomTypes roomTyp;
 
     public Servlet() {
         regCus = new RegisterCustomer();
+        roomTyp = new RoomTypes();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,25 +37,24 @@ public class Servlet extends HttpServlet {
 
         try {
 
-            String navn = request.getParameter("navn");
+            String name = request.getParameter("name");
             String email = request.getParameter("email");
-            String telefon = request.getParameter("telefon");
+            String phone = request.getParameter("phone");
             String action = request.getParameter("action");
 
             DbTool dbtool = new DbTool();
-            Connection conn = dbtool.loggInn(out);
+            Connection conn = dbtool.logIn(out);
 
-            out.println("Log in complete ");
-            DbFunctionality dbfunctionality = new DbFunctionality();
+            out.println("<div style= color:red> Log in worked, </div> ");
 
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
-                regCus.registerCustomer(out, conn, navn, email, telefon);
+                regCus.registerCustomer(out, conn, name, email, phone);
 
 
             } else if (action.contains("alle")) {
-                out.println("Valg, skrive alle tabeller");
-                dbfunctionality.printName(out, conn);
+                out.println("Valgt, skriver ut alle romIDer og romtyper");
+                roomTyp.getRoomID(out, conn);
             }
 
 
