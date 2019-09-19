@@ -22,6 +22,10 @@ public class DbFunctionality {
     Skal liste alle tabeller i databasen vi er logget inn på
  */
 
+    public void customerInfo() {
+
+    }
+
     public void showTables(Connection conn, PrintWriter out) {
 
         String strSelect = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
