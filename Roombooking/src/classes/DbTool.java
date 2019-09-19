@@ -6,6 +6,8 @@ package classes;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.PrimitiveIterator;
+import javax.ejb.Init;
 import javax.naming.*;
 import javax.sql.DataSource;
 
@@ -25,18 +27,32 @@ public class DbTool {
         try {
             // Step 1: Allocate a database 'Connection' object
             Context cont = new InitialContext();
-            DataSource ds = (DataSource)cont.lookup("java:comp/env/jdbc/localhost");
+            DataSource ds = (DataSource) cont.lookup("java:comp/env/jdbc/localhost");
 
             conn = ds.getConnection();
             return conn;
 
-        }
-        catch (SQLException ex ) {
-            out.println("Not connected to database " +ex);
-        }
-        catch (NamingException nex) {
+        } catch (SQLException ex) {
+            out.println("Not connected to database " + ex);
+        } catch (NamingException nex) {
             out.println("Not correct naming" + nex);
         }
         return null;
     }  // end loggInn
+
+    public Connection logInn() {
+        try {
+            Context cont = new InitialContext();
+            DataSource ds = (DataSource) cont.lookup("java:comp/env/jdbc/localhost");
+
+            conn = ds.getConnection();
+            return conn;
+        } catch (SQLException ex) {
+            System.out.println("Not connected to database " + ex);
+        } catch (NamingException nex) {
+            System.out.println("Not correct naming " + nex);
+        }
+        return null;
+
+    }
 }

@@ -12,7 +12,7 @@
   </head>
   <body>
 
-  <form action="Servlet">
+  <form action="./servlets.Servlet">
     Fornavn: <input type="text" name="navn">
     Dato<input type="date" id="start" name="dato"
                min="2019-01-01"
@@ -20,8 +20,21 @@
 
     <input type="submit" name ="action"  value="Registrer">
     <input type="submit" name ="action"  value="Vis alle">
+  </form>
 
     <br>
+
+  <form action="Registrer">
+    Name: <input type="text" name="name"><br>
+    Phone number: <input type="text" name="phone"><br>
+    Email: <input type="email" name="email"><br>
+    <input type="submit" name="registrer" value="Registrer">
+  </form>
+  <br>
+
+  <form action="./servlets.ServletCust" method="get">
+    <input type="submit" name="getInfo" value="Get Customer Info">
+  </form>
 
 
 
