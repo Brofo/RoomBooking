@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.DbTool;
-import classes.RegisterCustomer;
+import classes.DbFunctionality;
+import classes.Register;
 import classes.RoomTypes;
 
 
@@ -22,12 +23,13 @@ import classes.RoomTypes;
         urlPatterns = {"/servlets.Servlet"}
 )
 public class Servlet extends HttpServlet {
-   private RegisterCustomer regCus;
    private RoomTypes roomTyp;
+   private Register reg;
 
     public Servlet() {
-        regCus = new RegisterCustomer();
         roomTyp = new RoomTypes();
+        reg = new Register();
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +51,7 @@ public class Servlet extends HttpServlet {
 
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
-                regCus.registerCustomer(out, conn, name, email, phone);
+                reg.registerCustomer(out, conn, navn, email, telefon);
 
 
             } else if (action.contains("alle")) {
