@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.DbTool;
 import classes.DbFunctionality;
-import classes.RegisterCustomer;
+import classes.Register;
 
 
 @WebServlet(
@@ -22,10 +22,11 @@ import classes.RegisterCustomer;
         urlPatterns = {"/servlets.Servlet"}
 )
 public class Servlet extends HttpServlet {
-   private RegisterCustomer regCus;
+   private Register reg;
 
     public Servlet() {
-        regCus = new RegisterCustomer();
+        reg = new Register();
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +49,7 @@ public class Servlet extends HttpServlet {
 
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
-                regCus.registerCustomer(out, conn, navn, email, telefon);
+                reg.registerCustomer(out, conn, navn, email, telefon);
 
 
             } else if (action.contains("alle")) {
