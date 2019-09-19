@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import classes.DbTool;
 import classes.DbFunctionality;
+import classes.RegisterCustomer;
 
 
 @WebServlet(
@@ -21,7 +22,10 @@ import classes.DbFunctionality;
         urlPatterns = {"/servlets.Servlet"}
 )
 public class Servlet extends HttpServlet {
+   private RegisterCustomer regCus;
+
     public Servlet() {
+        regCus = new RegisterCustomer();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +35,9 @@ public class Servlet extends HttpServlet {
 
         try {
 
-            String fornavn = request.getParameter("navn");
-            String data = request.getParameter("dato");
+            String navn = request.getParameter("navn");
+            String email = request.getParameter("email");
+            String telefon = request.getParameter("telefon");
             String action = request.getParameter("action");
 
             DbTool dbtool = new DbTool();
@@ -41,10 +46,10 @@ public class Servlet extends HttpServlet {
             out.println("Log in complete ");
             DbFunctionality dbfunctionality = new DbFunctionality();
 
-            if (action.contains("Registrer")) {
+            if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
-                dbfunctionality.newName(fornavn, out, conn);
-                dbfunctionality.newDato(data,out,conn);
+                regCus.registerCustomer(out, conn, navn, email, telefon);
+
 
             } else if (action.contains("alle")) {
                 out.println("Valg, skrive alle tabeller");

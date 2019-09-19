@@ -123,5 +123,4 @@ public class DbFunctionality {
             out.println("Ikke hentet fra DB " +ex);
         }
     }
-
 }
