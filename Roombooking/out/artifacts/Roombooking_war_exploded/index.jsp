@@ -18,6 +18,8 @@
   Telefon: <input type="text" name="telefon">
   <input type="submit" name ="action"  value="Bestille">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
+  CheckInDate: <input type="text" name="Insjekks dato">
+  CheckOutDate: <input type=text" name="Utsjekks dato">
 
   <br>
 </form>
