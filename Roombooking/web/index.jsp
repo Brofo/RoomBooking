@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="servlets.Servlet">
+<form action="./servlets.Servlet">
   Navn: <input type="text" name="name">
   Email: <input type="text" name="email">
   Telefon: <input type="text" name="phone">
