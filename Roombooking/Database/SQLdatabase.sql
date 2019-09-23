@@ -39,15 +39,15 @@ VALUES('sr03', 'singleroom', TRUE, 250);
 INSERT INTO Room(room_id, room_type, room_available, room_price)
 VALUES('sr04', 'singleroom', TRUE, 250);
 INSERT INTO Room(room_id, room_type, room_available, room_price)
-VALUES('dr01', 'singleroom', TRUE, 500);
+VALUES('dr01', 'doubleroom', TRUE, 500);
 INSERT INTO Room(room_id, room_type, room_available, room_price)
-VALUES('dr02', 'singleroom', TRUE, 500);
+VALUES('dr02', 'doubleroom', TRUE, 500);
 INSERT INTO Room(room_id, room_type, room_available, room_price)
-VALUES('dr03', 'singleroom', TRUE, 500);
+VALUES('dr03', 'doubleroom', TRUE, 500);
 INSERT INTO Room(room_id, room_type, room_available, room_price)
-VALUES('dr04', 'singleroom', TRUE, 500);
+VALUES('dr04', 'doubleroom', TRUE, 500);
 INSERT INTO Room(room_id, room_type, room_available, room_price)
-VALUES('dr05', 'singleroom', TRUE, 500);
+VALUES('dr05', 'doubleroom', TRUE, 500);
 INSERT INTO Room (room_id, room_type, room_available, room_price)
 VALUES ('fr01', 'familyroom', TRUE, 750);
 INSERT INTO Room (room_id, room_type, room_available, room_price)

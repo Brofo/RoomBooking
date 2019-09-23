@@ -24,7 +24,7 @@ public class RegisterCustomer {
      * @return Ferdig generert Customer ID.
      */
     private String generateCustomerID() {
-        String numberID = Integer.toString(randomGenerator.nextInt(99999));
+        String numberID = Integer.toString(randomGenerator.nextInt(9999));
         String letterID = "C";
         String customerID = letterID + numberID;
         return customerID;
@@ -70,7 +70,7 @@ public class RegisterCustomer {
         try {
 
             PreparedStatement insert = conn.prepareStatement
-                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_name, cus_email, cus_phone) VALUES(?,?,?,?)");
+                    ("INSERT INTO roombookingdb.Customer(cus_id, cus_name, cus_email, cus_phone) VALUES(?,?,?,?)");
             insert.setString(1, customerID);
             insert.setString(2, navn);
             insert.setString(3, email);

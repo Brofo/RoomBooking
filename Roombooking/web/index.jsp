@@ -18,6 +18,8 @@
   Telefon: <input type="text" name="telefon">
   <input type="submit" name ="action"  value="Bestille">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
+  <input type="submit" name ="action"  value="Vis romtyper :)">
+  <input type="submit" name ="action"  value="Vis priser for rom">
 
   <br>
 </form>

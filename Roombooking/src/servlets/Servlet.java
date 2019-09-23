@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import classes.DbTool;
 import classes.DbFunctionality;
 import classes.RegisterCustomer;
+import classes.Room;
 
 
 @WebServlet(
@@ -23,9 +24,11 @@ import classes.RegisterCustomer;
 )
 public class Servlet extends HttpServlet {
    private RegisterCustomer regCus;
+   private Room roomTyp;
 
     public Servlet() {
         regCus = new RegisterCustomer();
+        roomTyp = new Room();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +46,7 @@ public class Servlet extends HttpServlet {
             DbTool dbtool = new DbTool();
             Connection conn = dbtool.loggInn(out);
 
-            out.println("Log in complete ");
+            out.println("Log in worked,  ");
             DbFunctionality dbfunctionality = new DbFunctionality();
 
             if (action.contains("Bestille")) {
@@ -52,9 +55,18 @@ public class Servlet extends HttpServlet {
 
 
             } else if (action.contains("alle")) {
-                out.println("Valg, skrive alle tabeller");
-                dbfunctionality.printName(out, conn);
+                out.println("Valgt, skriver ut alle romIDer og romtyper");
+               roomTyp.getRoomID(out, conn);
             }
+            else if (action.contains("romtyper")) {
+                out.println("Dette er romtypene");
+                roomTyp.getRoomType(out, conn);
+            }
+            else if (action.contains("priser")) {
+                out.println("Priser for rom");
+                roomTyp.getRoomPrice(out, conn);
+            }
+
 
 
         } catch (Throwable var17) {
