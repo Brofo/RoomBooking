@@ -20,7 +20,7 @@ public class CustomerFunctionality {
 
     public CustomerFunctionality(PrintWriter out) {
         this.out = out;
-        con = new DbTool().loggInn(out);
+        con = new DbTool().logIn(out);
 
         try {
             st = con.createStatement();

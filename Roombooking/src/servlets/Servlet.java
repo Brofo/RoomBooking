@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classes.DbTool;
-import classes.DbFunctionality;
 import classes.Register;
 import classes.RoomTypes;
 
@@ -27,6 +26,7 @@ public class Servlet extends HttpServlet {
    private Register reg;
 
     public Servlet() {
+
         roomTyp = new RoomTypes();
         reg = new Register();
 
@@ -47,11 +47,11 @@ public class Servlet extends HttpServlet {
             DbTool dbtool = new DbTool();
             Connection conn = dbtool.logIn(out);
 
-            out.println("<div style= color:red> Log in worked, </div> ");
+            out.println("Log in worked");
 
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
-                reg.registerCustomer(out, conn, navn, email, telefon);
+                reg.registerCustomer(out, conn, name, email, phone);
 
 
             } else if (action.contains("alle")) {

@@ -39,20 +39,4 @@ public class DbTool {
         }
         return null;
     }  // end loggInn
-
-    public Connection logInn() {
-        try {
-            Context cont = new InitialContext();
-            DataSource ds = (DataSource) cont.lookup("java:comp/env/jdbc/localhost");
-
-            conn = ds.getConnection();
-            return conn;
-        } catch (SQLException ex) {
-            System.out.println("Not connected to database " + ex);
-        } catch (NamingException nex) {
-            System.out.println("Not correct naming " + nex);
-        }
-        return null;
-
-    }
 }
