@@ -12,17 +12,17 @@
 </head>
 <body>
 
-<form action="./servlets.Servlet">
-  Navn: <input type="text" name="navn">
+<form action="servlets.Servlet">
+  Navn: <input type="text" name="name">
   Email: <input type="text" name="email">
-  Telefon: <input type="text" name="telefon">
+  Telefon: <input type="text" name="phone">
   <input type="submit" name ="action"  value="Bestille">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
+
+  <br>
 </form>
-<br>
-<form action="./servlets.PrintCustomers" method="get">
-    <input type="submit" name="printCustomers" value="Print Customers">
-</form>
+
+
 
 </body>
 </html>

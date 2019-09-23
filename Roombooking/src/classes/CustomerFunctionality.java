@@ -12,6 +12,7 @@ import java.sql.*;
 
 public class CustomerFunctionality {
     private PrintWriter out;
+    private Connection con;
     private Statement st;
     private ResultSet rs;
 
@@ -19,7 +20,7 @@ public class CustomerFunctionality {
 
     public CustomerFunctionality(PrintWriter out) {
         this.out = out;
-        Connection con = new DbTool().loggInn(out);
+        con = new DbTool().logIn(out);
 
         try {
             st = con.createStatement();
@@ -103,4 +104,6 @@ public class CustomerFunctionality {
         }
         return null;
     }
+
+
 }
