@@ -17,8 +17,9 @@ import javax.sql.DataSource;
  * @author hallgeir
  */
 public class DbTool {
-    Connection conn;        // Must be defined here as class variables, get their value in the login method
+    Connection con;        // Must be defined here as class variables, get their value in the login method
     Statement stmt;
+
 
     /*
         Vil etablere kontakt med databasen og returner et Connection objekt.
@@ -29,8 +30,8 @@ public class DbTool {
             Context cont = new InitialContext();
             DataSource ds = (DataSource) cont.lookup("java:comp/env/jdbc/localhost");
 
-            conn = ds.getConnection();
-            return conn;
+            con = ds.getConnection();
+            return con;
 
         } catch (SQLException ex) {
             out.println("Not connected to database " + ex);
@@ -45,8 +46,8 @@ public class DbTool {
             Context cont = new InitialContext();
             DataSource ds = (DataSource) cont.lookup("java:comp/env/jdbc/localhost");
 
-            conn = ds.getConnection();
-            return conn;
+            con = ds.getConnection();
+            return con;
         } catch (SQLException ex) {
             System.out.println("Not connected to database " + ex);
         } catch (NamingException nex) {
