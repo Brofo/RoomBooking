@@ -1,5 +1,6 @@
 package servlets;
 
+import classes.AlterOrder;
 import classes.DbTool;
 
 import javax.servlet.ServletException;
@@ -20,25 +21,36 @@ public class CancelPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Throwable var4 = null;
-        //WIP akkuratt nå bygges funksjonene
+        //WIP Du er god kristian husk å skrive kommentarer
         try {
-
-
+            //init alle variablene som vil bli trengt i cancelpage
+            String oldname = request.getParameter("oldname");
+            String newname = request.getParameter("newname");
+            String oldmail = request.getParameter("oldmail");
+            String newmail = request.getParameter("newmail");
+            String oldphone = request.getParameter("oldphone");
+            String newphone = request.getParameter("newphone");
+            String orderID = request.getParameter("orderid");
             String action = request.getParameter("action");
 
             DbTool dbtool = new DbTool();
             Connection conn = dbtool.logIn(out);
 
+            AlterOrder alterOrder = new AlterOrder();
             out.println("Up to date with Database");
 
             if (action.contains("navn")){
-
+                alterOrder.changeName(out,conn,oldname,newname);
             }
             else if (action.contains("E-mail")){
 
 
             }
             else if(action.contains("telefon")){
+
+
+            }
+            else if (action.contains("kansellere")){
 
 
             }
