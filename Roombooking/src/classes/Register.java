@@ -1,5 +1,5 @@
 /**
- * Denne klassen skal registrere customer og order i databasen.
+ * This class will register customers, users and orders in the database.
  */
 
 package classes;
@@ -48,7 +48,7 @@ public class Register {
                 insert.executeUpdate();
             }
             catch (SQLException ex) {
-                out.println("Kunne ikke registrere kunde " + ex);
+                out.println("Could not register the customer. " + ex);
             }
 
         }
@@ -64,7 +64,8 @@ public class Register {
         try {
 
             PreparedStatement insert = conn.prepareStatement
-                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_name, cus_email, cus_phone, password) VALUES(?,?,?,?,?)");
+                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_name, " +
+                            "cus_email, cus_phone, password) VALUES(?,?,?,?,?)");
             insert.setString(1, customerID);
             insert.setString(2, name);
             insert.setString(3, email);
@@ -73,14 +74,14 @@ public class Register {
             insert.executeUpdate();
         }
         catch (SQLException ex) {
-            out.println("Kunne ikke registrere kunde " + ex);
+            out.println("Could not register the user. " + ex);
         }
 
     }
 
     /**
-     * Denne metoden skal gjøre det mulig for å registrere data i en order.
-     * Den tar i bruk klassen getID for å registrere ID automatisk.
+     * This method will register data into an order.
+     * It uses Class getID to register an ID automatically.
      */
     public void registerOrder(PrintWriter out, Connection conn,
                               String roomID, String customerID,  String checkInDate, String checkOutDate) {
@@ -99,7 +100,7 @@ public class Register {
             insert.executeUpdate();
         }
         catch (SQLException ex) {
-                out.println(("Kunne ikke registrere order " + ex));
+                out.println(("Could not register the order " + ex));
             }
         }
     }
