@@ -24,8 +24,8 @@ import classes.RoomTypes;
 public class Servlet extends HttpServlet {
    private RoomTypes roomTyp;
    private Register reg;
-
     public Servlet() {
+
 
         roomTyp = new RoomTypes();
         reg = new Register();
@@ -57,6 +57,12 @@ public class Servlet extends HttpServlet {
             } else if (action.contains("alle")) {
                 out.println("Valgt, skriver ut alle romIDer og romtyper");
                 roomTyp.getRoomID(out, conn);
+            }
+             else if (action.contains("kansellere")){
+
+                 //Sender brukeren videre til en side hvor den eventuelt kan gjøre endring og/eller kansellere
+                 out.println("Valgt å kansellere bestilling");
+                 response.sendRedirect(request.getContextPath() + "/cancelPage.jsp");
             }
 
 
