@@ -2,6 +2,7 @@ package classes;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.Map;
 
 /**
  * CustomerFunctionality provides the functionality related to the Customer entity.
@@ -103,6 +104,68 @@ public class CustomerFunctionality {
             out.println("getEmail failed: " + sqlEx);
         }
         return null;
+    }
+
+    /**
+     * getId will take arguments to decide which table and column to search
+     * with the value caller wants to search for.
+     * @param tableToSearch the name of the table to search.
+     * @param columnToSearch the name of the column to search.
+     * @param columnValue the value to to search the column for.
+     * @return the primary key (id) of the searched value or null if not found.
+     */
+    public String getId(String tableToSearch, String columnToSearch, String columnValue) {
+        try {
+            var pst = con.prepareStatement("SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?");
+            pst.setString(1, columnValue);
+            var searchResultSet = pst.executeQuery();
+
+            if(searchResultSet.next()){
+                String searchResult = searchResultSet.getString(1);
+                return searchResult;
+            }
+        } catch (SQLException e){
+            out.println("Exeption in getCusId: " + e);
+        }
+        return null;
+    }
+
+    public boolean checkForCustomer(String name, String email, String phone) {
+        try {
+            String cus_id = "";
+            String[] searchArray = {"cus_name", "cus_email", "cus_phone"};
+            for(int i = 0; i > searchArray.length - 1; i++){
+                if(getId("Customer", ))
+            }
+
+        } catch(Exception e) {
+
+        } return false;
+    }
+
+    public void createBooking(String name, String email, String phone, String checkIn, String checkOut) {
+        try {
+            if(getId("Customer","email", email) == null) {
+
+            }
+
+
+            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES ('?', '?', '?', '?', '?'");
+            pst.setString(1, name);
+            pst.setString(2, email);
+            pst.setString(3, phone);
+            pst.setString(4, checkIn);
+            pst.setString(5, checkOut);
+
+
+
+            int orderCount = pst.executeUpdate();
+            out.println(orderCount + "order/s created.");
+
+        } catch (SQLException e) {
+            out.println("Error" + e);
+        }
+
     }
 
 
