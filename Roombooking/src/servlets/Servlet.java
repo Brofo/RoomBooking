@@ -62,6 +62,9 @@ public class Servlet extends HttpServlet {
             else if (action.contains("Opprett bruker")){
                 response.sendRedirect(request.getContextPath() + "/CreateUser.jsp");
             }
+            else if (action.contains("Logg inn")) {
+                response.sendRedirect(request.getContextPath() + "/LoggInn.jsp");
+            }
 
 
         } catch (Throwable var17) {

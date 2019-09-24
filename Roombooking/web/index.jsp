@@ -18,8 +18,8 @@
   Telefon: <input type="text" name="phone">
   <input type="submit" name ="action"  value="Bestille">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
-    <input type="submit" name ="action" value ="Opprett bruker">
-
+  <input type="submit" name ="action"  value="Opprett bruker">
+  <input type="submit" name ="action"  value="Logg inn">
   <br>
 </form>
 
