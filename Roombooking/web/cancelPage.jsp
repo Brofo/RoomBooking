@@ -9,36 +9,46 @@
 <html>
 <head>
     <title>Is this cancel culture?</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/CancelCulture.css" />
 </head>
 
-<p>Under finner du skjema for å endre navn</p>
+<br>
 <form action="servlets.CancelPage">
-    Navn: <input type="text" name="newname">
-    Navn som skal bli endret: <input type="text" name="oldname">
-    <input type="submit" name="action" value="Endre navn">
+    <fieldset>
+    <legend>Navne Endring</legend>
+    Navn:<br> <input type="text" name="newname"> <br>
+    Navn som skal bli endret:<br> <input type="text" name="oldname"><br>
+    KundeID:<br> <input type="text" name="customerID"><br>
+    <br> <input type="submit" name="action" value="Endre navn">
+    </fieldset>
 
 </form>
-
-<p>Under finner du skjema for å endre på e-mail</p>
+<br>
 <form action="servlets.CancelPage">
-    E-mail: <input type="text" name="oldmail">
-    E-mail som skal bli endret til: <input type="text" name="newmail">
-    <input type="submit" name="action" value="Endre E-mail">
+    <fieldset>
+        <legend>Endring på E-mail</legend>
+    E-mail:<br> <input type="text" name="newmail"><br>
+    E-mail som skal bli endret til:<br><input type="text" name="oldmail"><br>
+    <br> <input type="submit" name="action" value="Endre E-mail">
     <br>
+    </fieldset>
 </form>
-
-<p>Under kan du finne skjema for å endre på telfonnummeret</p>
+<br>
 <form action="servlets.CancelPage">
-    Telefonnummer: <input type="text" name="oldphone">
-    Telefonnummer som skal bli endret: <input type="text" name="newphone">
-    <input type="submit" name="action" value="Endre telefon">
+    <fieldset>
+        <legend> Endring på telefonnummer</legend>
+    Telefonnummer: <br><input type="text" name="newphone"><br>
+    Telefonnummer som skal bli endret:<br> <input type="text" name="oldphone"><br>
+    <br> <input type="submit" name="action" value="Endre telefon">
+    </fieldset>
 </form>
-
-<p>Skal du kansellere bestilling?</p>
-<p> Skriv inn bookingnummer i formen under </p>
+<br>
 <form action="servlets.CancelPage">
-    Bookingnummer: <input type="text" name="orderid">
-    <input type="submit" name="action" value="kansellere">
+    <fieldset>
+        <legend> Kansellering av bestilling</legend>
+    Bookingnummer: <br><input type="text" name="orderid"><br>
+    <br> <input type="submit" name="action" value="kansellere">
+</fieldset>
 </form>
 </body>
 </html>

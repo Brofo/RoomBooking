@@ -28,9 +28,10 @@ public class CancelPage extends HttpServlet {
             String newname = request.getParameter("newname");
             String oldmail = request.getParameter("oldmail");
             String newmail = request.getParameter("newmail");
-            String oldphone = request.getParameter("oldphone");
-            String newphone = request.getParameter("newphone");
+            Integer oldphone = Integer.parseInt(request.getParameter("oldphone"));
+            Integer newphone = Integer.parseInt(request.getParameter("newphone"));
             String orderID = request.getParameter("orderid");
+            String customerID = request.getParameter("customerID");
             String action = request.getParameter("action");
 
             DbTool dbtool = new DbTool();
@@ -40,14 +41,14 @@ public class CancelPage extends HttpServlet {
             out.println("Up to date with Database");
 
             if (action.contains("navn")){
-                alterOrder.changeName(out,conn,oldname,newname);
+                alterOrder.changeName(out,conn,oldname,newname,customerID);
             }
             else if (action.contains("E-mail")){
-
+                alterOrder.changeEmail(out,conn,oldmail,newmail);
 
             }
             else if(action.contains("telefon")){
-
+                alterOrder.changePhone(out,conn,oldphone,newphone);
 
             }
             else if (action.contains("kansellere")){
