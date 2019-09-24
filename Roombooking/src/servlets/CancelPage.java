@@ -20,7 +20,7 @@ public class CancelPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Throwable var4 = null;
-
+        //WIP akkuratt nå bygges funksjonene
         try {
 
 
@@ -30,6 +30,7 @@ public class CancelPage extends HttpServlet {
             Connection conn = dbtool.logIn(out);
 
             out.println("Up to date with Database");
+
             if (action.contains("navn")){
 
             }
