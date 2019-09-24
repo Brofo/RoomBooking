@@ -49,6 +49,7 @@ public class Servlet extends HttpServlet {
 
             out.println("Log in worked");
 
+            // Registers a Customer in the database.
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
                 reg.registerCustomer(out, conn, name, email, phone);
@@ -59,7 +60,7 @@ public class Servlet extends HttpServlet {
                 roomTyp.getRoomID(out, conn);
             }
             else if (action.contains("Opprett bruker")){
-                response.sendRedirect(request.getContextPath() + "/CreateUserServlet.jsp");
+                response.sendRedirect(request.getContextPath() + "/CreateUser.jsp");
             }
 
 

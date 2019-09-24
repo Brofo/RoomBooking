@@ -16,9 +16,9 @@
   Navn: <input type="text" name="name">
   Email: <input type="text" name="email">
   Telefon: <input type="text" name="phone">
-    Passord: <input type="text" name="password">
   <input type="submit" name ="action"  value="Bestille">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
+    <input type="submit" name ="action" value ="Opprett bruker">
 
   <br>
 </form>

@@ -1,3 +1,8 @@
+/**
+ * This servlet is used when someone wants to create a user.
+ * The information will be stored in Customer table in the database.
+ */
+
 package servlets;
 
 import javax.servlet.ServletException;
@@ -16,10 +21,11 @@ import classes.Register;
         name = "servlets.CreateUserServlet",
         urlPatterns = {"/servlets.CreateUserServlet"}
                 )
+
 public class CreateUserServlet extends HttpServlet {
     private Register regUser;
 
-    public CreateUserServlet(){
+    public CreateUserServlet() {
         regUser = new Register();
     }
 
@@ -27,19 +33,25 @@ public class CreateUserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        try {
-            String name = request.getParameter("name");
-            String phone = request.getParameter("phone");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-            String action = request.getParameter("action");
+        String action = request.getParameter("action");
 
-            DbTool dbtool = new DbTool();
-            Connection conn = dbtool.logIn(out);
+        DbTool dbtool = new DbTool();
+        Connection conn = dbtool.logIn(out);
 
-            if (action.contains("Opprett bruker")) {
-                regUser.registerUser(out, conn, name, email, phone, password);
-            }
+        if (action.contains("Opprett bruker")) {
+            regUser.registerUser(out, conn, name, email, phone, password);
+        }
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.processRequest(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.processRequest(request, response);
     }
 }
