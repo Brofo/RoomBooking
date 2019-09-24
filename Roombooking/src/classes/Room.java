@@ -102,35 +102,35 @@ public class Room {
 
             }
         } //Kode fortsatt under konstruksjon, BE AWARE
-        public void getRoomAvailability(PrintWriter out, Connection conn) {
-        PreparedStatement getRoomAvailability;
+/**public void getRoomAvailability(PrintWriter out, Connection conn) {
+ PreparedStatement getRoomAvailability;
 
-            try {
-                getRoomAvailability = conn.prepareStatement("select room_available from roombookingdb.room order by ?");
+ try {
+ getRoomAvailability = conn.prepareStatement("select room_available from roombookingdb.room order by ?");
 
 
-                ResultSet rset = getRoomPrice.executeQuery();
+ ResultSet rset = getRoomPrice.executeQuery();
 
-                out.println("<h3 style=color:red> Dette er romtypene og prisene </h3> " + "<br>");
-                int rowCount = 0;
+ out.println("<h3 style=color:red> Dette er romtypene og prisene </h3> " + "<br>");
+ int rowCount = 0;
 
-                while (rset.next()) {
-                    String roomType = rset.getString("room_type");
-                    String roomPrice = rset.getString("room_price");
+ while (rset.next()) {
+ String roomType = rset.getString("room_type");
+ String roomPrice = rset.getString("room_price");
 
-                    out.println("<div style= color:blue> RoomType: " + roomType + " RoomPrice:  " + roomPrice + "</div><br>");
-                    out.println("<br>");
+ out.println("<div style= color:blue> RoomType: " + roomType + " RoomPrice:  " + roomPrice + "</div><br>");
+ out.println("<br>");
 
-                    ++rowCount;
+ ++rowCount;
 
-                }
+ }
 
-            } catch (SQLException ex) {
+ } catch (SQLException ex) {
 
-                out.println("Ikke hentet fra databasen ERROR: " + ex);
+ out.println("Ikke hentet fra databasen ERROR: " + ex);
 
-            }
-        }
-    }
+ }
+ }**/
+}
 
 

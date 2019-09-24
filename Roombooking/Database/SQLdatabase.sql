@@ -2,7 +2,7 @@ CREATE DATABASE RoombookingDB;
 USE RoombookingDB; 
 
 CREATE TABLE Room(
-room_id VARCHAR(5) NOT NULL, 
+room_id VARCHAR(10) NOT NULL,
 room_type VARCHAR(20),
 room_available BOOLEAN,
 room_price INTEGER(15),

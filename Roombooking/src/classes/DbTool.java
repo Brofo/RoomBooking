@@ -21,7 +21,7 @@ public class DbTool {
     /*
         Vil etablere kontakt med databasen og returner et Connection objekt.
     */
-    public Connection loggInn(PrintWriter out) {
+    public Connection logIn(PrintWriter out) {
         try {
             // Step 1: Allocate a database 'Connection' object
             Context cont = new InitialContext();
