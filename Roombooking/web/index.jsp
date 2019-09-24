@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="servlets.Servlet">
+<form action="./servlets.Servlet">
   Navn: <input type="text" name="name">
   Email: <input type="text" name="email">
   Telefon: <input type="text" name="phone">
@@ -23,6 +23,14 @@
   <br>
 </form>
 
+<form action="./servlets.CreateBooking" method="post">
+  Name: <input type="text" name="name"><br>
+  Email: <input type="email" name="email"><br>
+  Phone number: <input type="text" name="phone"><br>
+  Check in date: <input type="date" name="checkin"><br>
+  Check out date: <input type="date" name="checkout"><br>
+  <input type="submit" name="createBooking" value="Create Booking">
+</form>
 
 
 </body>
