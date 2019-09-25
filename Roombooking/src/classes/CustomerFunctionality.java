@@ -3,6 +3,7 @@ package classes;
 import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,7 +119,8 @@ public class CustomerFunctionality {
      */
     public String getId(String tableToSearch, String columnToSearch, String columnValue) {
         try {
-            PreparedStatement pst = con.prepareStatement("SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?");
+            String stmt = "SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?";
+            PreparedStatement pst = con.prepareStatement(stmt);
             pst.setString(1, columnValue);
             ResultSet searchResultSet = pst.executeQuery();
 
@@ -132,27 +134,52 @@ public class CustomerFunctionality {
         return null;
     }
 
-    public boolean checkForCustomer(String email, String phone) {
-
-        try {
-            String cus_id = "";
-            String[] columnArray = {"cus_email", "cus_phone"};
-            String[] searchArray = {email, phone};
-
-            for(int i = 0; i < columnArray.length - 1; i++){
-                if(getId("Customer", searchArray[i], columnArray[i] ) != null){
-                    cus_id =  getId("Customer",columnArray[i],searchArray[i]);
-                }
+    /**
+     * checkForCustomer checks if there's a customer registered by either the name, email or phone submitted
+     * and maps the result by customer id and the data connected with it in a hashmap.
+     * @param name
+     * @param email
+     * @param phone
+     * @return a hashmap with the search results.
+     */
+    public HashMap<String, String> checkForCustomer(String name, String email, String phone) {
+        String cus_id;
+        String[] columnArray = {"cus_name", "cus_email", "cus_phone"};
+        String[] searchArray = {name, email, phone};
+        HashMap<String, String> searchResults = new HashMap();
+        for(int i = 0; i < columnArray.length; i++){
+            cus_id = getId("Customer", columnArray[i], searchArray[i]);
+            if(cus_id != null){
+                searchResults.put(cus_id, searchArray[i]);
             }
+        }
+        return searchResults;
+    }
 
-        } catch(Exception e) {
+    public String getField(String wantedField, String tableToSearch, String columnToSearch, String columnValue) {
+        try {
+            String stmt =   "SELECT " + wantedField +
+                            " FROM RoombookingDB." + tableToSearch +
+                            " WHERE " + columnToSearch + " = ?";
+            PreparedStatement pst = con.prepareStatement(stmt);
+            pst.setString(1, columnValue);
+            ResultSet searchResultSet = pst.executeQuery();
 
-        } return false;
+            if(searchResultSet.next()){
+                String searchResult = searchResultSet.getString(1);
+                out.println(searchResult);
+                return searchResult;
+            }
+        } catch (SQLException e){
+            out.println("Exeption in getField: " + e);
+        }
+        return null;
+
     }
 
     public void createBooking(String name, String email, String phone, String checkIn, String checkOut) {
         try {
-            if(getId("Customer","email", email) == null) {
+            if(checkForCustomer(name, email, phone).isEmpty()) {
 
             }
 
