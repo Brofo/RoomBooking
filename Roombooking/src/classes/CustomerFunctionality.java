@@ -119,7 +119,8 @@ public class CustomerFunctionality {
      */
     public String getId(String tableToSearch, String columnToSearch, String columnValue) {
         try {
-            PreparedStatement pst = con.prepareStatement("SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?");
+            String stmt = "SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?";
+            PreparedStatement pst = con.prepareStatement(stmt);
             pst.setString(1, columnValue);
             ResultSet searchResultSet = pst.executeQuery();
 
@@ -155,9 +156,30 @@ public class CustomerFunctionality {
         return searchResults;
     }
 
+    public String getField(String wantedField, String tableToSearch, String columnToSearch, String columnValue) {
+        try {
+            String stmt =   "SELECT " + wantedField +
+                            " FROM RoombookingDB." + tableToSearch +
+                            " WHERE " + columnToSearch + " = ?";
+            PreparedStatement pst = con.prepareStatement(stmt);
+            pst.setString(1, columnValue);
+            ResultSet searchResultSet = pst.executeQuery();
+
+            if(searchResultSet.next()){
+                String searchResult = searchResultSet.getString(1);
+                out.println(searchResult);
+                return searchResult;
+            }
+        } catch (SQLException e){
+            out.println("Exeption in getField: " + e);
+        }
+        return null;
+
+    }
+
     public void createBooking(String name, String email, String phone, String checkIn, String checkOut) {
         try {
-            if() {
+            if(checkForCustomer(name, email, phone).isEmpty()) {
 
             }
 
