@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="servlets.CreateUserServlet">
+<form action="servlets.userServlets.CreateUserServlet">
 Fyll inn feltene for å opprette en bruker.
     <br>
     Navn:       <input type="text" name="name">

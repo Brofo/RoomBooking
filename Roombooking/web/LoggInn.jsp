@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="servlets.LoggInnServlet" method="post">
+<form action="servlets.userServlets.LoggInnServlet" method ="post">
 
     <h1>Logg inn</h1>
     Epost: <input type="text" name="email"><br>

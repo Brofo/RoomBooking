@@ -3,7 +3,7 @@
  * The information will be stored in Customer table in the database.
  */
 
-package servlets;
+package servlets.userServlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +18,8 @@ import classes.DbTool;
 import classes.Register;
 
 @WebServlet(
-        name = "servlets.CreateUserServlet",
-        urlPatterns = {"/servlets.CreateUserServlet"}
+        name = "servlets.userServlets.CreateUserServlet",
+        urlPatterns = {"/servlets.userServlets.CreateUserServlet"}
                 )
 
 public class CreateUserServlet extends HttpServlet {
