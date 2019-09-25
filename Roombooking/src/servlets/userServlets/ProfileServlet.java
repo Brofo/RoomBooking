@@ -13,21 +13,29 @@ import java.io.PrintWriter;
             urlPatterns = "/servlets.userServlets.ProfileServlet")
 public class ProfileServlet extends HttpServlet {
 
+    /**
+     * Denne servlet sjekker om brukeren er logget inn, og gir dermed tilgang
+     * til brukerens profil.
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
+        // Henter menyen på toppen av websiden.
         request.getRequestDispatcher("link.html").include(request, response);
 
+        // Henter informasjonskapselen (cookie) hvis den finnes, og putter den i en Array.
         Cookie ck[] = request.getCookies();
-        if (ck != null) {
-            String userID = ck[0].getValue();
-            out.println(userID);
-            out.println(ck.length);
-            out.print("<b>Welcome to Profile</b>");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/LoggInn.jsp");
+
+        // Hvis cookien finnes, får brukeren som eier cookien tilgang til sin profil.
+        if(ck != null) {
+            String name = ck[0].getName();
+            out.println("Velkommen til din profil, " + name);
+        }
+        else{
+            out.print("Vennligst logg inn først.");
+            request.getRequestDispatcher("LoggInn.jsp").include(request, response);
         }
     }
 }

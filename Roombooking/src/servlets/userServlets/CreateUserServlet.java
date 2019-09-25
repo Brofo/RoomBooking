@@ -29,7 +29,9 @@ public class CreateUserServlet extends HttpServlet {
         regUser = new Register();
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
@@ -38,20 +40,16 @@ public class CreateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        String action = request.getParameter("action");
-
         DbTool dbtool = new DbTool();
         Connection conn = dbtool.logIn(out);
 
-        if (action.contains("Opprett bruker")) {
+            //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
+            //blir puttet inn i databasen, slik at brukeren blir opprettet.
             regUser.registerUser(out, conn, name, email, phone, password);
-        }
-    }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.processRequest(request, response);
+            out.println("Du har nå opprettet en bruker. Nå kan du logge inn med denne brukeren.");
+            request.getRequestDispatcher("LoggInn.jsp").include(request, response);
+
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.processRequest(request, response);
-    }
+
 }
