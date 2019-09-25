@@ -45,6 +45,19 @@
 <br>
 <form action="servlets.CancelPage">
     <fieldset>
+        <legend>Endring på romtype</legend>
+        Bookingnummer: <br><input type="text" name="orderid">
+       <br> <select>
+            <option name="rom" value="sr">Singelrom</option>
+            <option name="rom" value="dr">Dobbeltrom</option>
+            <option name="rom" value="fr">Familierom</option>
+            <option name="rom" value="zj">Suite</option>
+        </select>
+        <input type="submit" name="action" value="rom">
+    </fieldset>
+</form>
+<form action="servlets.CancelPage">
+    <fieldset>
         <legend> Kansellering av bestilling</legend>
     Bookingnummer: <br><input type="text" name="orderid"><br>
     <br> <input type="submit" name="action" value="kansellere">

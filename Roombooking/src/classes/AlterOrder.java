@@ -79,4 +79,28 @@ public class AlterOrder {
 
 
     }
+
+    public void changeRom(PrintWriter out, Connection conn,String orderID, String RomID){
+        final String sql_name = "UPDATE RoombookingDB.orders set room_id = ? where order_id = ?;";
+
+        try{
+            out.println("endrer på navn<br>");
+            PreparedStatement Statement = conn.prepareStatement(sql_name);
+
+            Statement.setString(1,RomID);
+            Statement.setString(2,orderID);
+
+            Statement.executeUpdate();
+
+            out.println("Endret " + RomID + "På bestilling" + orderID);
+
+        }
+        catch (SQLException ex) {
+            out.println("Kunne ikke finne telefon error: " + ex);
+        }
+
+
+
+
+    }
 }
