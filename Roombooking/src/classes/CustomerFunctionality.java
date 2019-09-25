@@ -130,19 +130,6 @@ public class CustomerFunctionality {
         return null;
     }
 
-    public boolean checkForCustomer(String name, String email, String phone) {
-        try {
-            String cus_id = "";
-            String[] searchArray = {"cus_name", "cus_email", "cus_phone"};
-            for(int i = 0; i > searchArray.length - 1; i++){
-                if(getId("Customer", ))
-            }
-
-        } catch(Exception e) {
-
-        } return false;
-    }
-
     public void createBooking(String name, String email, String phone, String checkIn, String checkOut) {
         try {
             if(getId("Customer","email", email) == null) {
