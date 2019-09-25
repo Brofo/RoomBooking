@@ -1,7 +1,9 @@
 package classes;
 
+import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -116,9 +118,9 @@ public class CustomerFunctionality {
      */
     public String getId(String tableToSearch, String columnToSearch, String columnValue) {
         try {
-            var pst = con.prepareStatement("SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?");
+            PreparedStatement pst = con.prepareStatement("SELECT cus_id FROM RoombookingDB." + tableToSearch + " WHERE " + columnToSearch + " = ?");
             pst.setString(1, columnValue);
-            var searchResultSet = pst.executeQuery();
+            ResultSet searchResultSet = pst.executeQuery();
 
             if(searchResultSet.next()){
                 String searchResult = searchResultSet.getString(1);
@@ -130,12 +132,17 @@ public class CustomerFunctionality {
         return null;
     }
 
-    public boolean checkForCustomer(String name, String email, String phone) {
+    public boolean checkForCustomer(String email, String phone) {
+
         try {
             String cus_id = "";
-            String[] searchArray = {"cus_name", "cus_email", "cus_phone"};
-            for(int i = 0; i > searchArray.length - 1; i++){
-                if(getId("Customer", ))
+            String[] columnArray = {"cus_email", "cus_phone"};
+            String[] searchArray = {email, phone};
+
+            for(int i = 0; i < columnArray.length - 1; i++){
+                if(getId("Customer", searchArray[i], columnArray[i] ) != null){
+                    cus_id =  getId("Customer",columnArray[i],searchArray[i]);
+                }
             }
 
         } catch(Exception e) {
