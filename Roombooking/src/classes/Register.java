@@ -50,19 +50,21 @@ public class Register {
      * Den tar i bruk klassen getID for å registrere ID automatisk.
      */
     public void registerOrder(PrintWriter out, Connection conn,
-                              String roomID, String customerID,  String checkInDate, String checkOutDate) {
+                              String roomID, String customerID,  String checkInDate, String checkOutDate,
+                              String prefrences) {
 
         String orderID = id.getID(out, conn, sqlOrderTable);
 
         try {
             PreparedStatement insert = conn.prepareStatement
                     ("INSERT INTO RoombookingDb.Orders(order_id, room_id, cus_id, " +
-                            "order_checkindate, order_checkoutdate) VALUES (?,?,?,?,?)");
+                            "order_checkindate, order_checkoutdate, prefrences) VALUES (?,?,?,?,?,?)");
             insert.setString(1, orderID);
             insert.setString(2, roomID);
             insert.setString(3, customerID);
             insert.setString(4, checkInDate);
             insert.setString(5, checkOutDate);
+            insert.setString(6, prefrences);
             insert.executeUpdate();
         }
         catch (SQLException ex) {

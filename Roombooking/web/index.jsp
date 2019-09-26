@@ -22,7 +22,12 @@
   <input type="submit" name ="action"  value="Vis priser for rom">
 
   <br>
+  Preferanser for bestilling:
+  <br>
+  <textarea rows="10" cols="50" maxlength = "500" placeholder="Preferanser...(maks 500 karakterer)">
+</textarea>
 </form>
+
 
 
 
