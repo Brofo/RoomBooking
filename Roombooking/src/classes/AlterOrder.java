@@ -3,6 +3,8 @@ package classes;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * @author Kristian
@@ -57,7 +59,6 @@ public class AlterOrder {
 
 
     }
-
     public void changePhone(PrintWriter out, Connection conn, int oldPhone, int newPhone){
         //Under ser du sql stringen som oppdaterer det gamle nummeret med det nye nummeret, skriver så ut endring som ble gjort på navnet
         final String sql_name = "UPDATE RoombookingDB.Customer set cus_phone = ? where cus_phone= ?;";
@@ -79,12 +80,11 @@ public class AlterOrder {
 
 
     }
-
-    public void changeRom(PrintWriter out, Connection conn,String orderID, String RomID){
+    public void changeRoom(PrintWriter out, Connection conn,String orderID, String RomID){
         final String sql_name = "UPDATE RoombookingDB.orders set room_id = ? where order_id = ?;";
 
         try{
-            out.println("endrer på navn<br>");
+            out.println("<br> endret rom<br>");
             PreparedStatement Statement = conn.prepareStatement(sql_name);
 
             Statement.setString(1,RomID);
@@ -92,7 +92,7 @@ public class AlterOrder {
 
             Statement.executeUpdate();
 
-            out.println("Endret " + RomID + "På bestilling" + orderID);
+            out.println("<br> På bestilling " + orderID);
 
         }
         catch (SQLException ex) {
@@ -103,4 +103,54 @@ public class AlterOrder {
 
 
     }
+    public void changeDate(PrintWriter out, Connection conn, String orderID, String type, String data) throws ParseException {
+        out.println("<title> Congrats you cancelled culture on the "+ data + "</title>");
+        java.util.Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(data);
+        String sql_name = null;
+
+        if (type == "checkin"){
+            sql_name = "UPDATE RoombookingDB.orders set order_checkindate = ? where order_id = ?";
+
+        } else if(type =="checkout"){
+            sql_name = "UPDATE RoombookingDB.orders set order_checkoutdate = ? where order_id = ?";
+        }
+
+        try{
+
+            PreparedStatement Statement = conn.prepareStatement(sql_name);
+            Statement.setDate(1,new java.sql.Date(date1.getTime()));
+            Statement.setString(2,orderID);
+            Statement.executeUpdate();
+
+            out.println("Endret dato til " + date1  + " i ordre: " + orderID);
+
+        }
+        catch (SQLException ex) {
+            out.println("Kunne ikke finne navn error: " + ex);
+        }
+    }
+
+    public void cancelOrder(PrintWriter out, Connection conn, String orderID, String mail, String phone){
+        final String sql = "DELETE roombookingdb.orders FROM roombookingdb.orders inner join roombookingdb.customer on orders.cus_id = customer.cus_id where order_id = ? and (customer.cus_email = ?  or customer.cus_phone = ?);";
+
+        if (mail == "" && phone == ""){
+            out.println("Vi må nesten ha en email eller et telefonnummer for avbestilling, gå tilbake og prøv igjen :)");
+        }
+        else{
+        try{
+            PreparedStatement Statement = conn.prepareStatement(sql);
+            Statement.setString(1, orderID);
+            Statement.setString(2,mail);
+            Statement.setString(3,phone);
+            Statement.executeUpdate();
+
+            out.println("Kansellert " + orderID  + " <br> Ha en fin dag!");
+
+        }
+        catch (SQLException ex) {
+            out.println("Kunne ikke finne navn error: " + ex);
+        }
+      }
+    }
+
 }

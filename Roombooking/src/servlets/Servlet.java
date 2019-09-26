@@ -59,7 +59,7 @@ public class Servlet extends HttpServlet {
                 out.println("Valgt, skriver ut alle romIDer og romtyper");
                 roomTyp.getRoomID(out, conn);
             }
-             else if (action.contains("kansellere")){
+             else if (action.contains("Kansellere")){
 
                  //Sender brukeren videre til en side hvor den eventuelt kan gjøre endring og/eller kansellere
                  out.println("Valgt å kansellere bestilling");
