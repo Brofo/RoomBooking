@@ -38,9 +38,9 @@ public class LogInServlet2 extends HttpServlet {
         // Epost brukes til å finne Customer ID.
         // Passordet som hentes er det som er tilknyttet Customer ID.
         // Navnet som hentes er tilknyttet Customer ID.
-        String customerID = cusFun.getId("Customer", "cus_email", email);
-        String correctPassword = cusFun.getField("password", "Customer", "cus_id", customerID);
-        String customerName = cusFun.getField("cus_name", "Customer", "cus_id", customerID);
+        String customerID = cusFun.getSingleRecord("cus_id", "Customer", "cus_email", email);
+        String correctPassword = cusFun.getSingleRecord("password", "Customer", "cus_id", customerID);
+        String customerName = cusFun.getSingleRecord("cus_name", "Customer", "cus_id", customerID);
 
 
         if (customerID == null) {
