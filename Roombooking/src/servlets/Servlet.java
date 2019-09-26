@@ -27,7 +27,6 @@ public class Servlet extends HttpServlet {
 
     public Servlet() {
 
-
         roomTyp = new RoomTypes();
         reg = new Register();
 

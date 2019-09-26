@@ -3,16 +3,18 @@
   User: Sindre
   Date: 24.09.2019
   Time: 13:34
-  To change this template use File | Settings | File Templates.
+
+  Denne filen lager menyen for å opprette en bruker. Tar i bruk CreateUserServlet
+  når man oppretter brukeren.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
 <html>
 <head>
     <title>Creating user</title>
 </head>
 <body>
 
-<form action="servlets.CreateUserServlet">
+<form action="servlets.userServlets.CreateUserServlet" method="post">
 Fyll inn feltene for å opprette en bruker.
     <br>
     Navn:       <input type="text" name="name">

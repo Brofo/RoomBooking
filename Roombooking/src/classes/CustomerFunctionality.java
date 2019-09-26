@@ -2,6 +2,7 @@ package classes;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.HashMap;
 
 /**
  * CustomerFunctionality provides the functionality related to the Customer entity.
@@ -35,74 +36,81 @@ public class CustomerFunctionality {
             out.println("Filling resultset failed: " + sqlEx);
         }
     }
-
     /**
-     * printCustomers() prints a list of all the customers in the database.
+     * checkForCustomer checks if there's a customer registered by either the name, email or phone submitted
+     * and maps the result by customer id and the data connected with it in a hashmap.
+     * @param name
+     * @param email
+     * @param phone
+     * @return a hashmap with the search results.
      */
-    public void printCustomers() {
-        try {
-            while(rs.next()) {
-                out.println("ID: " + getId() + "\nName: " + getName() + "\nPhone: " + getPhone() + "\nEmail: " + getEmail() + "\n");
+    public HashMap<String, String> checkForCustomer(String name, String email, String phone) {
+        String cus_id;
+        String[] columnArray = {"cus_name", "cus_email", "cus_phone"};
+        String[] searchValueArray = {name, email, phone};
+        HashMap<String, String> searchResults = new HashMap();
+        for(int i = 0; i < columnArray.length; i++){
+            cus_id = getSingleRecord("cus_id", "Customer", columnArray[i], searchValueArray[i]);
+            if(cus_id != null){
+                searchResults.put(searchValueArray[i], cus_id);
             }
         }
-        catch (SQLException sqlEx) {
-            out.println("rs.next() failed: " + sqlEx);
-        }
+        out.println(searchResults.toString());
+        return searchResults;
     }
+    /**
+     * getSingleRecord will take parameters to create a SQL-statement that retrieves any single record of the
+     * RoombookingDB-schema.
+     * @param whatToSelect is the name of the record (column name) wanted.
+     * @param tableToSearch is the name of the table the attribute is in.
+     * @param whereCondition is the condition that the record should be matched against.
+     * @param whereParameter the exact value of the condition used for the matching.
+     * @return a String that contains the value of the record found.
+     */
+    public String getSingleRecord(String whatToSelect, String tableToSearch, String whereCondition, String whereParameter) {
+        try {
+            String stmt =   "SELECT " + whatToSelect +
+                            " FROM RoombookingDB." + tableToSearch +
+                            " WHERE " + whereCondition + " = ?";
 
-    /**
-     * @return the customers ID.
-     */
-    private String getId(){
-        try {
-            String id = rs.getString("cus_id");
-            return id;
-        }
-        catch (SQLException sqlEx) {
-            out.println("getId failed: " + sqlEx);
-        }
-        return null;
-    }
-    /**
-     * @return the customers name.
-     */
-    private String getName(){
-        try {
-            String name = rs.getString("cus_name");
-            return name;
-        }
-        catch (SQLException sqlEx) {
-            out.println("getName failed: " + sqlEx);
-        }
-        return null;
-    }
+            PreparedStatement pst = con.prepareStatement(stmt);
+            pst.setString(1, whereParameter);
+            ResultSet searchResultSet = pst.executeQuery();
 
-    /**
-     * @return the customers phone number.
-     */
-    private String getPhone() {
-        try {
-            String phone = rs.getString("cus_phone");
-            return phone;
+            if(searchResultSet.next()){
+                String searchResult = searchResultSet.getString(1);
+                return searchResult;
+            }
         }
-        catch (SQLException sqlEx) {
-            out.println("getName failed: " + sqlEx);
+        catch (SQLException e){
+            out.println("Exeption in getField: " + e);
         }
         return null;
     }
 
-    /**
-     * @return the customers email.
-     */
-    private String getEmail() {
+    public void createBooking(String name, String email, String phone, String checkIn, String checkOut) {
         try {
-            String email = rs.getString("cus_email");
-            return email;
+            if(checkForCustomer(name, email, phone).isEmpty()) {
+
+            }
+
+
+            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES ('?', '?', '?', '?', '?'");
+            pst.setString(1, name);
+            pst.setString(2, email);
+            pst.setString(3, phone);
+            pst.setString(4, checkIn);
+            pst.setString(5, checkOut);
+
+
+
+            int orderCount = pst.executeUpdate();
+            out.println(orderCount + "order/s created.");
+
+        } catch (SQLException e) {
+            out.println("Error" + e);
         }
-        catch (SQLException sqlEx) {
-            out.println("getEmail failed: " + sqlEx);
-        }
-        return null;
+
     }
 
 
