@@ -16,7 +16,8 @@
   <a href="index.jsp"> <b>Forsiden</b></a>   |
   <a href="servlets.userServlets.LogInServlet1">Logg inn</a> |
   <a href="servlets.userServlets.ProfileServlet">Min profil</a> |
-  <a href="servlets.userServlets.LogOutServlet">Logg ut</a>
+  <a href="servlets.userServlets.LogOutServlet">Logg ut</a> |
+  <a href="Roominfo.jsp">Rominformasjon</a>
   <hr>
   Navn: <input type="text" name="name">
   Email: <input type="text" name="email">
