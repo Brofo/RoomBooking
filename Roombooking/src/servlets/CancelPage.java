@@ -75,7 +75,7 @@ public class CancelPage extends HttpServlet {
                     alterOrder.changeRom(out,conn,orderID,"zj01");
                 }
             }
-            else if (action.contains("kansellere")){
+            else if (action.contains("Kansellere")){
 
 
             }
