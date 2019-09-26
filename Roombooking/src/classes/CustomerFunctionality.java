@@ -1,11 +1,8 @@
 package classes;
 
-import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * CustomerFunctionality provides the functionality related to the Customer entity.
