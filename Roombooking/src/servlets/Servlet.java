@@ -49,6 +49,7 @@ public class Servlet extends HttpServlet {
 
             out.println("Log in worked");
 
+            // Registers a Customer in the database.
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
                 reg.registerCustomer(out, conn, name, email, phone);

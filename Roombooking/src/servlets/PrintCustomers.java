@@ -32,16 +32,15 @@ public class PrintCustomers extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         PrintWriter out = res.getWriter();
-        //String action = req.getParameter("printCustomers");
+        String action = req.getParameter("printCustomers");
         CustomerFunctionality cust = new CustomerFunctionality(out);
-        cust.printCustomers();
-        /*try {
+        try {
             if(action.contains("Print Customers")) {
                 cust.printCustomers();
             }
         }
         catch (Exception ex) {
             out.println("Exeption: " + ex);
-        }*/
+        }
     }
 }
