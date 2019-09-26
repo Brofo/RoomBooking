@@ -24,6 +24,7 @@ import classes.RoomTypes;
 public class Servlet extends HttpServlet {
    private RoomTypes roomTyp;
    private Register reg;
+
     public Servlet() {
 
 
@@ -49,6 +50,7 @@ public class Servlet extends HttpServlet {
 
             out.println("Log in worked");
 
+            // Registers a Customer in the database.
             if (action.contains("Bestille")) {
                 out.println("Registrer valgt ");
                 reg.registerCustomer(out, conn, name, email, phone);
@@ -63,6 +65,9 @@ public class Servlet extends HttpServlet {
                  //Sender brukeren videre til en side hvor den eventuelt kan gjøre endring og/eller kansellere
                  out.println("Valgt å kansellere bestilling");
                  response.sendRedirect(request.getContextPath() + "/cancelPage.jsp");
+            }
+            else if (action.contains("Opprett bruker")){
+                response.sendRedirect(request.getContextPath() + "/CreateUser.jsp");
             }
 
 

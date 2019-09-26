@@ -19,6 +19,7 @@
   <input type="submit" name ="action"  value="Bestille">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
   <input type="submit" name="action" value="kansellere bestilling">
+    <input type="submit" name ="action" value ="Opprett bruker">
 
   <br>
 </form>
