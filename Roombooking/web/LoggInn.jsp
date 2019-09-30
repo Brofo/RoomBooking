@@ -24,10 +24,10 @@
 
 </form>
 
-<br> Hvis du ikke har en bruker, kan du opprette en bruker her:
+<br> If you would like to create a new user, please press the button:
 <form action="CreateUser.jsp">
 
-    <input type="submit" name ="action"  value="Lag ny bruker">
+    <input type="submit" name ="action"  value="Create new user">
 </form>
 
 </body>

@@ -24,8 +24,8 @@ public class Register {
      * and the Users.
      * @return a generated Customer ID.
      */
-    public String getCustomerAndUserID(PrintWriter out, Connection conn) {
-        customerAndUserID = id.getID(out, conn, sqlCustomerTable);
+    public String getCustomerAndUserID(PrintWriter out) {
+        customerAndUserID = id.getID(out, sqlCustomerTable);
         return customerAndUserID;
     }
 
@@ -33,9 +33,7 @@ public class Register {
      * This method makes it possible for a customer to register name, email, and phone.
      * It uses Class getID to register an ID automatically.
      */
-    public void registerCustomer(PrintWriter out, Connection conn, String name, String email, String phone) {
-
-        String customerID = getCustomerAndUserID(out, conn);
+    public void registerCustomer(PrintWriter out, Connection conn, String customerID, String name, String email, String phone) {
 
             try {
 
@@ -59,7 +57,7 @@ public class Register {
      */
     public void registerUser(PrintWriter out, Connection conn, String name, String email, String phone, String password) {
 
-        String customerID = id.getID(out, conn, sqlCustomerTable);
+        String customerID = id.getID(out, sqlCustomerTable);
 
         try {
 
@@ -87,12 +85,12 @@ public class Register {
                               String roomID, String customerID,  String checkInDate, String checkOutDate,
                               String prefrences) {
 
-        String orderID = id.getID(out, conn, sqlOrderTable);
+        String orderID = id.getID(out, sqlOrderTable);
 
         try {
             PreparedStatement insert = conn.prepareStatement
                     ("INSERT INTO RoombookingDb.Orders(order_id, room_id, cus_id, " +
-                            "order_checkindate, order_checkoutdate, prefrences) VALUES (?,?,?,?,?,?)");
+                            "order_checkindate, order_checkoutdate, preferences) VALUES (?,?,?,?,?,?)");
             insert.setString(1, orderID);
             insert.setString(2, roomID);
             insert.setString(3, customerID);

@@ -18,10 +18,7 @@
   <a href="servlets.userServlets.ProfileServlet">Min profil</a> |
   <a href="servlets.userServlets.LogOutServlet">Logg ut</a>
   <hr>
-  Navn: <input type="text" name="name">
-  Email: <input type="text" name="email">
-  Telefon: <input type="text" name="phone">
-  <input type="submit" name ="action"  value="Bestille">
+
   <input type="submit" name ="action"  value="Vis alle bestillinger">
   <input type="submit" name ="action"  value="Vis romtyper :)">
   <input type="submit" name ="action"  value="Vis priser for rom">

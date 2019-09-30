@@ -39,9 +39,6 @@ public class Servlet extends HttpServlet {
 
         try {
 
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
             String action = request.getParameter("action");
 
             DbTool dbtool = new DbTool();
@@ -49,13 +46,8 @@ public class Servlet extends HttpServlet {
 
             out.println("Log in worked");
 
-            // Registers a Customer in the database.
-            if (action.contains("Bestille")) {
-                out.println("Registrer valgt ");
-                reg.registerCustomer(out, conn, name, email, phone);
 
-
-            } else if (action.contains("alle")) {
+            if (action.contains("alle")) {
                 out.println("Valgt, skriver ut alle romIDer og romtyper");
                 roomTyp.getRoomID(out, conn);
             }
