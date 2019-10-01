@@ -13,22 +13,22 @@
 <body>
 <form action ="LoggInn.jsp">
 
-    If you have an account, you can log in here: <br>
+    <h2>You are currently booking as a guest</h2>
+    If you would like to book as a user, click here:
     <input type="submit" name="LogIn" value="Log In"><br>
-    If not, fill in the empty spaces to continue as a guest.
 
 </form>
-<form action="servlets.bookingServlets.CustomerBookingServlet">
+<form action="servlets.bookingServlets.BookingServlet2" method="post">
 
-    <input type="hidden" name="availableRoomID" value="${availableRomID}">
+    <input type="hidden" name="availableRoomID" value="${availableRoomID}">
 
-    Room type: <input type="text" name="roomtype" value="${roomType}"><br>
+    Room type: <input type="text" name="roomType" value="${roomType}"><br>
     Check in date: <input type="date" name="checkin" value ="${checkInDate}"><br>
     Check out date: <input type="date" name="checkout" value="${checkOutDate}"><br>
     Name: <input type="text" name="name"><br>
     Email: <input type="email" name="email"><br>
     Phone number: <input type="text" name="phone"><br>
-    Preferences (optional):   <textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
+    Preferences (optional): <br><textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
     <input type="submit" name="createBooking" value="Book room">
 </form>

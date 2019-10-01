@@ -40,12 +40,9 @@ public class CreateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        DbTool dbtool = new DbTool();
-        Connection conn = dbtool.logIn(out);
-
             //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
             //blir puttet inn i databasen, slik at brukeren blir opprettet.
-            regUser.registerUser(out, conn, name, email, phone, password);
+            regUser.registerUser(out, name, email, phone, password);
             out.println("Du har nå opprettet en bruker. Nå kan du logge inn med denne brukeren.");
             request.getRequestDispatcher("LoggInn.jsp").include(request, response);
 

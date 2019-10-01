@@ -101,10 +101,10 @@ public class CustomerFunctionality {
      * @param checkOutDate the check out-date of the order.
      * @param customerPreferences any special preferences the customer has submitted.
      */
-    private void inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
+    public void inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
         try {
             GenerateID idGenerator = new GenerateID();
-            String orderId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Orders");
+            String orderId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Orders");
 
             PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES (?, ?, ?, ?, ?, ?)");
             pst.setString(1, orderId);
@@ -140,7 +140,7 @@ public class CustomerFunctionality {
             GenerateID idGenerator = new GenerateID();
             HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
             if(usedPersonalInfoMap.isEmpty()) {
-                String customerId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Customer");
+                String customerId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Customer");
 
                 inputRecordInOrders("noRoom", customerId, checkInDate, checkOutDate, "no preferences");
             }
@@ -178,13 +178,18 @@ public class CustomerFunctionality {
 
             ResultSet availableRooms = preparedStatement.executeQuery();
 
-            availableRooms.next();
-            return availableRooms.getString(1);
+            if (availableRooms.next()) {
+                availableRooms.next();
+                return availableRooms.getString(1);
+            }
+            else {
+                return "";
+            }
         }
         catch(SQLException e){
             out.println("Exeption thrown from getAvailableRoomBetween: " + e);
+            return null;
         }
-        return null;
     }
 
     /**

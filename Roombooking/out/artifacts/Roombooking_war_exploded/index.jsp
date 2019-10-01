@@ -13,28 +13,31 @@
 <body>
 
 <form action="servlets.Servlet">
+
   <a href="index.jsp"> <b>Forsiden</b></a>   |
   <a href="servlets.userServlets.LogInServlet1">Logg inn</a> |
   <a href="servlets.userServlets.ProfileServlet">Min profil</a> |
   <a href="servlets.userServlets.LogOutServlet">Logg ut</a>
   <hr>
 
-  <input type="submit" name ="action"  value="Book Room">
   <input type="submit" name ="action"  value="Vis alle bestillinger">
   <input type="submit" name ="action"  value="Vis romtyper :)">
   <input type="submit" name ="action"  value="Vis priser for rom">
+  <br>
 
-  <br>
-  Preferanser for bestilling:
-  <br>
-  <textarea rows="10" cols="50" maxlength = "500" placeholder="Preferanser...(maks 500 karakterer)">
-</textarea>
 </form>
 
-<form action="./servlets.CreateBooking" method="post">
-  Name: <input type="text" name="name"><br>
-  Email: <input type="email" name="email"><br>
-  Phone number: <input type="text" name="phone"><br>
+<form action="servlets.bookingServlets.BookingServlet1" method="post">
+
+  <label for="roomChoice">Please choose room type: </label>
+  <select id="roomChoice" name="roomType">
+    <option name="Empty">Select...</option>
+    <option name="Single room">Single room</option>
+    <option name="Double room">Double room</option>
+    <option name="Family room">Family room</option>
+    <option name="Suite">Suite</option>
+  </select><br>
+
   Check in date: <input type="date" name="checkin"><br>
   Check out date: <input type="date" name="checkout"><br>
   <input type="submit" name="createBooking" value="Create Booking">
