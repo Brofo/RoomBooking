@@ -27,6 +27,8 @@ public class CustomerFunctionality {
         this.out = out;
         con = new DbTool().logIn(out);
 
+        //Dette under her kommer jeg antageligvis til å fjerne. Brukte det når dette var en CustomerFunctionality,
+        //men nå er det vel mest en start på DBFunctionality, i mine øyne i alle fall.
         try {
             st = con.createStatement();
         }
@@ -59,11 +61,10 @@ public class CustomerFunctionality {
                 searchResults.put(searchValueArray[i], cus_id);
             }
         }
-        out.println(searchResults.toString());
         return searchResults;
     }
     /**
-     * getSingleRecord will take parameters to create a SQL-statement that retrieves any single record of the
+     * getField will take parameters to create a SQL-statement that retrieves any single record of the
      * RoombookingDB-schema.
      * @param whatToSelect is the name of the record (column name) wanted.
      * @param tableToSearch is the name of the table the attribute is in.
@@ -93,6 +94,41 @@ public class CustomerFunctionality {
     }
 
     /**
+     * inputRecordInCustomer will create a new record of a customer in table Customer.
+     * PS: Sindre har laget en form for denne i Register.java, men jeg trengte cus_id i kalleren (for å kunne
+     * registrere kunde før ordre), så enten så må generateId skje i kalleren (createBooking) eller så må
+     * registerCustomer returnere cus_id'en. Ville ikke endre Sindre sin klasse så jeg lagde min egen her. Dvs. at
+     * jeg per nå kaller generateId i createBooking.
+     * @param cus_id
+     * @param name
+     * @param phone
+     * @param email
+     * @param password
+     * @param bonuspoints
+     */
+    public void inputRecordInCustomer(String cus_id, String name, String phone, String email, String password, String bonuspoints) {
+        try {
+            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Customer VALUES (?, ?, ?, ?, ?, ?)");
+            pst.setString(1, cus_id);
+            pst.setString(2, name);
+            pst.setString(3, phone);
+            pst.setString(4, email);
+            pst.setString(5, password);
+            pst.setString(6, bonuspoints);
+
+            int customerCount = pst.executeUpdate();
+            if(customerCount == 1) {
+                out.println(customerCount + " customer registered.");
+            }
+            else {
+                out.println(customerCount + " customer registered.");
+            }
+        }
+        catch (SQLException e) {
+            out.println("Exeption in inputRecordInCustomer: " + e);
+        }
+    }
+    /**
      * inputRecordInOrders will put in a full record in table Orders. This is essentially the last part of creating
      * an order this will stay private as it needs only be accessed from createOrder().
      * @param room_id the id of the room that is ordered
@@ -100,8 +136,9 @@ public class CustomerFunctionality {
      * @param checkInDate the check in-date of the order.
      * @param checkOutDate the check out-date of the order.
      * @param customerPreferences any special preferences the customer has submitted.
+     * @return the order_id of the order recorded.
      */
-    private void inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
+    public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
         try {
             GenerateID idGenerator = new GenerateID();
             String orderId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Orders");
@@ -121,38 +158,64 @@ public class CustomerFunctionality {
             else {
                 out.println(orderCount + " orders created.");
             }
+            return orderId;
         }
         catch (SQLException e) {
             out.println("Exeption in createOrder: " + e);
         }
+        return null;
     }
 
     /**
-     * createBooking is not finished. Confer with Karl Martin before using.
+     * checkIfAvailableRoom will check if the chosen room type is available for the time period and call createBooking
+     * with the order information if it is.
+     * @param name
+     * @param email
+     * @param phone
+     * @param wantedRoomType
+     * @param checkInDate
+     * @param checkOutDate
+     * @param preferences
+     */
+    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) {
+        String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
+        if(roomId == null){
+            out.println("No available rooms of chosen type available for this period.");
+            out.println("Try different type or different period.");
+        }
+        else{
+            createBooking(name, email, phone, roomId, checkInDate, checkOutDate, preferences);
+        }
+
+    }
+
+    /**
+     * createBooking will use checkForCustomer if some of the information is already used. If it is not it will call
+     *  idGenerator to get a new cus_id and call inputRecordInCustomer with the new cus_id and the rest of the info.
+     *  If the info is used it will use the cus_id related to the email used. (Preferably it would check if there is
+     *  different cus_ids related to the different data but it doesn't do that yet.) At last it will call
+     *  inputRecordInOrders with the info and either the used cus_id or the newly generated one.
+     *  At last it prints out the string returned from getOrderInfo.
      * @param name
      * @param email
      * @param phone
      * @param checkInDate
      * @param checkOutDate
      */
-    public void createBooking(String name, String email, String phone, String checkInDate, String checkOutDate) {
-        try {
-            GenerateID idGenerator = new GenerateID();
-            HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
-            if(usedPersonalInfoMap.isEmpty()) {
-                String customerId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Customer");
-
-                inputRecordInOrders("noRoom", customerId, checkInDate, checkOutDate, "no preferences");
-            }
-            else{
-                out.println("Some of the information entered is already used.");
-            }
+    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences) {    GenerateID idGenerator = new GenerateID();
+        HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
+        String customerId;
+        if(usedPersonalInfoMap.isEmpty()) {
+            customerId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Customer");
+            inputRecordInCustomer(customerId, name, phone, email, null, null);
         }
-        catch (Exception e) {
-            out.println("Error" + e);
+        else{
+            customerId = usedPersonalInfoMap.get(email);
         }
-
+        String orderId = inputRecordInOrders(roomId, customerId, checkInDate, checkOutDate, preferences);
+        out.println(getOrderInfo(orderId));
     }
+
     /**
      * getAvailableRoomBetween finds the id of rooms of wanted type that is free in the selected period.
      * @param roomTypeId is the prefix of the room_id. E.g. if doubleroom is wanted pass the string "dr%"
@@ -178,11 +241,41 @@ public class CustomerFunctionality {
 
             ResultSet availableRooms = preparedStatement.executeQuery();
 
-            availableRooms.next();
-            return availableRooms.getString(1);
+            if(availableRooms.next()){
+                return availableRooms.getString(1);
+            }
+            else{
+                return null;
+            }
         }
         catch(SQLException e){
             out.println("Exeption thrown from getAvailableRoomBetween: " + e);
+        }
+        return null;
+    }
+
+    /**
+     * getOrderInfo will return a string the info of the order related to the orderId passed to this method.
+     * @param orderId
+     * @return a string with the values of each column related to the orderId
+     */
+    public String getOrderInfo(String orderId){
+        try{
+            String stmt = "SELECT * FROM RoombookingDB.Orders WHERE order_id = ?";
+            PreparedStatement getOrderInfoStatement = con.prepareStatement(stmt);
+            getOrderInfoStatement.setString(1, orderId);
+            ResultSet orderInfoRS = getOrderInfoStatement.executeQuery();
+            orderInfoRS.next();
+            String orderInfoString =    "Order ID: "        + orderId +
+                                        "Room ID: "         + orderInfoRS.getString(2) +
+                                        "Customer ID: "     + orderInfoRS.getString(3) +
+                                        "Check In Date: "   + orderInfoRS.getString(4) +
+                                        "Check Out Date: "  + orderInfoRS.getString(5) +
+                                        "Preferences: "     + orderInfoRS.getString(6);
+            return orderInfoString;
+        }
+        catch(SQLException e){
+            out.println("Exeption in getOrderInfo: " + e);
         }
         return null;
     }
@@ -244,5 +337,4 @@ public class CustomerFunctionality {
         }
         return null;
     }
-
 }
