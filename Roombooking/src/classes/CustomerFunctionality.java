@@ -4,6 +4,8 @@ import javax.persistence.SqlResultSetMapping;
 import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -225,6 +227,9 @@ public class CustomerFunctionality {
      */
     public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate){
         try{
+            java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
+            java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
+
             String stmt = "SELECT room_id FROM RoombookingDB.Room WHERE room_id LIKE ? AND room_id NOT IN(" +
                     "SELECT room_id FROM RoombookingDB.Orders WHERE room_id LIKE ? " +
                     "AND (order_checkindate BETWEEN ? AND (DATE_ADD(?, INTERVAL -1 DAY))" +
@@ -233,10 +238,10 @@ public class CustomerFunctionality {
             PreparedStatement preparedStatement = con.prepareStatement(stmt);
             preparedStatement.setString(1, roomTypeId);
             preparedStatement.setString(2, roomTypeId);
-            preparedStatement.setString(3, checkInDate);
-            preparedStatement.setString(4, checkOutDate);
-            preparedStatement.setString(5, checkInDate);
-            preparedStatement.setString(6, checkOutDate);
+            preparedStatement.setDate(3, (Date) checkInDatePR);
+            preparedStatement.setDate(4, (Date) checkOutDatePR);
+            preparedStatement.setDate(5, (Date) checkInDatePR);
+            preparedStatement.setDate(6, (Date) checkOutDatePR);
 
             ResultSet availableRooms = preparedStatement.executeQuery();
 
@@ -247,7 +252,7 @@ public class CustomerFunctionality {
                 return null;
             }
         }
-        catch(SQLException e){
+        catch(SQLException | ParseException e){
             out.println("Exeption thrown from getAvailableRoomBetween: " + e);
         }
         return null;
