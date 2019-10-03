@@ -4,6 +4,7 @@ import javax.persistence.SqlResultSetMapping;
 import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -293,7 +294,7 @@ public class CustomerFunctionality {
     public void getBookedRooms(String dateInQuestion){
         try{
             ResultSet bookedRoomsResultSet = st.executeQuery("SELECT room_id " +
-                                                                    "FROM Orders " +
+                                                                    "FROM roombookingdb.Orders " +
                                                                     "WHERE order_checkindate <= " + dateInQuestion +
                                                                     " AND order_checkoutdate > " + dateInQuestion);
             while(bookedRoomsResultSet.next()){
