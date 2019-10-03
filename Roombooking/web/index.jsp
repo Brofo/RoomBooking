@@ -45,7 +45,5 @@
   <input type="submit" name="createBooking" value="Create Booking">
 </form>
 
-
-
 </body>
 </html>

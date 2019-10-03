@@ -179,11 +179,10 @@ public class CustomerFunctionality {
             ResultSet availableRooms = preparedStatement.executeQuery();
 
             if (availableRooms.next()) {
-                availableRooms.next();
                 return availableRooms.getString(1);
             }
             else {
-                return "";
+                return null;
             }
         }
         catch(SQLException e){
