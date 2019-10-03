@@ -33,8 +33,8 @@ public class BookingServlet2 extends HttpServlet {
 
         // Verdiene fra parameterne:
         String availableRoomID = request.getParameter("availableRoomID");
-        String checkInDate = request.getParameter("checkin");
-        String checkOutDate = request.getParameter("checkout");
+        String checkInDate = request.getParameter("checkInDate");
+        String checkOutDate = request.getParameter("checkOutDate");
         String preferences = request.getParameter("preferences");
 
         String name = request.getParameter("name");
@@ -45,6 +45,7 @@ public class BookingServlet2 extends HttpServlet {
 
         // Requesting cookie to check if a user is logged in
         Cookie existingCookies[] = request.getCookies();
+out.println(checkInDate + " " + checkOutDate);
 
         if (existingCookies != null) {
             //If logged in, just register the order, using the users Customer ID.
