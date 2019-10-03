@@ -22,6 +22,12 @@ import classes.Register;
         urlPatterns = {"/servlets.userServlets.CreateUserServlet"}
                 )
 
+/**
+ * This servlet receives the parameters from the CreateUser.jsp site, which contains
+ * information about the user that wants to be registered. It puts the information
+ * into the database, in order to register the user.
+ */
+
 public class CreateUserServlet extends HttpServlet {
     private Register regUser;
 
@@ -40,14 +46,10 @@ public class CreateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        DbTool dbtool = new DbTool();
-        Connection conn = dbtool.logIn(out);
-
             //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
             //blir puttet inn i databasen, slik at brukeren blir opprettet.
-            regUser.registerUser(out, conn, name, email, phone, password);
-            out.println("Du har nå opprettet en bruker. Nå kan du logge inn med denne brukeren.");
-            request.getRequestDispatcher("LoggInn.jsp").include(request, response);
+            regUser.registerUser(out, name, email, phone, password);
+            request.getRequestDispatcher("LogIn.jsp").include(request, response);
 
     }
 

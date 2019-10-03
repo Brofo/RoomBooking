@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 /**
  * LogInServlet1 brukes kun til å sjekke om brukeren allerede er logget inn.
  * Hvis brukeren er logget inn, får den beskjed om dette. Hvis ikke, blir den
- * videresendt til LoggInn.jsp, som er formen til innloggingsmenyen.
+ * videresendt til LogIn.jsp, som er formen til innloggingsmenyen.
  */
 public class LogInServlet1 extends HttpServlet {
 
@@ -26,18 +26,17 @@ public class LogInServlet1 extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        // Henter inn menyen på toppen av websiden.
-        request.getRequestDispatcher("link.html").include(request, response);
 
         Cookie existingCookies[] = request.getCookies();
         if (existingCookies != null) {
-            String userName = existingCookies[0].getName();
-            out.println("Du er allerede logget inn som " + userName);
+            // The user is already logged in, and will be sent directly to their profile.
+            String name = existingCookies[0].getName();
+            request.setAttribute("name", name);
+            request.getRequestDispatcher("Profile.jsp").forward(request, response);
         }
         else {
-            response.sendRedirect(request.getContextPath() + "/LoggInn.jsp");
+            // The user is not logged in, and will be sent to the LogIn site.
+            response.sendRedirect(request.getContextPath() + "/LogIn.jsp");
         }
     }
 

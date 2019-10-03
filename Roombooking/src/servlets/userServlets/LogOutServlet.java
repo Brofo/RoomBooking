@@ -31,11 +31,11 @@ public class LogOutServlet extends HttpServlet {
         // Sjekker om brukeren er logget inn. Hvis den er det, blir cookien slettet.
         Cookie existingCookies[] = request.getCookies();
         if (existingCookies != null) {
-            out.println("Du er nå logget ut.");
+            out.println("Your are now logged out");
             existingCookies[0].setMaxAge(0);
             response.addCookie(existingCookies[0]);
         } else {
-            out.println("Du må logge inn før du kan logge ut! Tøysekopp.");
+            out.println("You have to log in before you can log out.");
         }
     }
 }

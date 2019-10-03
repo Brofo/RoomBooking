@@ -52,8 +52,11 @@ public class GenerateID {
      * Metoden skal sjekke om verdien som opprettes for ID allerede finnes i databasen.
      * Hvis den ikke finnes, blir verdien returnert og brukt i registrering av customer eller order.
      */
-    public String getID(PrintWriter out, Connection conn, String sqlTable) {
+    public String getID(PrintWriter out, String sqlTable) {
+
         String ID = generateID(sqlTable, out);
+        DbTool dbtool = new DbTool();
+        Connection conn = dbtool.logIn(out);
 
         try {
             PreparedStatement select = conn.prepareStatement(sqlTable);

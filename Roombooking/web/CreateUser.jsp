@@ -14,6 +14,12 @@
 </head>
 <body>
 
+    <a href="index.jsp"> <b>Home</b></a>   |
+    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
+    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
+    <a href="servlets.userServlets.LogOutServlet">Log out</a>
+    <hr>
+
 <form action="servlets.userServlets.CreateUserServlet" method="post">
 Fyll inn feltene for å opprette en bruker.
     <br>
@@ -21,7 +27,7 @@ Fyll inn feltene for å opprette en bruker.
     Telefon:    <input type="text" name="phone">
     <br><br>Innlogging:</br>
     E-post:     <input type="text" name ="email">
-    Passord:    <input type="text" name ="password">
+    Passord:    <input type="password" name ="password">
     <input type="submit" name="action" value="Opprett bruker">
 </form>
 
