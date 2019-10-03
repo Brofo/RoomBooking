@@ -141,6 +141,8 @@ public class CustomerFunctionality {
      */
     public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
         try {
+            java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
+            java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
             GenerateID idGenerator = new GenerateID();
             String orderId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Orders");
 
@@ -148,8 +150,8 @@ public class CustomerFunctionality {
             pst.setString(1, orderId);
             pst.setString(2, room_id);
             pst.setString(3, cus_id);
-            pst.setString(4, checkInDate);
-            pst.setString(5, checkOutDate);
+            pst.setDate(4, new java.sql.Date(checkInDatePR.getTime()));
+            pst.setDate(5, new java.sql.Date(checkOutDatePR.getTime()));
             pst.setString(6, customerPreferences);
 
             int orderCount = pst.executeUpdate();
@@ -161,7 +163,7 @@ public class CustomerFunctionality {
             }
             return orderId;
         }
-        catch (SQLException e) {
+        catch (SQLException | ParseException e) {
             out.println("Exeption in createOrder: " + e);
         }
         return null;
