@@ -51,8 +51,8 @@ public class BookingServlet1 extends HttpServlet {
                 roomTypeID = "zj%";
             } else {
                 roomTypeID = null;
-                request.getRequestDispatcher("index.jsp").include(request, response);
-                out.println("Please select a room type.");
+                request.setAttribute("errorMessage","Please select a room type.");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
         String availableRoomID = null;
@@ -91,10 +91,11 @@ public class BookingServlet1 extends HttpServlet {
             } else {
                 if (roomTypeID == null) {
                     // Do nothing. Did not choose room type. This error is handled at the beginning of the servlet.
-                } else {
+                }
+                else {
                     // Rommet er ikke ledig.
-                    request.getRequestDispatcher("index.jsp").include(request, response); // Henter inn forsiden igjen.
-                    out.println("This roomtype is fully booked for this period.");
+                    request.setAttribute("errorMessage","There are no rooms of this room type available for this period.");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             }
     }
