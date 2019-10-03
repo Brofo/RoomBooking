@@ -12,3 +12,10 @@ input[type=text]:focus{
     border: 3px solid coral;
     width: 13%;
 }
+Form{
+    float: left;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

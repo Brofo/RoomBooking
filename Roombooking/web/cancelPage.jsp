@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<br>
+
 <!--
  Formen for funksjonen changeName
  -->
@@ -26,7 +26,6 @@
     <br> <input type="submit" name="action" value="Endre navn">
     </fieldset>
 </form>
-<br>
 <!--
  Formen for funksjonen changeMail
  -->
@@ -39,7 +38,7 @@
     <br>
     </fieldset>
 </form>
-<br>
+
 <!--
  Formen for funksjonen changePhone
  -->
@@ -51,7 +50,7 @@
     <br> <input type="submit" name="action" value="Endre telefon">
     </fieldset>
 </form>
-<br>
+
 <!--
  Formen for funksjonen changeRoom
  -->

@@ -5,6 +5,7 @@ import classes.DbTool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,6 +57,8 @@ public class CancelPage extends HttpServlet {
             //Alterorder for funksjonen til servlet
             AlterOrder alterOrder = new AlterOrder();
             out.println("Up to date with Database <br>");
+
+
 
             //tar inn gammelt navn og nytt navn og endrer på det i databasen, kunne fungert bedre om vi hadde et etternavn også da slipper man og bruke kundenummer
             if (action.contains("navn")){
