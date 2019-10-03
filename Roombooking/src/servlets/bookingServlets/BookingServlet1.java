@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.text.ParseException;
 
 @WebServlet(name = "servlets.bookingServlets.BookingServlet1",
             urlPatterns = {"/servlets.bookingServlets.BookingServlet1"}
@@ -54,9 +55,14 @@ public class BookingServlet1 extends HttpServlet {
                 out.println("Please select a room type.");
             }
 
-            String availableRoomID = cusFun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
+        String availableRoomID = null;
+        try {
+            availableRoomID = cusFun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-            if (availableRoomID != null && !availableRoomID.equals("")) {
+        if (availableRoomID != null && !availableRoomID.equals("")) {
                 // Rommet er ledig. Prøver derfor å finne ut om den som vil booke er en bruker,
                 // eller en customer.
 

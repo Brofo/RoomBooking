@@ -178,7 +178,7 @@ public class CustomerFunctionality {
      * @param checkOutDate
      * @param preferences
      */
-    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) {
+    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) throws ParseException {
         String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
         if(roomId == null){
             out.println("No available rooms of chosen type available for this period.");
@@ -225,11 +225,11 @@ public class CustomerFunctionality {
      * @param checkOutDate is the wanted date for checking out.
      * @return a string with one of the available rooms.
      */
-    public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate){
-        try{
-            java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
-            java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
+    public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate) throws ParseException {
+        java.util.Date checkIndatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
+        java.util.Date checkOutdatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
 
+        try{
             String stmt = "SELECT room_id FROM RoombookingDB.Room WHERE room_id LIKE ? AND room_id NOT IN(" +
                     "SELECT room_id FROM RoombookingDB.Orders WHERE room_id LIKE ? " +
                     "AND (order_checkindate BETWEEN ? AND (DATE_ADD(?, INTERVAL -1 DAY))" +
@@ -238,10 +238,10 @@ public class CustomerFunctionality {
             PreparedStatement preparedStatement = con.prepareStatement(stmt);
             preparedStatement.setString(1, roomTypeId);
             preparedStatement.setString(2, roomTypeId);
-            preparedStatement.setDate(3, (Date) checkInDatePR);
-            preparedStatement.setDate(4, (Date) checkOutDatePR);
-            preparedStatement.setDate(5, (Date) checkInDatePR);
-            preparedStatement.setDate(6, (Date) checkOutDatePR);
+            preparedStatement.setDate(3, new java.sql.Date(checkIndatePR.getTime()));
+            preparedStatement.setDate(4, new java.sql.Date(checkOutdatePR.getTime()));
+            preparedStatement.setDate(5, new java.sql.Date(checkIndatePR.getTime()));
+            preparedStatement.setDate(6, new java.sql.Date(checkOutdatePR.getTime()));
 
             ResultSet availableRooms = preparedStatement.executeQuery();
 
@@ -252,7 +252,7 @@ public class CustomerFunctionality {
                 return null;
             }
         }
-        catch(SQLException | ParseException e){
+        catch(SQLException e){
             out.println("Exeption thrown from getAvailableRoomBetween: " + e);
         }
         return null;
