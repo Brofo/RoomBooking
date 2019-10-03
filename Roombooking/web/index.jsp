@@ -16,6 +16,7 @@
     <a href="servlets.userServlets.LogInServlet1">Log in</a> |
     <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
     <a href="servlets.userServlets.LogOutServlet">Log out</a>
+    <a href="servlets.servletsRoominfo.SingleServlet">Room info</a>
     <hr>
 
 <form action="servlets.Servlet">

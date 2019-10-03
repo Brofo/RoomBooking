@@ -4,6 +4,8 @@ import javax.persistence.SqlResultSetMapping;
 import javax.xml.transform.Result;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -176,7 +178,7 @@ public class CustomerFunctionality {
      * @param checkOutDate
      * @param preferences
      */
-    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) {
+    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) throws ParseException {
         String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
         if(roomId == null){
             out.println("No available rooms of chosen type available for this period.");
@@ -223,7 +225,10 @@ public class CustomerFunctionality {
      * @param checkOutDate is the wanted date for checking out.
      * @return a string with one of the available rooms.
      */
-    public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate){
+    public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate) throws ParseException {
+        java.util.Date checkIndatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
+        java.util.Date checkOutdatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
+
         try{
             String stmt = "SELECT room_id FROM RoombookingDB.Room WHERE room_id LIKE ? AND room_id NOT IN(" +
                     "SELECT room_id FROM RoombookingDB.Orders WHERE room_id LIKE ? " +
@@ -233,10 +238,10 @@ public class CustomerFunctionality {
             PreparedStatement preparedStatement = con.prepareStatement(stmt);
             preparedStatement.setString(1, roomTypeId);
             preparedStatement.setString(2, roomTypeId);
-            preparedStatement.setString(3, checkInDate);
-            preparedStatement.setString(4, checkOutDate);
-            preparedStatement.setString(5, checkInDate);
-            preparedStatement.setString(6, checkOutDate);
+            preparedStatement.setDate(3, new java.sql.Date(checkIndatePR.getTime()));
+            preparedStatement.setDate(4, new java.sql.Date(checkOutdatePR.getTime()));
+            preparedStatement.setDate(5, new java.sql.Date(checkIndatePR.getTime()));
+            preparedStatement.setDate(6, new java.sql.Date(checkOutdatePR.getTime()));
 
             ResultSet availableRooms = preparedStatement.executeQuery();
 

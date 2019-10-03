@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.String;
 import java.sql.Date;
+import java.text.ParseException;
 
 @WebServlet(
         name = "servlets.CreateBooking",
@@ -32,7 +33,11 @@ public class CreateBooking extends HttpServlet {
         String action = req.getParameter("createBooking");
 
         if (action.contains("Create Booking")) {
-            cusFunc.checkIfRoomAvailable(name, email, phone, roomType, checkIn, checkOut, preferences);
+            try {
+                cusFunc.checkIfRoomAvailable(name, email, phone, roomType, checkIn, checkOut, preferences);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         else{
             out.println("What the fuck?");
