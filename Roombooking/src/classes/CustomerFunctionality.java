@@ -140,7 +140,7 @@ public class CustomerFunctionality {
     public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
         try {
             GenerateID idGenerator = new GenerateID();
-            String orderId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Orders");
+            String orderId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Orders");
 
             PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES (?, ?, ?, ?, ?, ?)");
             pst.setString(1, orderId);
@@ -205,7 +205,7 @@ public class CustomerFunctionality {
         HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
         String customerId;
         if(usedPersonalInfoMap.isEmpty()) {
-            customerId = idGenerator.getID(out, con, "SELECT count(*) FROM RoombookingDB.Customer");
+            customerId = idGenerator.getID(out,  "SELECT count(*) FROM RoombookingDB.Customer");
             inputRecordInCustomer(customerId, name, phone, email, null, null);
         }
         else{
