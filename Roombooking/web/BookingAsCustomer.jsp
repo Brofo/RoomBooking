@@ -3,7 +3,11 @@
   User: Sindre
   Date: 26.09.2019
   Time: 14:30
-  To change this template use File | Settings | File Templates.
+
+  After writing information in the index.jsp form, the user will be sent here if
+  it is not logged in. If it chooses not to log in, it will just continue as a
+  customer, and it has to type information about themselves as opposed to the
+  user that is logged in.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <html>
@@ -11,23 +15,40 @@
     <title>Booking as a guest</title>
 </head>
 <body>
-<form action ="LoggInn.jsp">
+
+    <a href="index.jsp"> <b>Home</b></a>   |
+    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
+    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
+    <a href="servlets.userServlets.LogOutServlet">Log out</a>
+    <hr>
+
+<form action ="LogIn.jsp">
 
     <h2>You are currently booking as a guest</h2>
     If you would like to book as a user, click here:
     <input type="submit" name="LogIn" value="Log In"><br>
 
 </form>
+
+<form action ="index.jsp">
+    Room type:      <b>${roomType}</b><br>
+    Check in date:  <b>${checkInDate}</b><br>
+    Check out date: <b>${checkOutDate}</b><br>
+    Change room type or dates:
+    <input type="submit" value="Change">
+    <br>
+</form>
+
 <form action="servlets.bookingServlets.BookingServlet2" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
+    <input type="hidden" name="roomType" value="${roomType}">
+    <input type="hidden" name="checkInDate" value="${checkInDate}">
+    <input type="hidden" name="checkOutDate" value="${checkOutDate}">
 
-    Room type: <input type="text" name="roomType" value="${roomType}"><br>
-    Check in date: <input type="date" name="checkin" value ="${checkInDate}"><br>
-    Check out date: <input type="date" name="checkout" value="${checkOutDate}"><br>
     Name: <input type="text" name="name"><br>
     Email: <input type="email" name="email"><br>
-    Phone number: <input type="text" name="phone"><br>
+    Phone number: <input type="tel" name="phone"><br>
     Preferences (optional): <br><textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
     <input type="submit" name="createBooking" value="Book room">

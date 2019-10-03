@@ -15,6 +15,12 @@ import java.io.PrintWriter;
 @WebServlet(name = "servlets.bookingServlets.BookingServlet2",
             urlPatterns = {"/servlets.bookingServlets.BookingServlet2"}
 )
+
+/**
+ * This servlet is used when either a logged in user, or a customer is at the last step
+ * of booking a room. If it is a user, an order will be registered, using the user's customer ID.
+ * If it is a customer, the customer will be registered first, and then the order.
+ */
 public class BookingServlet2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

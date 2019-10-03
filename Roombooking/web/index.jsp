@@ -3,7 +3,9 @@
   User: Sindre
   Date: 11.09.2019
   Time: 11:11
-  To change this template use File | Settings | File Templates.
+
+  This is the main page of the system. A customer can use this page
+  to initiate a booking.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <html>
@@ -12,13 +14,13 @@
 </head>
 <body>
 
-<form action="servlets.Servlet">
+    <a href="index.jsp"> <b>Home</b></a>   |
+    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
+    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
+    <a href="servlets.userServlets.LogOutServlet">Log out</a>
+    <hr>
 
-  <a href="index.jsp"> <b>Forsiden</b></a>   |
-  <a href="servlets.userServlets.LogInServlet1">Logg inn</a> |
-  <a href="servlets.userServlets.ProfileServlet">Min profil</a> |
-  <a href="servlets.userServlets.LogOutServlet">Logg ut</a>
-  <hr>
+<form action="servlets.Servlet">
 
   <input type="submit" name ="action"  value="Vis alle bestillinger">
   <input type="submit" name ="action"  value="Vis romtyper :)">

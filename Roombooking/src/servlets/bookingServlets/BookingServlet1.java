@@ -37,6 +37,8 @@ public class BookingServlet1 extends HttpServlet {
         String checkOutDate = request.getParameter("checkout");
         String roomType = request.getParameter("roomType");
 
+            // Check what room type has been chosen, in order to assign
+            // a room ID to the booking order.
             String roomTypeID;
             if (roomType.equals("Single room")) {
                 roomTypeID = "sr%";
@@ -48,8 +50,8 @@ public class BookingServlet1 extends HttpServlet {
                 roomTypeID = "zj%";
             } else {
                 roomTypeID = null;
-                out.println("The selected room type does not exist.");
                 request.getRequestDispatcher("index.jsp").include(request, response);
+                out.println("Please select a room type.");
             }
 
             String availableRoomID = cusFun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
@@ -81,9 +83,13 @@ public class BookingServlet1 extends HttpServlet {
                     request.getRequestDispatcher("BookingAsCustomer.jsp").forward(request, response);
                 }
             } else {
-                // Rommet er ikke ledig.
-                request.getRequestDispatcher("index.jsp").include(request, response); // Henter inn forsiden igjen.
-                out.println("This roomtype is fully booked for this period.");
+                if (roomTypeID == null) {
+                    // Do nothing. Did not choose room type. This error is handled at the beginning of the servlet.
+                } else {
+                    // Rommet er ikke ledig.
+                    request.getRequestDispatcher("index.jsp").include(request, response); // Henter inn forsiden igjen.
+                    out.println("This roomtype is fully booked for this period.");
+                }
             }
     }
 }

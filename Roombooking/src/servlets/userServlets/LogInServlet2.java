@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 
 /**
  * LogInServlet2 har sin funksjonalitet når brukeren forsøker å trykke på "Logg Inn"
- * etter å ha fylt inn innloggingsdetaljene i menyen til LoggInn.jsp.
+ * etter å ha fylt inn innloggingsdetaljene i menyen til LogIn.jsp.
  */
 public class LogInServlet2 extends HttpServlet {
 
@@ -44,22 +44,26 @@ public class LogInServlet2 extends HttpServlet {
 
 
         if (customerID == null) {
-                out.println("Det er ingen bruker tilknyttet denne e-posten.");
-                request.getRequestDispatcher("LoggInn.jsp").include(request, response);
+                // Creates parameter for the errorMessage in LogIn.jsp.
+                request.setAttribute("errorMessage","There is no account associated with this E-mail.");
+                request.getRequestDispatcher("LogIn.jsp").forward(request, response);
             }
             else if (password.equals(correctPassword)) {
-                out.println("Du er nå logget inn.");
-                out.println("Velkommen " + customerName);
-
                 // Passordet som er skrevet inn matcher passordet i databasen.
                 // Oppretter derfor en informasjonskapsel (cookie), slik at brukeren
                 // Forblir innlogget.
                 Cookie makeCookie = new Cookie(customerName, customerID);
                 response.addCookie(makeCookie);
 
+                // Saves the customer's name in the session.
+                request.setAttribute("name", customerName);
+                // Sends the customer's name to Profile.jsp.
+                request.getRequestDispatcher("Profile.jsp").forward(request, response);
+
             } else {
-                out.println("Passordet er feil! :(");
-                request.getRequestDispatcher("LoggInn.jsp").include(request, response);
+                // Creates parameter for the errorMessage in LogIn.jsp.
+                request.setAttribute("errorMessage","Incorrect password. Please try again");
+                request.getRequestDispatcher("LogIn.jsp").forward(request, response);
             }
     }
 

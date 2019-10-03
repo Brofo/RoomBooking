@@ -3,7 +3,10 @@
   User: Sindre
   Date: 26.09.2019
   Time: 14:30
-  To change this template use File | Settings | File Templates.
+
+  After writing information in the index.jsp file, the user will be sent
+  to this form if it is logged in. The data about the user will be
+  automatically retrieved, and the user does not have to type it again.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <html>
@@ -11,15 +14,30 @@
     <title>Booking as a loyal member</title>
 </head>
 <body>
+
+    <a href="index.jsp"> <b>Home</b></a>   |
+    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
+    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
+    <a href="servlets.userServlets.LogOutServlet">Log out</a>
+    <hr>
+
+<form action ="index.jsp">
+    <h2>You are booking as ${username}</h2>
+    Room type:      <b>${roomType}</b><br>
+    Check in date:  <b>${checkInDate}</b><br>
+    Check out date: <b>${checkOutDate}</b><br>
+    Change room type or dates:
+    <input type="submit" value="Change">
+    <br>
+</form>
+
 <form action="servlets.bookingServlets.BookingServlet2" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
+    <input type="hidden" name="roomType" value="${roomType}">
+    <input type="hidden" name="checkInDate" value="${checkInDate}">
+    <input type="hidden" name="checkOutDate" value="${checkOutDate}">
 
-    <h2>You are booking as ${username}</h2>
-
-    Room type: <input type="text" name="roomType" value="${roomType}"><br>
-    Check in date: <input type="date" name="checkin" value ="${checkInDate}"><br>
-    Check out date: <input type="date" name="checkout" value="${checkOutDate}"><br>
     Preferences (optional):<br>
     <textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
