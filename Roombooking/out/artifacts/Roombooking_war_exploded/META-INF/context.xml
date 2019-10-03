@@ -2,7 +2,11 @@
 <Context path="jbdc/localhost">
 
     <Resource name="jdbc/localhost" type="javax.sql.DataSource" auth="Container"
+<<<<<<< HEAD
               username="root" password="passord" driverClassName="com.mysql.jdbc.Driver"
+=======
+              username="root" password="qBDNx1cB" driverClassName="com.mysql.jdbc.Driver"
+>>>>>>> 4a52598f7af9b2ac8dfaf7eee0186832ecb70c1f
               url="jdbc:mysql://localhost:3306/">
     </Resource>
 </Context>
