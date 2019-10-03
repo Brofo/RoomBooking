@@ -26,6 +26,8 @@
   <input type="submit" name ="action"  value="Vis alle bestillinger">
   <input type="submit" name ="action"  value="Vis romtyper :)">
   <input type="submit" name ="action"  value="Vis priser for rom">
+  <input type="submit" name="action" value="Kansellere bestilling">
+    <input type="submit" name ="action" value ="Opprett bruker">
 
   <br>
   Preferanser for bestilling:

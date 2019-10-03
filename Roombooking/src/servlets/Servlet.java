@@ -59,6 +59,15 @@ public class Servlet extends HttpServlet {
                 out.println("Valgt, skriver ut alle romIDer og romtyper");
                 roomTyp.getRoomID(out, conn);
             }
+             else if (action.contains("Kansellere")){
+
+                 //Sender brukeren videre til en side hvor den eventuelt kan gjøre endring og/eller kansellere
+                 out.println("Valgt å kansellere bestilling");
+                 response.sendRedirect(request.getContextPath() + "/cancelPage.jsp");
+            }
+            else if (action.contains("Opprett bruker")){
+                response.sendRedirect(request.getContextPath() + "/CreateUser.jsp");
+            }
 
 
         } catch (Throwable var17) {
