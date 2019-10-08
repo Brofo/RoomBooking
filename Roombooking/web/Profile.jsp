@@ -19,7 +19,7 @@
     <h2>Welcome to your profile, ${name}</h2>
 
     <form action="servlets.profileServlets.SeeBookings" method="get">
-
+        <input type="submit" name="action" value="My bookings">
     </form>
 </body>
 </html>

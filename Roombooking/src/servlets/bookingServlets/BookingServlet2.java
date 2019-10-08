@@ -45,7 +45,7 @@ public class BookingServlet2 extends HttpServlet {
 
         // Requesting cookie to check if a user is logged in
         Cookie existingCookies[] = request.getCookies();
-            out.println(checkInDate + " " + checkOutDate);
+        out.println(checkInDate + " " + checkOutDate);
 
         if (existingCookies != null) {
             //If logged in, just register the order, using the users Customer ID.
@@ -53,6 +53,7 @@ public class BookingServlet2 extends HttpServlet {
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
             out.println("You have successfully booked a " + roomType + " from " + checkInDate + " until " + checkOutDate + ".");
         }
+
         else {
             //If not logged in, register the customer in the database.
             //Then use the customer ID of this customer to register an order.
@@ -62,6 +63,4 @@ public class BookingServlet2 extends HttpServlet {
             out.println("You have successfully booked a " + roomType + " from " + checkInDate + " until " + checkOutDate + ".");
         }
     }
-
-
 }
