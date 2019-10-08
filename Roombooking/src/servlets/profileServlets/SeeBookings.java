@@ -1,5 +1,7 @@
 package servlets.profileServlets;
 
+import classes.GetOrderInfo;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -21,12 +23,11 @@ public class SeeBookings extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
+        GetOrderInfo ordInfo = new GetOrderInfo();
 
         Cookie userCookie[] = request.getCookies();
         String customerID = userCookie[0].getValue();
 
-        // klasse.metode(customerID);
-
-
+        out.println(ordInfo.getOrderFromCustomerId(customerID, out));
     }
 }
