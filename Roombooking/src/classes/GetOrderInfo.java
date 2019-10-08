@@ -11,7 +11,8 @@ public class GetOrderInfo {
             var resultSetOne = st.executeQuery("select cus_name, cus_email, cus_phone from RoombookingDB.customer");
             var resultSetTwo = st.executeQuery("select order_checkInDate, order_checkOutDate, preferences from RoombookingDB.orders");
 
-            while (resultSetOne.next()) {
+            while (resultSetOne.next())
+            {
                 var cusName = resultSetOne.getString("cus_name");
                 var cusEmail = resultSetOne.getString("cus_email");
                 var cusPhone = resultSetOne.getString("cus_phone");
@@ -48,7 +49,6 @@ public class GetOrderInfo {
             PreparedStatement getOrderInfoStatement = conn.prepareStatement(stmt);
             getOrderInfoStatement.setString(1, customerID);
             ResultSet orderInfoRS = getOrderInfoStatement.executeQuery();
-            orderInfoRS.next();
 
 
             while(orderInfoRS.next())
@@ -59,15 +59,16 @@ public class GetOrderInfo {
                         "Check Out Date: "  + orderInfoRS.getString(5) +
                         "Preferences: "     + orderInfoRS.getString(6);
 
+
                 return orderInfo;
             }
 
         }
-        catch(SQLException ex)
-        {
-            out.println("Exeption in getOrderFromCustomerID: " + ex);
-        }
-        return null;
+                    catch(SQLException ex)
+                    {
+                        out.println("Exeption in getOrderFromCustomerID: " + ex);
+                    }
+                    return null;
     }
 
 }
