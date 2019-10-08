@@ -9,12 +9,17 @@
   automatically retrieved, and the user does not have to type it again.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
-<%@include  file="link.html"%>
 <html>
 <head>
     <title>Booking as a loyal member</title>
 </head>
 <body>
+
+    <a href="index.jsp"> <b>Home</b></a>   |
+    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
+    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
+    <a href="servlets.userServlets.LogOutServlet">Log out</a>
+    <hr>
 
 <form action ="index.jsp">
     <h2>You are booking as ${username}</h2>

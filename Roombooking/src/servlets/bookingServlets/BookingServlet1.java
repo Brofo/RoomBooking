@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.text.ParseException;
 
 @WebServlet(name = "servlets.bookingServlets.BookingServlet1",
             urlPatterns = {"/servlets.bookingServlets.BookingServlet1"}
@@ -50,13 +51,18 @@ public class BookingServlet1 extends HttpServlet {
                 roomTypeID = "zj%";
             } else {
                 roomTypeID = null;
-                request.getRequestDispatcher("index.jsp").include(request, response);
-                out.println("Please select a room type.");
+                request.setAttribute("errorMessage","Please select a room type.");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
-            String availableRoomID = cusFun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
+        String availableRoomID = null;
+        try {
+            availableRoomID = cusFun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-            if (availableRoomID != null && !availableRoomID.equals("")) {
+        if (availableRoomID != null && !availableRoomID.equals("")) {
                 // Rommet er ledig. Prøver derfor å finne ut om den som vil booke er en bruker,
                 // eller en customer.
 
@@ -85,10 +91,11 @@ public class BookingServlet1 extends HttpServlet {
             } else {
                 if (roomTypeID == null) {
                     // Do nothing. Did not choose room type. This error is handled at the beginning of the servlet.
-                } else {
+                }
+                else {
                     // Rommet er ikke ledig.
-                    request.getRequestDispatcher("index.jsp").include(request, response); // Henter inn forsiden igjen.
-                    out.println("This roomtype is fully booked for this period.");
+                    request.setAttribute("errorMessage","There are no rooms of this room type available for this period.");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             }
     }

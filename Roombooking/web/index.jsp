@@ -6,17 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@include  file="link.html"%>
 <html>
 <head>
   <title>Rombukser</title>
 </head>
 <body>
-
-    <a href="index.jsp"> <b>Home</b></a>   |
-    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
-    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
-    <a href="servlets.userServlets.LogOutServlet">Log out</a>
-    <hr>
 
 <form action="servlets.Servlet">
 
@@ -26,6 +21,8 @@
   <br>
 
 </form>
+
+
 
 <form action="servlets.bookingServlets.BookingServlet1" method="post">
 
@@ -40,10 +37,10 @@
 
   Check in date: <input type="date" name="checkin"><br>
   Check out date: <input type="date" name="checkout"><br>
-  <input type="submit" name="createBooking" value="Create Booking">
+  <input type="submit" name="createBooking" value="Create Booking"><br>
+
+  <span style="color: red; "> ${errorMessage} </span><br>
 </form>
-
-
 
 </body>
 </html>
