@@ -30,5 +30,44 @@ public class GetOrderInfo {
         }
 
     }
-}
 
+
+    /*
+        Denne metoden skal ta inn customer ID som parameter, og bruke denne til å printe ut informasjon
+        om order til alle orders som inneholder denne Customer ID.
+         "Customer ID: "     + orderInfoRS.getString(3) +
+     */
+    public String getOrderFromCustomerId(String customerID, PrintWriter out)
+    {
+        DbTool dbtool = new DbTool();
+        Connection conn = dbtool.logIn(out);
+
+        try
+        {
+            String stmt = "SELECT * FROM RoombookingDB.Orders WHERE cus_id = ?";
+            PreparedStatement getOrderInfoStatement = conn.prepareStatement(stmt);
+            getOrderInfoStatement.setString(1, customerID);
+            ResultSet orderInfoRS = getOrderInfoStatement.executeQuery();
+            orderInfoRS.next();
+
+
+            while(orderInfoRS.next())
+            {
+                String orderInfo =    "All Order information "        + customerID +
+                        "Room ID: "         + orderInfoRS.getString(2) +
+                        "Check In Date: "   + orderInfoRS.getString(4) +
+                        "Check Out Date: "  + orderInfoRS.getString(5) +
+                        "Preferences: "     + orderInfoRS.getString(6);
+
+                return orderInfo;
+            }
+
+        }
+        catch(SQLException ex)
+        {
+            out.println("Exeption in getOrderFromCustomerID: " + ex);
+        }
+        return null;
+    }
+
+}
