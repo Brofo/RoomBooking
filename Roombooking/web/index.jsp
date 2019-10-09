@@ -13,15 +13,7 @@
 </head>
 <body>
 
-<form action="servlets.Servlet">
-
-  <input type="submit" name ="action"  value="Vis alle bestillinger">
-  <input type="submit" name ="action"  value="Vis romtyper :)">
-  <input type="submit" name ="action"  value="Vis priser for rom">
-  <br>
-
-</form>
-
+<h1>Hotel booking service</h1>
 
 
 <form action="servlets.bookingServlets.BookingServlet1" method="post">
