@@ -1,4 +1,4 @@
-package servlets.userServlets;
+package servlets.profileServlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet(name = "servlets.userServlets.ProfileServlet",
-            urlPatterns = "/servlets.userServlets.ProfileServlet")
+@WebServlet(name = "servlets.profileServlets.ProfileServlet",
+            urlPatterns = "/servlets.profileServlets.ProfileServlet")
 public class ProfileServlet extends HttpServlet {
 
     /**
@@ -20,22 +19,21 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        // Henter menyen på toppen av websiden.
-        request.getRequestDispatcher("link.html").include(request, response);
 
         // Henter informasjonskapselen (cookie) hvis den finnes, og putter den i en Array.
         Cookie ck[] = request.getCookies();
 
-        // Hvis cookien finnes, får brukeren som eier cookien tilgang til sin profil.
         if(ck != null) {
+            // The user is logged in, because a cookie was detected. The user is welcomed
+            // with their own name, and will have access to their personal data.
             String name = ck[0].getName();
-            out.println("Velkommen til din profil, " + name);
+            request.setAttribute("name", name);
+            request.getRequestDispatcher("Profile.jsp").forward(request, response);
         }
         else{
-            out.print("Vennligst logg inn først.");
-            request.getRequestDispatcher("LoggInn.jsp").include(request, response);
+            // Not logged in. Sends the user to the Log In page, with the error message.
+            request.setAttribute("errorMessage", "Please log in to access your profile.");
+            request.getRequestDispatcher("LogIn.jsp").include(request, response);
         }
     }
 }

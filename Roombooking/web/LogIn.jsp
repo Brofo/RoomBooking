@@ -9,6 +9,7 @@
   sendes man til CreateUser.jsp, som er en meny for å lage bruker.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@include  file="link.html"%>
 <html>
 <head>
     <title>Logg Inn</title>
@@ -17,17 +18,20 @@
 
 <form action="servlets.userServlets.LogInServlet2" method ="post">
 
-    <h1>Logg inn</h1>
-    Epost: <input type="text" name="email"><br>
-    Passord: <input type="text" name="password"><br>
-    <input type="submit" name="action" value="Logg inn">
+    <h1>Log in</h1>
+
+    <span style="color: red; "> ${errorMessage} </span><br>
+    E-mail: <input type="text" name="email"><br>
+    Password: <input type="password" name="password"><br>
+    <input type="submit" name="action" value="Log in"><br>
+
 
 </form>
 
-<br> Hvis du ikke har en bruker, kan du opprette en bruker her:
+If you would like to create a new account, please press the button:
 <form action="CreateUser.jsp">
 
-    <input type="submit" name ="action"  value="Lag ny bruker">
+    <input type="submit" name ="action"  value="Create new account">
 </form>
 
 </body>

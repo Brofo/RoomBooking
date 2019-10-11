@@ -8,6 +8,7 @@
   når man oppretter brukeren.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
+<%@include  file="link.html"%>
 <html>
 <head>
     <title>Creating user</title>
@@ -21,7 +22,7 @@ Fyll inn feltene for å opprette en bruker.
     Telefon:    <input type="text" name="phone">
     <br><br>Innlogging:</br>
     E-post:     <input type="text" name ="email">
-    Passord:    <input type="text" name ="password">
+    Passord:    <input type="password" name ="password">
     <input type="submit" name="action" value="Opprett bruker">
 </form>
 
