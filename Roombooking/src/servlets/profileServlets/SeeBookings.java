@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 public class SeeBookings extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         GetOrderInfo ordInfo = new GetOrderInfo();
 

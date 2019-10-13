@@ -3,31 +3,19 @@
   User: Sindre
   Date: 11.09.2019
   Time: 11:11
-
-  This is the main page of the system. A customer can use this page
-  to initiate a booking.
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@include  file="link.html"%>
 <html>
 <head>
   <title>Rombukser</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/indexStyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-    <a href="index.jsp"> <b>Home</b></a>   |
-    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
-    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
-    <a href="servlets.userServlets.LogOutServlet">Log out</a>
-    <hr>
+<h1>Hotel booking service</h1>
 
-<form action="servlets.Servlet">
-
-  <input type="submit" name ="action"  value="Vis alle bestillinger">
-  <input type="submit" name ="action"  value="Vis romtyper :)">
-  <input type="submit" name ="action"  value="Vis priser for rom">
-  <br>
-
-</form>
 
 <form action="servlets.bookingServlets.BookingServlet1" method="post">
 
@@ -38,14 +26,14 @@
     <option name="Double room">Double room</option>
     <option name="Family room">Family room</option>
     <option name="Suite">Suite</option>
-  </select><br>
+  </select>
 
-  Check in date: <input type="date" name="checkin"><br>
-  Check out date: <input type="date" name="checkout"><br>
-  <input type="submit" name="createBooking" value="Create Booking">
+  <p>Check in date: <input type="date" name="checkin"></p>
+  <p>Check out date: <input type="date" name="checkout"></p>
+  <input class="button" type="submit" name="createBooking" value="Create Booking"><br>
+
+  <span style="color: red; "> ${errorMessage} </span><br>
 </form>
-
-
 
 </body>
 </html>
