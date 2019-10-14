@@ -1,0 +1,27 @@
+form{
+
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    font-family: "56th Street";
+    font-size: 150%;
+}
+h1{
+    margin-block-start: 5em;
+    text-align: center;
+    font-family: "56th Street";
+}
+.button{
+
+}
+div{
+    text-align: center;
+}
+a{
+    text-align: initial
+
+}
+p{
+    text-align: center;
+    font-family: "56th Street";
+}
