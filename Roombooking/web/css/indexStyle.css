@@ -1,15 +1,25 @@
 form{
 
     text-align: center;
-    height: 100%;
+    height: 35%;
     width: 100%;
-    font-family: "56th Street";
+    font-family: "Helvetica Neue";
     font-size: 150%;
 }
 h1{
-    margin-block-start: 5em;
+    margin-block-start: 3em;
     text-align: center;
-    font-family: "56th Street";
+    font-family: "Helvetica Neue";
+}
+h3{
+    text-align: center;
+    font-family: "Helvetica Neue";
+}
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 .button{
 
@@ -22,6 +32,19 @@ a{
 
 }
 p{
+
     text-align: center;
-    font-family: "56th Street";
+    font-family: "Helvetica Neue";
+}
+ul{
+    display: inline-block;
+    text-align: left;
+    font-family: "Helvetica Neue";
+    list-style-type:disc;
+}
+.cancelPage{
+    height: 3%;
+}
+.seeBookings{
+    height: 3%;
 }

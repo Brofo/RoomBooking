@@ -28,7 +28,7 @@
 
 </form>
 
-If you would like to create a new account, please press the button:
+<p>If you would like to create a new account, please press the button:</p>
 <form action="CreateUser.jsp">
 
     <input type="submit" name ="action"  value="Create new account">
