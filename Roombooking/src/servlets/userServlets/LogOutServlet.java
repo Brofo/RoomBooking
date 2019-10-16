@@ -22,9 +22,9 @@ public class LogOutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
         // Henter menyen på toppen av websiden.
         request.getRequestDispatcher("link.html").include(request, response);
 

@@ -24,7 +24,10 @@ public class CancelPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
+        request.getRequestDispatcher("link.html").include(request, response);
         Throwable var4 = null;
+
         //WIP Du er god kristian husk å skrive kommentarer
         try {
 
@@ -56,9 +59,6 @@ public class CancelPage extends HttpServlet {
             Connection conn = dbtool.logIn(out);
             //Alterorder for funksjonen til servlet
             AlterOrder alterOrder = new AlterOrder();
-            out.println("Up to date with Database <br>");
-
-
 
             //tar inn gammelt navn og nytt navn og endrer på det i databasen, kunne fungert bedre om vi hadde et etternavn også da slipper man og bruke kundenummer
             if (action.contains("navn")){
@@ -81,22 +81,22 @@ public class CancelPage extends HttpServlet {
                 if (rom.contains("sr")){
                     System.out.println("It works");
                     alterOrder.changeRoom(out,conn,orderID,"sr01");
-                    out.println("<br> endret rom til Singelrom");
+                    out.println("<p> endret rom til Singelrom</p>");
                 }
                 else if(rom.contains("dr")){
                     System.out.println("It works");
                     alterOrder.changeRoom(out,conn,orderID,"dr01");
-                    out.println("<br> endret rom til Dobbeltrom");
+                    out.println("<p> endret rom til Dobbeltrom</p>");
                 }
                 else if(rom.contains("fr")){
                     System.out.println("It works");
                     alterOrder.changeRoom(out,conn,orderID,"fr01");
-                    out.println("<br> endret rom til Familierom");
+                    out.println("<p>  endret rom til Familierom</p>");
                 }
                 else if(rom.contains("zj")){
                     System.out.println("It works");
                     alterOrder.changeRoom(out,conn,orderID,"zj01");
-                    out.println("<br> endret rom til Suite");
+                    out.println("<p> endret rom til Suite</p>");
                 }
             }
             //kommer minst to else if statments til, som omhandler checkin og checkout date men først må vi fikse databasen på det.

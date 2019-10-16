@@ -49,25 +49,25 @@ public class GetOrderInfo {
             getOrderInfoStatement.setString(1, customerID);
             ResultSet orderInfoRS = getOrderInfoStatement.executeQuery();
 
-            String orderInfo = "All Order information: <br>";
+            String orderInfo = "<h1>All Order information: </h1>";
             while(orderInfoRS.next())
             {
-                        String roomID = orderInfoRS.getString(2) + "<br>";
-                        String checkInDate = "Check in date: " + orderInfoRS.getString(4) + "<br>";
-                        String checkOutDate = "Check out date: " + orderInfoRS.getString(5) + "<br>";
-                        String preferences = "Preferences: " + orderInfoRS.getString(6) + "<br><br>";
+                        String roomID = "<p>"+ orderInfoRS.getString(2) + "</p><br>";
+                        String checkInDate = "<p> Check in date: " + orderInfoRS.getString(4) + "</p>";
+                        String checkOutDate = "<p>Check out date: " + orderInfoRS.getString(5) + "</p>";
+                        String preferences = "<p>Preferences: " + orderInfoRS.getString(6) + "</p><br>";
 
                         if (roomID.contains("sr")) {
-                                roomID = "Room type: Single room <br>";
+                                roomID = "<p> Room type: <h4>Single room</h4> </p>";
                             }
                         else if (roomID.contains("dr")) {
-                                roomID = "Room type: Double room <br>";
+                                roomID = "<p> Room type: <h4>Double room</h4> </p>";
                             }
                         else if (roomID.contains("fr")) {
-                                roomID = "Room type: Family room <br>";
+                                roomID = "<p> Room type: <h4>Family room</h4> </p>";
                             }
                         else if (roomID.contains("zj")) {
-                                roomID = "Room type: Suite <br>";
+                                roomID = "<p> Room type: <h4>Suite</h4> </p>";
                             }
                     orderInfo = orderInfo + "<br>" + roomID + checkInDate + checkOutDate + preferences;
                  }

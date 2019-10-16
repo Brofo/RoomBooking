@@ -1,5 +1,5 @@
 form{
-
+    display: inline-block;
     text-align: center;
     height: 35%;
     width: 100%;
@@ -12,6 +12,10 @@ h1{
     font-family: 'Poppins', sans-serif;
 }
 h3{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+h4{
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
@@ -44,6 +48,17 @@ a:focus{
     background-color: darkred;
     border: 2px solid crimson;
 }
+.profile{
+    font-family: "Poppins", sans-serif;
+    color: whitesmoke;
+    background-color: crimson;
+    border: 2px solid darkred;
+    text-align: initial;
+    text-decoration: none;
+    padding-right: 2%;
+    padding-left: 2%;
+    display: inline-block;
+}
 p{
 
     text-align: center;
@@ -58,8 +73,10 @@ ul{
     list-style-type:disc;
 }
 .cancelPage{
+    display: inline-block;
     height: 3%;
 }
 .seeBookings{
+    display: inline-block;
     height: 3%;
 }

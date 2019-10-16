@@ -19,11 +19,11 @@
     <h1>Welcome to your profile, ${name}</h1>
 
     <form class="seeBookings" action="servlets.profileServlets.SeeBookings" method="get">
-        <input type="submit" name="action" value="My bookings">
+        <input class="profile" type="submit" name="action" value="My bookings">
     </form>
 
     <form class="cancelPage" action="cancelPage.jsp">
-        <input type="submit" name="action" value="Cancel/Change order">
+        <input  class="profile" type="submit" name="action" value="Cancel/Change order">
     </form>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class AlterOrder {
             Statement.setString(3, customerID);
             Statement.executeUpdate();
 
-            out.println("Endret navn fra " + oldname + " til " + newname);
+            out.println("<p> Endret navn fra " + oldname + " til " + newname +"</p>");
 
         }
         catch (SQLException ex) {
@@ -84,7 +84,7 @@ public class AlterOrder {
         final String sql_name = "UPDATE RoombookingDB.orders set room_id = ? where order_id = ?;";
 
         try{
-            out.println("<br> endret rom<br>");
+            out.println("<p> endret rom </p>");
             PreparedStatement Statement = conn.prepareStatement(sql_name);
 
             Statement.setString(1,RomID);
@@ -92,7 +92,7 @@ public class AlterOrder {
 
             Statement.executeUpdate();
 
-            out.println("<br> På bestilling " + orderID);
+            out.println("<p> På bestilling " + orderID+"</p>");
 
         }
         catch (SQLException ex) {
@@ -122,7 +122,7 @@ public class AlterOrder {
             Statement.setString(2,orderID);
             Statement.executeUpdate();
 
-            out.println("Endret dato til " + date1  + " i ordre: " + orderID);
+            out.println("<p> Endret dato til " + date1  + " i ordre: " + orderID + "</p>");
 
         }
         catch (SQLException ex) {
@@ -134,7 +134,7 @@ public class AlterOrder {
         final String sql = "DELETE roombookingdb.orders FROM roombookingdb.orders inner join roombookingdb.customer on orders.cus_id = customer.cus_id where order_id = ? and (customer.cus_email = ?  or customer.cus_phone = ?);";
 
         if (mail == "" && phone == ""){
-            out.println("Vi må nesten ha en email eller et telefonnummer for avbestilling, gå tilbake og prøv igjen :)");
+            out.println("<p>Vi må nesten ha en email eller et telefonnummer for avbestilling, gå tilbake og prøv igjen :)"+"</p>");
         }
         else{
         try{
@@ -144,7 +144,7 @@ public class AlterOrder {
             Statement.setString(3,phone);
             Statement.executeUpdate();
 
-            out.println("Kansellert " + orderID  + " <br> Ha en fin dag!");
+            out.println("<p> Kansellert " + orderID  + " <br> Ha en fin dag! </p>");
 
         }
         catch (SQLException ex) {

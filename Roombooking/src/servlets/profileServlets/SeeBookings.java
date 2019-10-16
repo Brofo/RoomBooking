@@ -23,6 +23,9 @@ public class SeeBookings extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
+        request.getRequestDispatcher("link.html").include(request, response);
+
         GetOrderInfo ordInfo = new GetOrderInfo();
 
         Cookie userCookie[] = request.getCookies();
