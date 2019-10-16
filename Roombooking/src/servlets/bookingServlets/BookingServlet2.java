@@ -37,7 +37,8 @@ public class BookingServlet2 extends HttpServlet {
         String checkOutDate = request.getParameter("checkOutDate");
         String preferences = request.getParameter("preferences");
 
-        String name = request.getParameter("name");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
 
@@ -58,7 +59,7 @@ public class BookingServlet2 extends HttpServlet {
             //If not logged in, register the customer in the database.
             //Then use the customer ID of this customer to register an order.
             String customerID = reg.getCustomerAndUserID(out);
-            reg.registerCustomer(out, customerID, name, email, phone);
+            reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
             out.println("You have successfully booked a " + roomType + " from " + checkInDate + " until " + checkOutDate + ".");
         }
