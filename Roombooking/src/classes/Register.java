@@ -33,18 +33,20 @@ public class Register {
      * This method makes it possible for a customer to register name, email, and phone.
      * It uses Class getID to register an ID automatically.
      */
-    public void registerCustomer(PrintWriter out, String customerID, String name, String email, String phone) {
+    public void registerCustomer(PrintWriter out, String customerID, String firstname,
+                                 String lastname, String email, String phone) {
 
             try {
                 DbTool dbtool = new DbTool();
                 Connection conn = dbtool.logIn(out);
 
              PreparedStatement insert = conn.prepareStatement
-                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_name, cus_email, cus_phone) VALUES(?,?,?,?)");
+                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_firstname, cus_lastname, cus_email, cus_phone) VALUES(?,?,?,?,?)");
                 insert.setString(1, customerID);
-                insert.setString(2, name);
-                insert.setString(3, email);
-                insert.setString(4, phone);
+                insert.setString(2, firstname);
+                insert.setString(3, lastname);
+                insert.setString(4, email);
+                insert.setString(5, phone);
                 insert.executeUpdate();
             }
             catch (SQLException ex) {
@@ -57,7 +59,8 @@ public class Register {
      * This method is similar to registerCustomer, except it is used for creating
      * an account on the website. Password will be included when creating an account.
      */
-    public void registerUser(PrintWriter out, String name, String email, String phone, String password) {
+    public void registerUser(PrintWriter out, String firstname, String lastname,
+                             String email, String phone, String password) {
 
         String customerID = id.getID(out, sqlCustomerTable);
 
@@ -66,13 +69,14 @@ public class Register {
             Connection conn = dbtool.logIn(out);
 
             PreparedStatement insert = conn.prepareStatement
-                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_name, " +
-                            "cus_email, cus_phone, password) VALUES(?,?,?,?,?)");
+                    ("INSERT INTO RoombookingDB.Customer(cus_id, cus_firstname, cus_lastname, " +
+                            "cus_email, cus_phone, cus_password) VALUES(?,?,?,?,?,?)");
             insert.setString(1, customerID);
-            insert.setString(2, name);
-            insert.setString(3, email);
-            insert.setString(4, phone);
-            insert.setString(5, password);
+            insert.setString(2, firstname);
+            insert.setString(3, lastname);
+            insert.setString(4, email);
+            insert.setString(5, phone);
+            insert.setString(6, password);
             insert.executeUpdate();
         }
         catch (SQLException ex) {
@@ -95,7 +99,7 @@ public class Register {
         try {
             PreparedStatement insert = conn.prepareStatement
                     ("INSERT INTO RoombookingDb.Orders(order_id, room_id, cus_id, " +
-                            "order_checkindate, order_checkoutdate, preferences) VALUES (?,?,?,?,?,?)");
+                            "order_checkindate, order_checkoutdate, order_preferences) VALUES (?,?,?,?,?,?)");
             insert.setString(1, orderID);
             insert.setString(2, roomID);
             insert.setString(3, customerID);

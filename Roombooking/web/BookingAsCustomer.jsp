@@ -41,7 +41,8 @@
     <input type="hidden" name="checkInDate" value="${checkInDate}">
     <input type="hidden" name="checkOutDate" value="${checkOutDate}">
 
-    Name: <input type="text" name="name"><br>
+    First name: <input type="text" name="firstname"><br>
+    Last name: <input type="text" name="lastname"><br>
     Email: <input type="email" name="email"><br>
     Phone number: <input type="tel" name="phone"><br>
     Preferences (optional): <br><textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>

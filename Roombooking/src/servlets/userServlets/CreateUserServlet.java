@@ -41,14 +41,15 @@ public class CreateUserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String name = request.getParameter("name");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
             //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
             //blir puttet inn i databasen, slik at brukeren blir opprettet.
-            regUser.registerUser(out, name, email, phone, password);
+            regUser.registerUser(out, firstname, lastname, email, phone, password);
             request.getRequestDispatcher("LogIn.jsp").include(request, response);
 
     }
