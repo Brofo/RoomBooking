@@ -23,7 +23,7 @@ public class AlterOrder {
     public void changeName(PrintWriter out, Connection conn, String oldname , String newname, String customerID){
 
         //Under ser du sql stringen som oppdaterer det gamle navnet med det nye navnet, skriver så ut navnet tar også inn kunde id slik at man endrer på riktig navn, ettersom at den vil endre på alle som har registrert seg under samme navn.
-        final String sql_name = "UPDATE RoombookingDB.Customer set cus_name = ? where cus_name = ? AND cus_id = ?;";
+        final String sql_name = "UPDATE RoombookingDB.customer set cus_name = ? where cus_name = ? AND cus_id = ?;";
 
         try{
             PreparedStatement Statement = conn.prepareStatement(sql_name);
