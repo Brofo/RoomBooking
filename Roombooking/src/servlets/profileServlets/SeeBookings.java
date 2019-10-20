@@ -29,7 +29,6 @@ public class SeeBookings extends HttpServlet {
         GetOrderInfo ordInfo = new GetOrderInfo();
 
         // Henter menyen på toppen av websiden.
-        request.getRequestDispatcher("link.html").include(request, response);
 
         Cookie userCookie[] = request.getCookies();
         String customerID = userCookie[0].getValue();

@@ -1,4 +1,4 @@
-package servlets;
+package servlets.cancelServlets;
 
 import classes.AlterOrder;
 import classes.DbTool;
@@ -17,13 +17,14 @@ import java.text.ParseException;
 import static java.lang.Integer.parseInt;
 
 @WebServlet(
-        name = "CancelPage",
-        urlPatterns = {"/servlets.CancelPage"}
+        name = "CancelPageCustomer",
+        urlPatterns = {"/servlets.cancelServlets.CancelPageCustomer"}
 )
-public class CancelPage extends HttpServlet {
+public class CancelPageCustomer extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
         out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
         request.getRequestDispatcher("link.html").include(request, response);
         Throwable var4 = null;
@@ -36,7 +37,7 @@ public class CancelPage extends HttpServlet {
             //String til changeName
             String oldname = request.getParameter("oldname");
             String newname = request.getParameter("newname");
-            String customerID = request.getParameter("customerID");
+
             //String til changeEmail
             String oldmail = request.getParameter("oldmail");
             String newmail = request.getParameter("newmail");
@@ -62,7 +63,17 @@ public class CancelPage extends HttpServlet {
 
             //tar inn gammelt navn og nytt navn og endrer på det i databasen, kunne fungert bedre om vi hadde et etternavn også da slipper man og bruke kundenummer
             if (action.contains("navn")){
+                Cookie userCookie[] = request.getCookies();
+                System.out.println(userCookie);
+                if(userCookie != null){
+                String customerID = userCookie[0].getValue();
                 alterOrder.changeName(out,conn,oldname,newname,customerID);
+                } else{
+                    String customerID = request.getParameter("customerID");
+                    alterOrder.changeName(out,conn,oldname,newname,customerID);
+                }
+
+
             }
             //endrer på emailen verdien til kunden med å ta inn det gamle og den nye emailen.
             else if (action.contains("E-mail")){
@@ -137,7 +148,6 @@ public class CancelPage extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("Why?");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -146,6 +156,5 @@ public class CancelPage extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("Help");
     }
 }

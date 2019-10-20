@@ -6,6 +6,10 @@ form{
     font-family: 'Roboto', sans-serif;
     font-size: 150%;
 }
+form.bookingCustomer{
+    height: 13%;
+}
+
 h1{
     margin-block-start: 3em;
     text-align: center;
@@ -60,7 +64,6 @@ a:focus{
     display: inline-block;
 }
 p{
-
     text-align: center;
     font-family: 'Roboto', sans-serif;
     padding-left: 35%;
@@ -79,4 +82,15 @@ ul{
 .seeBookings{
     display: inline-block;
     height: 3%;
+}
+.date{
+    font-family: "Poppins", 'Roboto', sans-serif;
+    color: darkred;
+}
+input.login{
+    margin-top: 1%;
+}
+p.loginPara{
+    margin-top: 3% ;
+
 }

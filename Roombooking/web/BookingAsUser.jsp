@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<form action ="index.jsp">
+<form class="bookingUser" action ="index.jsp">
     <h2>You are booking as ${username}</h2>
     Room type:      <b>${roomType}</b><br>
     Check in date:  <b>${checkInDate}</b><br>
@@ -26,7 +26,7 @@
     <br>
 </form>
 
-<form action="servlets.bookingServlets.BookingServlet2" method="post">
+<form class="bookingUser" action="servlets.bookingServlets.BookingServlet2" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
     <input type="hidden" name="roomType" value="${roomType}">
