@@ -1,10 +1,13 @@
 package classes;
 
 
+import javax.persistence.criteria.Order;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kristian
@@ -16,6 +19,7 @@ public class AlterOrder {
     private Statement stmt;
     private ResultSet rs;
 
+
     public AlterOrder(){
 
     }
@@ -23,7 +27,7 @@ public class AlterOrder {
     public void changeName(PrintWriter out, Connection conn, String oldname , String newname, String customerID){
 
         //Under ser du sql stringen som oppdaterer det gamle navnet med det nye navnet, skriver så ut navnet tar også inn kunde id slik at man endrer på riktig navn, ettersom at den vil endre på alle som har registrert seg under samme navn.
-        final String sql_name = "UPDATE RoombookingDB.customer set cus_name = ? where cus_name = ? AND cus_id = ?;";
+        final String sql_name = "UPDATE RoombookingDB.customer set cus_firstname = ? where cus_firstname = ? AND cus_id = ?;";
 
         try{
             PreparedStatement Statement = conn.prepareStatement(sql_name);
@@ -32,7 +36,7 @@ public class AlterOrder {
             Statement.setString(3, customerID);
             Statement.executeUpdate();
 
-            out.println("Endret navn fra " + oldname + " til " + newname);
+            out.println("<p> Endret navn fra " + oldname + " til " + newname +"</p>");
 
         }
         catch (SQLException ex) {
@@ -84,7 +88,7 @@ public class AlterOrder {
         final String sql_name = "UPDATE RoombookingDB.orders set room_id = ? where order_id = ?;";
 
         try{
-            out.println("<br> endret rom<br>");
+            out.println("<p> endret rom </p>");
             PreparedStatement Statement = conn.prepareStatement(sql_name);
 
             Statement.setString(1,RomID);
@@ -92,7 +96,7 @@ public class AlterOrder {
 
             Statement.executeUpdate();
 
-            out.println("<br> På bestilling " + orderID);
+            out.println("<p> På bestilling " + orderID+"</p>");
 
         }
         catch (SQLException ex) {
@@ -122,7 +126,7 @@ public class AlterOrder {
             Statement.setString(2,orderID);
             Statement.executeUpdate();
 
-            out.println("Endret dato til " + date1  + " i ordre: " + orderID);
+            out.println("<p> Endret dato til " + date1  + " i ordre: " + orderID + "</p>");
 
         }
         catch (SQLException ex) {
@@ -134,7 +138,7 @@ public class AlterOrder {
         final String sql = "DELETE roombookingdb.orders FROM roombookingdb.orders inner join roombookingdb.customer on orders.cus_id = customer.cus_id where order_id = ? and (customer.cus_email = ?  or customer.cus_phone = ?);";
 
         if (mail == "" && phone == ""){
-            out.println("Vi må nesten ha en email eller et telefonnummer for avbestilling, gå tilbake og prøv igjen :)");
+            out.println("<p>Vi må nesten ha en email eller et telefonnummer for avbestilling, gå tilbake og prøv igjen :)"+"</p>");
         }
         else{
         try{
@@ -144,7 +148,7 @@ public class AlterOrder {
             Statement.setString(3,phone);
             Statement.executeUpdate();
 
-            out.println("Kansellert " + orderID  + " <br> Ha en fin dag!");
+            out.println("<p> Kansellert " + orderID  + " <br> Ha en fin dag! </p>");
 
         }
         catch (SQLException ex) {
@@ -153,4 +157,6 @@ public class AlterOrder {
       }
     }
 
-}
+    }
+
+

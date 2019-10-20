@@ -21,12 +21,14 @@ import java.io.PrintWriter;
 public class SeeBookings extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
+        request.getRequestDispatcher("link.html").include(request, response);
+
         GetOrderInfo ordInfo = new GetOrderInfo();
 
         // Henter menyen på toppen av websiden.
-        request.getRequestDispatcher("link.html").include(request, response);
 
         Cookie userCookie[] = request.getCookies();
         String customerID = userCookie[0].getValue();

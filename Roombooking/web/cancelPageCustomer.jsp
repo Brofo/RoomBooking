@@ -18,7 +18,7 @@
 <!--
  Formen for funksjonen changeName
  -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
     <legend>Navne Endring</legend>
     Navn:<br> <input type="text" name="newname"> <br>
@@ -30,7 +30,7 @@
 <!--
  Formen for funksjonen changeMail
  -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
         <legend>Endring på E-mail</legend>
     E-mail:<br> <input type="text" name="newmail"><br>
@@ -43,7 +43,7 @@
 <!--
  Formen for funksjonen changePhone
  -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
         <legend> Endring på telefonnummer</legend>
     Telefonnummer: <br><input type="text" name="newphone"><br>
@@ -55,7 +55,7 @@
 <!--
  Formen for funksjonen changeRoom
  -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
         <legend>Endring på romtype</legend>
         Bookingnummer: <br><input type="text" name="orderid">
@@ -72,7 +72,7 @@
  Formen for funksjonen changeCheckIn
  WIP
  -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
     <legend>Endring på Checkin dato</legend>
         Bookingnummer: <input type="text" name="orderid"><br>
@@ -84,10 +84,15 @@
  Formen for funksjonen changeCheckOut
  WIP
 -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
         <legend>Endring på Checkout dato</legend>
-        Bookingnummer: <input type="text" name="orderid"><br>
+        Bookingnummer: <select name="OrdersMenu">
+                <c:forEach items="${listOrdersMenu}" var ="OrdersMenu">
+                    <option value="${orders.id}">${orders.id}</option>
+                </c:forEach>
+            </select>
+        <br>
         Dag du vil endre til: <input type="date" name="date">
         <input type="submit" name="action" value="Endre Checkout">
     </fieldset>
@@ -97,10 +102,10 @@
  Formen for funksjonen cancelOrder
  WIP
  -->
-<form action="servlets.CancelPage">
+<form action="servlets.cancelServlets.CancelPageCustomer">
     <fieldset>
         <legend> Kansellering av bestilling</legend>
-    Bookingnummer: <br><input type="text" name="orderid"><br>Bookingnummer: <br>
+    Bookingnummer: <br><input type="text" name="orderid">
        Enten skriv inn E-mailen din her: <input type="text" name="mail"><br>
         Eller skriv inn telefonnummere ditt her:<input type="text" name="phone"><br>
         <br> <input type="submit" name="action" value="kansellere">

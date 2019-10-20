@@ -9,22 +9,21 @@
   and find information about their own user data.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
+<%@include  file="link.html"%>
 <html>
 <head>
     <title>My Profile</title>
 </head>
 <body>
 
-    <a href="index.jsp"> <b>Home</b></a>   |
-    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
-    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
-    <a href="servlets.userServlets.LogOutServlet">Log out</a>
-    <hr>
+    <h1>Welcome to your profile, ${name}</h1>
 
-    <h2>Welcome to your profile, ${name}</h2>
+    <form class="seeBookings" action="servlets.profileServlets.SeeBookings" method="get">
+        <input class="profile" type="submit" name="action" value="My bookings">
+    </form>
 
-    <form action="servlets.profileServlets.SeeBookings" method="get">
-
+    <form class="cancelPage" action="cancelPageCustomer.jsp">
+        <input  class="profile" type="submit" name="action" value="Cancel/Change order">
     </form>
 </body>
 </html>

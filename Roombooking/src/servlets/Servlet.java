@@ -55,7 +55,7 @@ public class Servlet extends HttpServlet {
 
                  //Sender brukeren videre til en side hvor den eventuelt kan gjøre endring og/eller kansellere
                  out.println("Valgt å kansellere bestilling");
-                 response.sendRedirect(request.getContextPath() + "/cancelPage.jsp");
+                 response.sendRedirect(request.getContextPath() + "/cancelPageCustomer.jsp");
             }
             else if (action.contains("Opprett bruker")){
                 response.sendRedirect(request.getContextPath() + "/CreateUser.jsp");
