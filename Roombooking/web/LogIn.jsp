@@ -23,14 +23,13 @@
     <span style="color: red; "> ${errorMessage} </span><br>
     E-mail: <input type="text" name="email"><br>
     Password: <input type="password" name="password"><br>
-    <input type="submit" name="action" value="Log in"><br>
+    <input class="login" type="submit" name="action" value="Log in"><br>
 
 
 </form>
 
-If you would like to create a new account, please press the button:
+<p class="loginPara">If you would like to create a new account, please press the button:</p>
 <form action="CreateUser.jsp">
-
     <input type="submit" name ="action"  value="Create new account">
 </form>
 

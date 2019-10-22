@@ -156,10 +156,10 @@ public class CustomerFunctionality {
 
             int orderCount = pst.executeUpdate();
             if(orderCount == 1) {
-                out.println(orderCount + " order created.");
+                //out.println(orderCount + " order created.");
             }
             else {
-                out.println(orderCount + " orders created.");
+               // out.println(orderCount + " orders created.");
             }
             return orderId;
         }
@@ -319,7 +319,7 @@ public class CustomerFunctionality {
      * @param dateInQuestion the date you want to see free rooms at.
      * @return an ArrayList with all free rooms.
      */
-    public ArrayList getFreeRooms(String roomType, String dateInQuestion){
+  /*  public ArrayList getFreeRooms(String roomType, String dateInQuestion){
         try{
             String stmt = "SELECT room_id FROM RoombookingDB.Room WHERE room_type = ? AND room_id NOT IN(" +
                                 "SELECT room_id FROM RoombookingDB.Orders " +
@@ -342,5 +342,5 @@ public class CustomerFunctionality {
             out.println("Exeption in getFreeRooms: " + e);
         }
         return null;
-    }
+    }*/
 }

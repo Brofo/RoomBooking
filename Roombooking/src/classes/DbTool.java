@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author hallgeir
+
  */
 public class DbTool {
     Connection conn;        // Must be defined here as class variables, get their value in the login method

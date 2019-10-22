@@ -24,7 +24,7 @@ public class LogInServlet2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         CustomerFunctionality cusFun = new CustomerFunctionality(out);
 
@@ -39,8 +39,8 @@ public class LogInServlet2 extends HttpServlet {
         // Passordet som hentes er det som er tilknyttet Customer ID.
         // Navnet som hentes er tilknyttet Customer ID.
         String customerID = cusFun.getField("cus_id", "Customer", "cus_email", email);
-        String correctPassword = cusFun.getField("password", "Customer", "cus_id", customerID);
-        String customerName = cusFun.getField("cus_name", "Customer", "cus_id", customerID);
+        String correctPassword = cusFun.getField("cus_password", "Customer", "cus_id", customerID);
+        String customerName = cusFun.getField("cus_firstname", "Customer", "cus_id", customerID);
 
 
         if (customerID == null) {

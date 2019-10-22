@@ -16,13 +16,14 @@
 <body>
 
 <form action="servlets.userServlets.CreateUserServlet" method="post">
-Fyll inn feltene for å opprette en bruker.
+Fill the empty slots in order to create a user.
     <br>
-    Navn:       <input type="text" name="name">
-    Telefon:    <input type="text" name="phone">
-    <br><br>Innlogging:</br>
-    E-post:     <input type="text" name ="email">
-    Passord:    <input type="password" name ="password">
+    First name:       <input type="text" name="firstname">
+    Last name:     <input type="text" name="lastname">
+    <br><br>
+    Phone:    <input type="text" name="phone">
+    E-mail:     <input type="text" name ="email">
+    Password:    <input type="password" name ="password">
     <input type="submit" name="action" value="Opprett bruker">
 </form>
 

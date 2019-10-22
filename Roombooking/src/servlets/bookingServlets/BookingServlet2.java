@@ -29,7 +29,9 @@ public class BookingServlet2 extends HttpServlet {
         Register reg = new Register();
 
         // Henter menyen på toppen av websiden.
+        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("link.html").include(request, response);
+        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
 
         // Verdiene fra parameterne:
         String availableRoomID = request.getParameter("availableRoomID");
@@ -37,7 +39,8 @@ public class BookingServlet2 extends HttpServlet {
         String checkOutDate = request.getParameter("checkOutDate");
         String preferences = request.getParameter("preferences");
 
-        String name = request.getParameter("name");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
 
@@ -45,22 +48,22 @@ public class BookingServlet2 extends HttpServlet {
 
         // Requesting cookie to check if a user is logged in
         Cookie existingCookies[] = request.getCookies();
-        out.println(checkInDate + " " + checkOutDate);
+
 
         if (existingCookies != null) {
             //If logged in, just register the order, using the users Customer ID.
             String customerID = existingCookies[0].getValue();
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
-            out.println("You have successfully booked a " + roomType + " from " + checkInDate + " until " + checkOutDate + ".");
+            out.println("<p> You have successfully booked a </p4> " +"<h4>" + roomType +"</h4>"+ " <p> from </p><p>" + checkInDate +"</p>"+ " <p> until </p> <p>" + checkOutDate + ".</p>");
         }
 
         else {
             //If not logged in, register the customer in the database.
             //Then use the customer ID of this customer to register an order.
             String customerID = reg.getCustomerAndUserID(out);
-            reg.registerCustomer(out, customerID, name, email, phone);
+            reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
-            out.println("You have successfully booked a " + roomType + " from " + checkInDate + " until " + checkOutDate + ".");
+            out.println("<p> You have successfully booked a </p4> " +"<h4>" + roomType +"</h4>"+ " <p> from </p><p class='date'>" + checkInDate +"</p>"+ " <p> until </p> <p class='date'>" + checkOutDate + ".</p>");
         }
     }
 }

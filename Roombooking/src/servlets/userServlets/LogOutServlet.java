@@ -22,20 +22,20 @@ public class LogOutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
         // Henter menyen på toppen av websiden.
         request.getRequestDispatcher("link.html").include(request, response);
 
         // Sjekker om brukeren er logget inn. Hvis den er det, blir cookien slettet.
         Cookie existingCookies[] = request.getCookies();
         if (existingCookies != null) {
-            out.println("Your are now logged out");
+            out.println("<p>Your are now logged out</p>");
             existingCookies[0].setMaxAge(0);
             response.addCookie(existingCookies[0]);
         } else {
-            out.println("You have to log in before you can log out.");
+            out.println("<p>You have to log in before you can log out.<p>");
         }
     }
 }
