@@ -9,19 +9,14 @@
   automatically retrieved, and the user does not have to type it again.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@include  file="link.html"%>
 <html>
 <head>
     <title>Booking as a loyal member</title>
 </head>
 <body>
 
-    <a href="index.jsp"> <b>Home</b></a>   |
-    <a href="servlets.userServlets.LogInServlet1">Log in</a> |
-    <a href="servlets.profileServlets.ProfileServlet">My profile</a> |
-    <a href="servlets.userServlets.LogOutServlet">Log out</a>
-    <hr>
-
-<form action ="index.jsp">
+<form class="bookingUser" action ="index.jsp">
     <h2>You are booking as ${username}</h2>
     Room type:      <b>${roomType}</b><br>
     Check in date:  <b>${checkInDate}</b><br>
@@ -31,7 +26,7 @@
     <br>
 </form>
 
-<form action="servlets.bookingServlets.BookingServlet2" method="post">
+<form class="bookingUser" action="servlets.bookingServlets.BookingServlet2" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
     <input type="hidden" name="roomType" value="${roomType}">

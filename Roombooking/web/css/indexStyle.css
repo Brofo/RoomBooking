@@ -1,0 +1,96 @@
+form{
+    display: inline-block;
+    text-align: center;
+    height: 35%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 150%;
+}
+form.bookingCustomer{
+    height: 13%;
+}
+
+h1{
+    margin-block-start: 3em;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+h3{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+h4{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.button{
+
+}
+div{
+    text-align: center;
+}
+a{
+    font-family: "Poppins", sans-serif;
+    color: whitesmoke;
+    background-color: crimson;
+    border: 2px solid darkred;
+    text-align: initial;
+    text-decoration: none;
+    padding-right: 2%;
+    padding-left: 2%;
+    height: 120%;
+    width: 120%;
+
+}
+a:focus{
+    background-color: darkred;
+    border: 2px solid crimson;
+}
+.profile{
+    font-family: "Poppins", sans-serif;
+    color: whitesmoke;
+    background-color: crimson;
+    border: 2px solid darkred;
+    text-align: initial;
+    text-decoration: none;
+    padding-right: 2%;
+    padding-left: 2%;
+    display: inline-block;
+}
+p{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 35%;
+    padding-right: 35%;
+}
+ul{
+    display: inline-block;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    list-style-type:disc;
+}
+.cancelPage{
+    display: inline-block;
+    height: 3%;
+}
+.seeBookings{
+    display: inline-block;
+    height: 3%;
+}
+.date{
+    font-family: "Poppins", 'Roboto', sans-serif;
+    color: darkred;
+}
+input.login{
+    margin-top: 1%;
+}
+p.loginPara{
+    margin-top: 3% ;
+
+}
