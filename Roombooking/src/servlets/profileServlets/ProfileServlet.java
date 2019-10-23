@@ -26,8 +26,9 @@ public class ProfileServlet extends HttpServlet {
         if(ck != null) {
             // The user is logged in, because a cookie was detected. The user is welcomed
             // with their own name, and will have access to their personal data.
-            String name = ck[0].getName();
-            request.setAttribute("name", name);
+            String firstname = ck[0].getName();
+
+            request.setAttribute("firstname", firstname);
             request.getRequestDispatcher("Profile.jsp").forward(request, response);
         }
         else{
