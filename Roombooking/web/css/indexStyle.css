@@ -1,35 +1,28 @@
 form{
     display: inline-block;
-    float: top;
-    clear: both;
     text-align: center;
     width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 150%;
-    position: static;
 }
 form.bookingCustomer{
     height: 13%;
-
 }
 
 h1{
     margin-block-start: 3em;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    float: top;
 }
 h3{
-    float: top;
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
-h4{ float: top;
+h4{
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
 img{
-    float: top;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -39,11 +32,9 @@ img{
 
 }
 div{
-    float: top;
     text-align: center;
 }
 a{
-    float: top;
     font-family: "Poppins", sans-serif;
     color: whitesmoke;
     background-color: crimson;
@@ -57,12 +48,10 @@ a{
 
 }
 a:focus{
-    float: top;
     background-color: darkred;
     border: 2px solid crimson;
 }
 .profile{
-    float: top;
     font-family: "Poppins", sans-serif;
     color: whitesmoke;
     background-color: crimson;
@@ -74,31 +63,26 @@ a:focus{
     display: inline-block;
 }
 p{
-    float: top;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     padding-left: 35%;
     padding-right: 35%;
 }
 ul{
-    float: top;
     display: inline-block;
     text-align: left;
     font-family: 'Roboto', sans-serif;
     list-style-type:disc;
 }
 .cancelPage{
-    float: top;
     display: inline-block;
     height: 3%;
 }
 .seeBookings{
-    float: top;
     display: inline-block;
     height: 3%;
 }
 .date{
-    float: top;
     font-family: "Poppins", 'Roboto', sans-serif;
     color: darkred;
 }
@@ -107,7 +91,15 @@ input.login{
     margin-top: 1%;
 }
 p.loginPara{
+    margin-top: 5%;
+    display: block;
     position: relative;
-    margin-top: 3% ;
 
+}
+form.loginForm{
+    margin-bottom: 3%;
+}
+.roomprofile{
+    width:549px;
+    height:314px;
 }
