@@ -31,9 +31,7 @@ public class LogInServlet1 extends HttpServlet {
             System.out.println(existingCookies);
             // The user is already logged in, and will be sent directly to their profile.
             String firstname = existingCookies[0].getName();
-            String lastname = existingCookies[0].getName();
             request.setAttribute("firstname", firstname);
-            request.setAttribute("lastname",lastname);
             request.getRequestDispatcher("Profile.jsp").forward(request, response);
         }
         else {

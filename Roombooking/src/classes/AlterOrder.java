@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author Kristian
- * @version 0.1
+ * @version 0.8
  */
 public class AlterOrder {
     private PrintWriter out;
@@ -24,19 +24,46 @@ public class AlterOrder {
 
     }
     //Tar inn det gamle navnet og det nye navnet samt kundeid som senere blir videresendt til SQL Stringen
-    public void changeName(PrintWriter out, Connection conn, String oldname , String newname, String customerID){
+    public void changeName(PrintWriter out, Connection conn, String firstname , String lastname, String customerID){
 
         //Under ser du sql stringen som oppdaterer det gamle navnet med det nye navnet, skriver så ut navnet tar også inn kunde id slik at man endrer på riktig navn, ettersom at den vil endre på alle som har registrert seg under samme navn.
-        final String sql_name = "UPDATE RoombookingDB.customer set cus_firstname = ? where cus_firstname = ? AND cus_id = ?;";
-
         try{
-            PreparedStatement Statement = conn.prepareStatement(sql_name);
-            Statement.setString(1,newname);
-            Statement.setString(2,oldname);
-            Statement.setString(3, customerID);
-            Statement.executeUpdate();
+            String sql_name;
+                out.println(firstname+lastname);
+            if (firstname != "" && lastname == ""){
 
-            out.println("<p> Endret navn fra " + oldname + " til " + newname +"</p>");
+                sql_name = "UPDATE RoombookingDB.customer set cus_firstname = ? where cus_id = ?;";
+                PreparedStatement Statement = conn.prepareStatement(sql_name);
+                Statement.setString(1,firstname);
+                Statement.setString(2, customerID);
+                Statement.executeUpdate();
+                out.println("<p> Endret navn  til " + firstname +"</p>");
+                out.println(firstname+lastname);
+            } else if(firstname == "" && lastname != ""){
+
+                sql_name = "UPDATE RoombookingDB.customer set cus_lastname = ? where cus_id = ?;";
+                PreparedStatement Statement = conn.prepareStatement(sql_name);
+                Statement.setString(1,lastname);
+                Statement.setString(2, customerID);
+                Statement.executeUpdate();
+                out.println("<p> Endret navn  til " + lastname +"</p>");
+
+            } else if(firstname != "" && lastname !=""){
+
+                sql_name = "UPDATE RoombookingDB.customer set cus_firstname = ? , cus_lastname = ? where cus_id = ?;";
+                PreparedStatement Statement = conn.prepareStatement(sql_name);
+                Statement.setString(1,firstname);
+                Statement.setString(2,lastname);
+                Statement.setString(3, customerID);
+                Statement.executeUpdate();
+                out.println("<p> Endret navn  til " + firstname + " " + lastname +"</p>");
+                out.println(firstname+lastname);
+            } else{
+                out.println("<p>Du må skrive inn navnet du vil endre i det tilhørende feltet</p>");
+                out.println(firstname+lastname);
+            }
+
+
 
         }
         catch (SQLException ex) {

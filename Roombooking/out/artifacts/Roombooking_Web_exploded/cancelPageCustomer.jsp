@@ -19,13 +19,10 @@
  Formen for funksjonen changeName
  -->
 <form action="servlets.cancelServlets.CancelPageCustomer">
-    <fieldset>
-    <legend>Navne Endring</legend>
-    Navn:<br> <input type="text" name="newname"> <br>
-    Navn som skal bli endret:<br> <input type="text" name="oldname"><br>
-    KundeID:<br> <input type="text" name="customerID"><br>
-    <br> <input type="submit" name="action" value="Endre navn">
-    </fieldset>
+    Navn:<input type="text" name="newname"> <br>
+    Navn som skal bli endret: <input type="text" name="oldname"><br>
+    KundeID: <input type="text" name="customerID"><input type="submit" name="action" value="Endre navn">
+
 </form>
 <!--
  Formen for funksjonen changeMail
