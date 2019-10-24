@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <h1>Welcome to your profile, ${name}</h1>
+    <h1>Welcome to your profile, ${firstname} </h1>
 
     <form class="seeBookings" action="servlets.profileServlets.SeeBookings" method="get">
         <input class="profile" type="submit" name="action" value="My bookings">

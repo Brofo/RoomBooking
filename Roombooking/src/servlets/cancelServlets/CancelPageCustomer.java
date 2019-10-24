@@ -29,7 +29,7 @@ public class CancelPageCustomer extends HttpServlet {
         request.getRequestDispatcher("link.html").include(request, response);
         Throwable var4 = null;
 
-        //WIP Du er god kristian husk å skrive kommentarer
+
         try {
 
             //init alle variablene som vil bli trengt i cancelpage
@@ -63,17 +63,8 @@ public class CancelPageCustomer extends HttpServlet {
 
             //tar inn gammelt navn og nytt navn og endrer på det i databasen, kunne fungert bedre om vi hadde et etternavn også da slipper man og bruke kundenummer
             if (action.contains("navn")){
-                Cookie userCookie[] = request.getCookies();
-                System.out.println(userCookie);
-                if(userCookie != null){
-                String customerID = userCookie[0].getValue();
-                alterOrder.changeName(out,conn,oldname,newname,customerID);
-                } else{
                     String customerID = request.getParameter("customerID");
                     alterOrder.changeName(out,conn,oldname,newname,customerID);
-                }
-
-
             }
             //endrer på emailen verdien til kunden med å ta inn det gamle og den nye emailen.
             else if (action.contains("E-mail")){
