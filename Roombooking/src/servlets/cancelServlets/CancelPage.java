@@ -47,11 +47,12 @@ public class CancelPage extends HttpServlet {
                 request.setAttribute("phone", phone);
 
                 request.getRequestDispatcher("cancelPageUser.jsp").forward(request, response);
+                out.close();
 
 
             } else{
-                request.getRequestDispatcher("cancelPageCustomer.jsp").forward(request, response);
-
+                request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+                out.close();
             }
 
 
@@ -70,6 +71,7 @@ public class CancelPage extends HttpServlet {
                     out.close();
                 }
             }
+
         }
     }
 
