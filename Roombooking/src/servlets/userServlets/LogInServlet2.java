@@ -40,7 +40,7 @@ public class LogInServlet2 extends HttpServlet {
         // Navnet som hentes er tilknyttet Customer ID.
         String customerID = cusFun.getField("cus_id", "Customer", "cus_email", email);
         String correctPassword = cusFun.getField("cus_password", "Customer", "cus_id", customerID);
-        String customerName = cusFun.getField("cus_firstname", "Customer", "cus_id", customerID);
+        String customerFirstName = cusFun.getField("cus_firstname", "Customer", "cus_id", customerID);
 
 
         if (customerID == null) {
@@ -52,11 +52,11 @@ public class LogInServlet2 extends HttpServlet {
                 // Passordet som er skrevet inn matcher passordet i databasen.
                 // Oppretter derfor en informasjonskapsel (cookie), slik at brukeren
                 // Forblir innlogget.
-                Cookie makeCookie = new Cookie(customerName, customerID);
+                Cookie makeCookie = new Cookie(customerFirstName, customerID);
                 response.addCookie(makeCookie);
 
                 // Saves the customer's name in the session.
-                request.setAttribute("name", customerName);
+                request.setAttribute("firstname", customerFirstName);
                 // Sends the customer's name to Profile.jsp.
                 request.getRequestDispatcher("Profile.jsp").forward(request, response);
 
