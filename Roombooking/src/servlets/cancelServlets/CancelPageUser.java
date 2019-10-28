@@ -35,7 +35,6 @@ public class CancelPageUser extends HttpServlet {
         CustomerFunctionality cusFun = new CustomerFunctionality(out);
         DbTool dbTool = new DbTool();
         Connection conn = dbTool.logIn(out);
-
         AlterOrder order = new AlterOrder();
 
         //Henter ut kundeID til brukeren
@@ -121,6 +120,7 @@ public class CancelPageUser extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            destroy();
         }
     }
 
