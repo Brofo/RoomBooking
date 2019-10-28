@@ -10,6 +10,7 @@
 <html>
 <head>
   <title>Rombukser</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/indexStyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -25,11 +26,11 @@
     <option name="Double room">Double room</option>
     <option name="Family room">Family room</option>
     <option name="Suite">Suite</option>
-  </select><br>
+  </select>
 
-  Check in date: <input type="date" name="checkin"><br>
-  Check out date: <input type="date" name="checkout"><br>
-  <input type="submit" name="createBooking" value="Create Booking"><br>
+  <p>Check in date: <input type="date" name="checkin"></p>
+  <p>Check out date: <input type="date" name="checkout"></p>
+  <input class="button" type="submit" name="createBooking" value="Create Booking"><br>
 
   <span style="color: red; "> ${errorMessage} </span><br>
 </form>
