@@ -44,8 +44,8 @@ public class Email
                 Message message =  new MimeMessage(session);
                 message.setFrom(new InternetAddress(myAccountEmail));
                 message.setRecipient(Message.RecipientType.TO , new InternetAddress(recipient));
-                message.setSubject("Den første testen av mail funksjon");
-                message.setText("sjekk mailen a");
+                message.setSubject("Du har nå registerert en bruker");
+                message.setText("Registrert bruker");
                 return message;
             }
             catch (Exception ex)

@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 
 import classes.DbTool;
+import classes.Email;
 import classes.Register;
 
 @WebServlet(
@@ -51,6 +52,18 @@ public class CreateUserServlet extends HttpServlet {
             //blir puttet inn i databasen, slik at brukeren blir opprettet.
             regUser.registerUser(out, firstname, lastname, email, phone, password);
             request.getRequestDispatcher("LogIn.jsp").include(request, response);
+
+        try
+        {
+            Email.sendMail("email");
+        }
+
+        catch(Exception ex)
+        {
+        System.out.println(ex);
+
+        }
+
 
     }
 
