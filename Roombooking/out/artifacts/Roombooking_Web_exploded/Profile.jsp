@@ -16,10 +16,14 @@
 </head>
 <body>
 
-    <h2>Welcome to your profile, ${name}</h2>
+    <h1>Welcome to your profile, ${name}</h1>
 
-    <form action="servlets.profileServlets.SeeBookings" method="get">
+    <form class="seeBookings" action="servlets.profileServlets.SeeBookings" method="get">
+        <input class="profile" type="submit" name="action" value="My bookings">
+    </form>
 
+    <form class="cancelPage" action="cancelPageCustomer.jsp">
+        <input  class="profile" type="submit" name="action" value="Cancel/Change order">
     </form>
 </body>
 </html>

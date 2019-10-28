@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<form action ="LogIn.jsp">
+<form class="bookingCustomer" action ="LogIn.jsp">
 
     <h2>You are currently booking as a guest</h2>
     If you would like to book as a user, click here:
@@ -25,7 +25,7 @@
 
 </form>
 
-<form action ="index.jsp">
+<form class="bookingCustomer" action ="index.jsp">
     Room type:      <b>${roomType}</b><br>
     Check in date:  <b>${checkInDate}</b><br>
     Check out date: <b>${checkOutDate}</b><br>
@@ -34,14 +34,15 @@
     <br>
 </form>
 
-<form action="servlets.bookingServlets.BookingServlet2" method="post">
+<form class="bookingCustomer" action="servlets.bookingServlets.BookingServlet2" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
     <input type="hidden" name="roomType" value="${roomType}">
     <input type="hidden" name="checkInDate" value="${checkInDate}">
     <input type="hidden" name="checkOutDate" value="${checkOutDate}">
 
-    Name: <input type="text" name="name"><br>
+    First name: <input type="text" name="firstname"><br>
+    Last name: <input type="text" name="lastname"><br>
     Email: <input type="email" name="email"><br>
     Phone number: <input type="tel" name="phone"><br>
     Preferences (optional): <br><textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
