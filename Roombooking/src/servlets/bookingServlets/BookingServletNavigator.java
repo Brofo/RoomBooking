@@ -21,6 +21,10 @@ public class BookingServletNavigator extends HttpServlet {
         String preferences = request.getParameter("preferences");
         String roomType = request.getParameter("roomType");
         String paymentType = request.getParameter("paymentType");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
 
         request.setAttribute(availableRoomID, "availableRoomID");
         request.setAttribute(checkInDate, "checkInDate");
@@ -28,6 +32,10 @@ public class BookingServletNavigator extends HttpServlet {
         request.setAttribute(preferences, "preferences");
         request.setAttribute(roomType, "roomType");
         request.setAttribute(paymentType, "paymentType");
+        request.setAttribute(firstname, "firstname");
+        request.setAttribute(lastname, "lastname");
+        request.setAttribute(email, "email");
+        request.setAttribute(phone, "phone");
 
         if (paymentType.equals("card")) {
             request.getRequestDispatcher("CardPayment.jsp").forward(request, response);
