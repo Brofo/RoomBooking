@@ -1,4 +1,3 @@
-BookingFinished.jsp
 <%--
   Created by IntelliJ IDEA.
   User: Sindre
