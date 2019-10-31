@@ -28,9 +28,26 @@ img{
     margin-right: auto;
     width: 50%;
 }
-.button{
-
+#navnForm{
+    display: none;
 }
+#emailForm{
+    display: none;
+}
+#telefonForm{
+    display: none;
+}
+#kansellereForm{
+    display: none;
+}
+#datoForm{
+    display: none;
+}
+#romForm{
+    display: none;
+}
+
+
 div{
     text-align: center;
 }
@@ -78,7 +95,6 @@ ul{
     display: inline-block;
     height: 3%;
 }
-}
 .seeBookings{
     display: inline-block;
     height: 3%;
@@ -99,6 +115,11 @@ p.loginPara{
 }
 form.loginForm{
     margin-bottom: 3%;
+}
+button{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+
 }
 .roomprofile{
     width:549px;

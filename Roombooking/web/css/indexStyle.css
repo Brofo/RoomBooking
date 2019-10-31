@@ -1,7 +1,6 @@
 form{
     display: inline-block;
     text-align: center;
-    height: 35%;
     width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 150%;
@@ -29,9 +28,26 @@ img{
     margin-right: auto;
     width: 50%;
 }
-.button{
-
+#navnForm{
+    display: none;
 }
+#emailForm{
+    display: none;
+}
+#telefonForm{
+    display: none;
+}
+#kansellereForm{
+    display: none;
+}
+#datoForm{
+    display: none;
+}
+#romForm{
+    display: none;
+}
+
+
 div{
     text-align: center;
 }
@@ -79,6 +95,7 @@ ul{
     display: inline-block;
     height: 3%;
 }
+}
 .seeBookings{
     display: inline-block;
     height: 3%;
@@ -88,9 +105,24 @@ ul{
     color: darkred;
 }
 input.login{
+    position: relative;
     margin-top: 1%;
 }
 p.loginPara{
-    margin-top: 3% ;
+    margin-top: 5%;
+    display: block;
+    position: relative;
 
+}
+form.loginForm{
+    margin-bottom: 3%;
+}
+button{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+
+}
+.roomprofile{
+    width:549px;
+    height:314px;
 }

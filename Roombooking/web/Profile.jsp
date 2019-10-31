@@ -16,13 +16,19 @@
 </head>
 <body>
 
-    <h1>Welcome to your profile, ${name}</h1>
+    <h1>Welcome to your profile, ${firstname} </h1>
+    <h2></h2>
+    <h3>Bonuspoints: ${bonus}</h3>
+
+    <form class="" action="Bonusinfo.jsp" method="get">
+        <input class="profile" type="submit" name="action" value="About Bonuspoints">
+    </form>
 
     <form class="seeBookings" action="servlets.profileServlets.SeeBookings" method="get">
         <input class="profile" type="submit" name="action" value="My bookings">
     </form>
 
-    <form class="cancelPage" action="cancelPageCustomer.jsp">
+    <form class="cancelPage" action="servlets.cancelServlets.CancelPage">
         <input  class="profile" type="submit" name="action" value="Cancel/Change order">
     </form>
 </body>
