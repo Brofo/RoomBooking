@@ -70,5 +70,4 @@ public class LogInServlet2 extends HttpServlet {
                 request.getRequestDispatcher("LogIn.jsp").forward(request, response);
             }
     }
-
 }
