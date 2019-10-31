@@ -15,7 +15,7 @@ public class BookingServletNavigator extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String availableRoomID = request.getParameter("availableRoomID");
+        //String availableRoomID = request.getParameter("availableRoomID");
         String checkInDate = request.getParameter("checkInDate");
         String checkOutDate = request.getParameter("checkOutDate");
         String preferences = request.getParameter("preferences");
@@ -26,7 +26,8 @@ public class BookingServletNavigator extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
 
-        request.setAttribute(availableRoomID, "availableRoomID");
+        //
+        // request.setAttribute(availableRoomID, "availableRoomID");
         request.setAttribute(checkInDate, "checkInDate");
         request.setAttribute(checkOutDate, "checkOutDate");
         request.setAttribute(preferences, "preferences");
