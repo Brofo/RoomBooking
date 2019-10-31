@@ -26,7 +26,7 @@
     <br>
 </form>
 
-<form class="bookingUser" action="servlets.bookingServlets.BookingServlet2" method="post">
+<form class="bookingUser" action="servlets.bookingServlets.BookingServletNavigator" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
     <input type="hidden" name="roomType" value="${roomType}">
