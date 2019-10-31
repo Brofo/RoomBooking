@@ -28,7 +28,7 @@
         <input class="profile" type="submit" name="action" value="My bookings">
     </form>
 
-    <form class="cancelPage" action="cancelPageCustomer.jsp">
+    <form class="cancelPage" action="servlets.cancelServlets.CancelPage">
         <input  class="profile" type="submit" name="action" value="Cancel/Change order">
     </form>
 </body>
