@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
+<%@include  file="link.html"%>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
@@ -11,7 +12,19 @@
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
-  <form class="checkout">
+<input type="hidden" name="availableRoomID" value="${availableRoomID}">
+<input type="hidden" name="roomType" value="${roomType}">
+<input type="hidden" name="checkInDate" value="${checkInDate}">
+<input type="hidden" name="checkOutDate" value="${checkOutDate}">
+
+<input type="hidden" name="firstname" value="${firstname}">
+<input type="hidden" name="lastname" value="${lastname}">
+<input type="hidden" name="email" value="${email}">
+<input type="hidden" name="phone" value="${phone}">
+<input type="hidden" name="preferences" value="${preferences}">
+<input type="hidden" name="paymentType" value="${paymentType}">
+
+  <form class="checkout" action="servlets.bookingServlets.BookingServlet2" method="post">
     <div class="checkout-header">
       <h1 class="checkout-title">
         Checkout
@@ -19,7 +32,7 @@
       </h1>
     </div>
     <p>
-      <input type="text" class="checkout-input checkout-name" placeholder="Your name" autofocus>
+      <input type="text" class="checkout-input checkout-name" placeholder="Card holder name" autofocus>
       <input type="text" class="checkout-input checkout-exp" placeholder="MM">
       <input type="text" class="checkout-input checkout-exp" placeholder="YY">
     </p>

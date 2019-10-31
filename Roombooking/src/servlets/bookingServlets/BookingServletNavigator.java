@@ -37,10 +37,10 @@ public class BookingServletNavigator extends HttpServlet {
         request.setAttribute(email, "email");
         request.setAttribute(phone, "phone");
 
-        if (paymentType.equals("card")) {
+        if (paymentType.contains("Card")) {
             request.getRequestDispatcher("CardPayment.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("BookingServlet2").forward(request, response);
+            request.getRequestDispatcher("servlets.bookingServlets.BookingServlet2").forward(request, response);
         }
     }
 }
