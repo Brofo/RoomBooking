@@ -45,6 +45,11 @@
     Last name: <input type="text" name="lastname"><br>
     Email: <input type="email" name="email"><br>
     Phone number: <input type="tel" name="phone"><br>
+    Payment method: <select id="paymentMethod" name="paymentMethod">
+                        <option name="empty">Select...</option>
+                        <option name="creditCard">Credit Card</option>
+                        <option name="uponArrival">Pay Upon Arrival</option>
+    </select>
     Preferences (optional): <br><textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
     <input type="submit" name="createBooking" value="Book room">
