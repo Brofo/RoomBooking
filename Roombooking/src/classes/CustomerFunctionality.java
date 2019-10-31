@@ -320,7 +320,7 @@ public class CustomerFunctionality {
      */
     public void alterBonusPoints(String customerID, int bonuspoints) {
         try {
-            PreparedStatement pst = con.prepareStatement("UPDATE customer " +
+            PreparedStatement pst = con.prepareStatement("UPDATE roombookingdb.customer " +
                     "SET cus_bonuspoints = (cus_bonuspoints + (?)) WHERE cus_id = (?)");
             pst.setInt(1, bonuspoints);
             pst.setString(2, customerID);

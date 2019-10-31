@@ -36,7 +36,7 @@
         <option name="empty">Select...</option>
         <option name="card">Credit Card</option>
         <option name="uponArrival">Pay Upon Arrival</option>
-        <option name="bonuspoints">With Bonuspoints</option>
+        <option name="bonuspoints">Bonuspoints</option>
     </select><br>
 
     Preferences (optional):<br>
