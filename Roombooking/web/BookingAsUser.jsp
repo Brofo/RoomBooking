@@ -32,6 +32,12 @@
     <input type="hidden" name="roomType" value="${roomType}">
     <input type="hidden" name="checkInDate" value="${checkInDate}">
     <input type="hidden" name="checkOutDate" value="${checkOutDate}">
+    Payment method: <select id="paymentMethod" name="paymentType">
+        <option name="empty">Select...</option>
+        <option name="card">Credit Card</option>
+        <option name="uponArrival">Pay Upon Arrival</option>
+        <option name="bonuspoints">With Bonuspoints</option>
+    </select><br>
 
     Preferences (optional):<br>
     <textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
