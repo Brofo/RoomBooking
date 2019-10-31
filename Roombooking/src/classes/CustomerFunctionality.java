@@ -314,6 +314,24 @@ public class CustomerFunctionality {
     }
 
     /**
+     * This method is used to alter the bonus points of a user.
+     * @param customerID The ID of the customer that will have the points altered.
+     * @param bonuspoints The amount of bonus points that will be altered.
+     */
+    public void alterBonusPoints(String customerID, int bonuspoints) {
+        try {
+            PreparedStatement pst = con.prepareStatement("UPDATE customer " +
+                    "SET cus_bonuspoints = (cus_bonuspoints + (?)) WHERE cus_id = (?)");
+            pst.setInt(1, bonuspoints);
+            pst.setString(2, customerID);
+            pst.executeUpdate();
+        }
+        catch (SQLException ex) {
+            out.println("Could not alter bonuspoints + " + ex);
+        }
+    }
+
+    /**
      * getFreeRooms will find all free rooms for one date.
      * @param roomType wanted roomtype. In this you need to use room_type from Room and not room_id. E.g. "doubleroom".
      * @param dateInQuestion the date you want to see free rooms at.
