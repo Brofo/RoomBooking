@@ -60,31 +60,31 @@ public class BookingServlet2 extends HttpServlet {
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
 
             //If the user paid with card, add bonuspoints to the user:
-            if (paymentType.equals("card")) {
+            if (paymentType.contains("Card")) {
                 int bonuspointsAquired = 0;
                 // Calculate the amount of bonuspoints the user will get.
-                if (roomType.equals("Single room")) {
+                if (roomType.contains("Single")) {
                     bonuspointsAquired = 2500;
-                } else if (roomType.equals("Double room")) {
+                } else if (roomType.contains("Double")) {
                     bonuspointsAquired = 5000;
-                } else if (roomType.equals("Family room")) {
+                } else if (roomType.contains("Family")) {
                     bonuspointsAquired = 7500;
-                } else if (roomType.equals("Suite")) {
+                } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
                 cusFun.alterBonusPoints(customerID, bonuspointsAquired);
             }
             // If the user paid with bonuspoints, remove the points from the user:
-            if (paymentType.equals("bonuspoints")) {
+            if (paymentType.contains("Bonuspoints")) {
                 int bonuspointsPrice = 0;
                 // Calculate the amount of bonuspoints the user will be charged.
-                if (roomType.equals("Single room")) {
+                if (roomType.contains("Single")) {
                     bonuspointsPrice = 25000;
-                } else if (roomType.equals("Double room")) {
+                } else if (roomType.contains("Double")) {
                     bonuspointsPrice = 50000;
-                } else if (roomType.equals("Family room")) {
+                } else if (roomType.contains("Family")) {
                     bonuspointsPrice = 75000;
-                } else if (roomType.equals("Suite")) {
+                } else if (roomType.contains("Suite")) {
                     bonuspointsPrice = 100000;
                 }
 
@@ -94,7 +94,7 @@ public class BookingServlet2 extends HttpServlet {
                 if (currentBonuspoints < bonuspointsPrice) {
                     //The user does not have enough points.
                     request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
-                    request.getRequestDispatcher("BookingAsUser.jsp").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
                     //The uses does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
@@ -115,6 +115,7 @@ public class BookingServlet2 extends HttpServlet {
         request.setAttribute("roomType", roomType);
         request.setAttribute("checkInDate", checkInDate);
         request.setAttribute("checkOutDate", checkOutDate);
+        request.setAttribute("paymentType", paymentType);
         request.getRequestDispatcher("BookingFinished.jsp").forward(request, response);
     }
 }
