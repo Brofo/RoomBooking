@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "servlets.bookingServlets.BookingServlet2",
-            urlPatterns = {"/servlets.bookingServlets.BookingServlet2"}
+        urlPatterns = {"/servlets.bookingServlets.BookingServlet2"}
 )
 
 /**
@@ -38,6 +38,7 @@ public class BookingServlet2 extends HttpServlet {
         String checkInDate = request.getParameter("checkInDate");
         String checkOutDate = request.getParameter("checkOutDate");
         String preferences = request.getParameter("preferences");
+        String paymentType = request.getParameter("paymentType");
 
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
@@ -50,20 +51,70 @@ public class BookingServlet2 extends HttpServlet {
         Cookie existingCookies[] = request.getCookies();
 
 
+        //Check whether the customer is logged in or not.
         if (existingCookies != null) {
-            //If logged in, just register the order, using the users Customer ID.
+            // The user is logged in. Fetch CustomerID from cookie:
             String customerID = existingCookies[0].getValue();
+
+            // Just register the order, using the users Customer ID.
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
-            out.println("<p> You have successfully booked a </p4> " +"<h4>" + roomType +"</h4>"+ " <p> from </p><p>" + checkInDate +"</p>"+ " <p> until </p> <p>" + checkOutDate + ".</p>");
+
+            //If the user paid with card, add bonuspoints to the user:
+            if (paymentType.equals("card")) {
+                int bonuspointsAquired = 0;
+                // Calculate the amount of bonuspoints the user will get.
+                if (roomType.equals("Single room")) {
+                    bonuspointsAquired = 2500;
+                } else if (roomType.equals("Double room")) {
+                    bonuspointsAquired = 5000;
+                } else if (roomType.equals("Family room")) {
+                    bonuspointsAquired = 7500;
+                } else if (roomType.equals("Suite")) {
+                    bonuspointsAquired = 10000;
+                }
+                cusFun.alterBonusPoints(customerID, bonuspointsAquired);
+            }
+            // If the user paid with bonuspoints, remove the points from the user:
+            if (paymentType.equals("bonuspoints")) {
+                int bonuspointsPrice = 0;
+                // Calculate the amount of bonuspoints the user will be charged.
+                if (roomType.equals("Single room")) {
+                    bonuspointsPrice = 25000;
+                } else if (roomType.equals("Double room")) {
+                    bonuspointsPrice = 50000;
+                } else if (roomType.equals("Family room")) {
+                    bonuspointsPrice = 75000;
+                } else if (roomType.equals("Suite")) {
+                    bonuspointsPrice = 100000;
+                }
+
+                // Check if the customer has enough bonuspoints for the order.
+                int currentBonuspoints = Integer.parseInt(cusFun.getField("cus_bonuspoints",
+                        "customer", "cus_id", customerID));
+                if (currentBonuspoints < bonuspointsPrice) {
+                    //The user does not have enough points.
+                    request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
+                    request.getRequestDispatcher("BookingAsUser.jsp").forward(request, response);
+                } else {
+                    //The uses does have enough points. Subtract bonuspoints from the user.
+                    bonuspointsPrice = -bonuspointsPrice;
+                    cusFun.alterBonusPoints(customerID, bonuspointsPrice);
+                }
+            }
+
         }
 
         else {
-            //If not logged in, register the customer in the database.
+            //The customer is not logged in. Register the customer in the database.
             //Then use the customer ID of this customer to register an order.
             String customerID = reg.getCustomerAndUserID(out);
             reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
             cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
-            out.println("<p> You have successfully booked a </p4> " +"<h4>" + roomType +"</h4>"+ " <p> from </p><p class='date'>" + checkInDate +"</p>"+ " <p> until </p> <p class='date'>" + checkOutDate + ".</p>");
         }
+
+        request.setAttribute("roomType", roomType);
+        request.setAttribute("checkInDate", checkInDate);
+        request.setAttribute("checkOutDate", checkOutDate);
+        request.getRequestDispatcher("BookingFinished.jsp").forward(request, response);
     }
 }
