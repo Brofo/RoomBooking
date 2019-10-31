@@ -12,19 +12,20 @@
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
-<input type="hidden" name="availableRoomID" value="${availableRoomID}">
-<input type="hidden" name="roomType" value="${roomType}">
-<input type="hidden" name="checkInDate" value="${checkInDate}">
-<input type="hidden" name="checkOutDate" value="${checkOutDate}">
-
-<input type="hidden" name="firstname" value="${firstname}">
-<input type="hidden" name="lastname" value="${lastname}">
-<input type="hidden" name="email" value="${email}">
-<input type="hidden" name="phone" value="${phone}">
-<input type="hidden" name="preferences" value="${preferences}">
-<input type="hidden" name="paymentType" value="${paymentType}">
 
   <form class="checkout" action="servlets.bookingServlets.BookingServlet2" method="post">
+    <input type="hidden" name="availableRoomID" value="${availableRoomID}">
+    <input type="hidden" name="roomType" value="${roomType}">
+    <input type="hidden" name="checkInDate" value="${checkInDate}">
+    <input type="hidden" name="checkOutDate" value="${checkOutDate}">
+
+    <input type="hidden" name="firstname" value="${firstname}">
+    <input type="hidden" name="lastname" value="${lastname}">
+    <input type="hidden" name="email" value="${email}">
+    <input type="hidden" name="phone" value="${phone}">
+    <input type="hidden" name="preferences" value="${preferences}">
+    <input type="hidden" name="paymentType" value="${paymentType}">
+
     <div class="checkout-header">
       <h1 class="checkout-title">
         Checkout

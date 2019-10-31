@@ -13,29 +13,9 @@ import java.io.IOException;
 
 public class BookingServletNavigator extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String availableRoomID = request.getParameter("availableRoomID");
-        String checkInDate = request.getParameter("checkInDate");
-        String checkOutDate = request.getParameter("checkOutDate");
-        String preferences = request.getParameter("preferences");
-        String roomType = request.getParameter("roomType");
         String paymentType = request.getParameter("paymentType");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-
-        request.setAttribute(availableRoomID, "availableRoomID");
-        request.setAttribute(checkInDate, "checkInDate");
-        request.setAttribute(checkOutDate, "checkOutDate");
-        request.setAttribute(preferences, "preferences");
-        request.setAttribute(roomType, "roomType");
-        request.setAttribute(paymentType, "paymentType");
-        request.setAttribute(firstname, "firstname");
-        request.setAttribute(lastname, "lastname");
-        request.setAttribute(email, "email");
-        request.setAttribute(phone, "phone");
 
         if (paymentType.contains("Card")) {
             request.getRequestDispatcher("CardPayment.jsp").forward(request, response);

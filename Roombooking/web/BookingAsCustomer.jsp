@@ -34,7 +34,7 @@
     <br>
 </form>
 
-<form class="bookingCustomer" action="servlets.bookingServlets.BookingServletNavigator" method="get">
+<form class="bookingCustomer" action="servlets.bookingServlets.BookingServletNavigator" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
     <input type="hidden" name="roomType" value="${roomType}">
@@ -45,7 +45,7 @@
     Last name: <input type="text" name="lastname"><br>
     Email: <input type="email" name="email"><br>
     Phone number: <input type="tel" name="phone"><br>
-    Payment method: <select id="paymentMethod" name="paymentMethod">
+    Payment method: <select id="paymentMethod" name="paymentType">
                         <option name="empty">Select...</option>
                         <option name="creditCard">Credit Card</option>
                         <option name="uponArrival">Pay Upon Arrival</option>
