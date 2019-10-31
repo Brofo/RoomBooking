@@ -37,26 +37,27 @@ public class Email
         Transport.send(message);
         System.out.println("Message er sendt");
     }
-        private static Message prepareMessage(Session session, String myAccountEmail, String recipient)
+    private static Message prepareMessage(Session session, String myAccountEmail, String recipient)
+    {
+        try
         {
-            try
-            {
-                Message message =  new MimeMessage(session);
-                message.setFrom(new InternetAddress(myAccountEmail));
-                message.setRecipient(Message.RecipientType.TO , new InternetAddress(recipient));
-                message.setSubject("Du har nå registerert en bruker");
-                message.setText("Registrert bruker");
-                return message;
-            }
-            catch (Exception ex)
-            {
-
-                Logger.getLogger(Email.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                return null;
-
+            Message message =  new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO , new InternetAddress(recipient));
+            message.setSubject("Du har nå registerert en bruker");
+            message.setText("Registrert bruker");
+            return message;
         }
+        catch (Exception ex)
+        {
+
+            Logger.getLogger(Email.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
 
 }
+
 
 

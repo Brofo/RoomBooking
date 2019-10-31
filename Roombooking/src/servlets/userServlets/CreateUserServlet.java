@@ -32,7 +32,7 @@ import classes.Register;
 public class CreateUserServlet extends HttpServlet {
     private Register regUser;
 
-    public CreateUserServlet() {
+    public CreateUserServlet() throws Exception {
         regUser = new Register();
     }
 
@@ -48,24 +48,24 @@ public class CreateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-            //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
-            //blir puttet inn i databasen, slik at brukeren blir opprettet.
-            regUser.registerUser(out, firstname, lastname, email, phone, password);
-            request.getRequestDispatcher("LogIn.jsp").include(request, response);
+        //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
+        //blir puttet inn i databasen, slik at brukeren blir opprettet.
+        regUser.registerUser(out, firstname, lastname, email, phone, password);
+        request.getRequestDispatcher("LogIn.jsp").include(request, response);
+
 
         try
         {
-            Email.sendMail("email");
+            System.out.println("før sendEmail");
+            Email.sendMail(email);
+            System.out.println("etter SendMail");
         }
-
-        catch(Exception ex)
-        {
-        System.out.println(ex);
-
-        }
-
+            catch (Exception ex)
+            {
+                System.out.println("i catch");
+                ex.printStackTrace();
+            }
 
     }
 
-
-}
+    }
