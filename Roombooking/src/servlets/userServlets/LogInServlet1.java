@@ -1,5 +1,7 @@
 package servlets.userServlets;
 
+import classes.CustomerFunctionality;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -29,9 +31,17 @@ public class LogInServlet1 extends HttpServlet {
         Cookie existingCookies[] = request.getCookies();
         if (existingCookies != null) {
             System.out.println(existingCookies);
+            PrintWriter out = response.getWriter();
+            CustomerFunctionality cusFun = new CustomerFunctionality(out);
+
             // The user is already logged in, and will be sent directly to their profile.
             String firstname = existingCookies[0].getName();
+            String cID = existingCookies[0].getValue();
+            String bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+
             request.setAttribute("firstname", firstname);
+            request.setAttribute("bonus",bonus);
+
             request.getRequestDispatcher("Profile.jsp").forward(request, response);
         }
         else {
