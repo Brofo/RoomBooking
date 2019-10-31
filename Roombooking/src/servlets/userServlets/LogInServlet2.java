@@ -53,12 +53,22 @@ public class LogInServlet2 extends HttpServlet {
                 // Oppretter derfor en informasjonskapsel (cookie), slik at brukeren
                 // Forblir innlogget.
                 Cookie makeCookie = new Cookie(customerFirstName, customerID);
-                response.addCookie(makeCookie);
+                response.addCookie(makeCookie)
+                ;
+            Cookie ck[] = request.getCookies();
+            String cID = ck[0].getValue();
+            String firstname = ck[0].getName();
+            //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
+            String bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+            request.setAttribute("firstname", firstname);
+            request.setAttribute("bonus", bonus);
+
 
                 // Saves the customer's name in the session.
                 request.setAttribute("firstname", customerFirstName);
                 // Sends the customer's name to Profile.jsp.
                 request.getRequestDispatcher("Profile.jsp").forward(request, response);
+
 
             } else {
                 // Creates parameter for the errorMessage in LogIn.jsp.
