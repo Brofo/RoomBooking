@@ -1,4 +1,3 @@
-BookingFinished.jsp
 <%--
   Created by IntelliJ IDEA.
   User: Sindre
@@ -19,5 +18,6 @@ BookingFinished.jsp
 You have booked a ${roomType} <br>
 from ${checkInDate}<br>
 until ${checkOutDate}<br>
+Payment type: ${paymentType}<br>
 </body>
 </html>
