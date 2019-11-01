@@ -16,6 +16,7 @@ import java.sql.SQLException;
         urlPatterns = {"/servlets.Review"})
 public class Review extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Reviews rw = new Reviews();
         String review = request.getParameter("review");
@@ -25,10 +26,9 @@ public class Review extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Reviews re = new Reviews();
-        String review = request.getParameter("review");
         out.println(re.getReviews(out));
     }
 }
