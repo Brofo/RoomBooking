@@ -98,6 +98,7 @@ public class BookingServlet2 extends HttpServlet {
                 } else {
                     //The uses does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
+
                     cusFun.alterBonusPoints(customerID, bonuspointsPrice);
                 }
             }
