@@ -19,13 +19,13 @@
             Fornavn: <input type="text" name="firstname" >
             Etternavn:<input type="text" name="lastname" ><br>
 
-            <input type="submit" name="action" value="Trykk her for å endre navn">
-            <input onclick="closeForm('navnForm','navnKnapp')" type="button" value="avbryt">
+            <input class="profile" type="submit" name="action" value="Trykk her for å endre navn">
+            <input class="profile" onclick="closeForm('navnForm','navnKnapp')" type="button" value="avbryt">
         </form>
     </div>
 
     <div id="navnKnapp" >
-    <button onclick="openForm('navnForm','navnKnapp')">Endre navn</button>
+    <button class="profile" onclick="openForm('navnForm','navnKnapp')">Endre navn</button>
     </div>
 
     <p>E-mail: ${email}</p>
@@ -33,34 +33,34 @@
         <form action="servlets.cancelServlets.CancelPageUser"  method="post" >
             E-mail: <input type="text" name="email">
             <br>
-            <input type="submit" name="action" value="Trykk her for å endre email">
-            <input onclick="closeForm('emailForm','emailKnapp')" type="button" value="avbryt">
+            <input class="profile" type="submit" name="action" value="Trykk her for å endre email">
+            <input class="profile" onclick="closeForm('emailForm','emailKnapp')" type="button" value="avbryt">
 
         </form>
     </div>
 
     <div id="emailKnapp" >
-        <button onclick="openForm('emailForm','emailKnapp')">Endre email</button>
+        <button class="profile"  onclick="openForm('emailForm','emailKnapp')">Endre email</button>
     </div>
     <p>Telefon: ${phone}</p>
     <div id="telefonForm">
         <form action="servlets.cancelServlets.CancelPageUser"  method="post"  >
             E-mail: <input type="text" name="phone">
             <br>
-            <input type="submit" name="action" value="Trykk her for å endre telefon?">
-            <input onclick="closeForm('telefonForm','telefonKnapp')" type="button" value="avbryt">
+            <input class="profile"  type="submit" name="action" value="Trykk her for å endre telefon?">
+            <input class="profile" onclick="closeForm('telefonForm','telefonKnapp')" type="button" value="avbryt">
 
         </form>
     </div>
 
     <div id="telefonKnapp" >
-        <button onclick="openForm('telefonForm','telefonKnapp')">Endre telefon</button>
+        <button class="profile"  onclick="openForm('telefonForm','telefonKnapp')">Endre telefon</button>
     </div>
     <br>
     <div>
-        <button onclick="openForm('kansellereForm',null), closeForm('romForm',null),closeForm('datoForm',null)">Kansellere rom</button>
-        <button onclick="openForm('romForm',null), closeForm('kansellereForm',null),closeForm('datoForm',null)">Endre rom</button>
-        <button onclick="openForm('datoForm',null), closeForm('romForm',null),closeForm('kansellereForm',null)">Endre dato </button>
+        <button class="profile" onclick="openForm('kansellereForm',null), closeForm('romForm',null),closeForm('datoForm',null)">Kansellere rom</button>
+        <button class="profile" onclick="openForm('romForm',null), closeForm('kansellereForm',null),closeForm('datoForm',null)">Endre rom</button>
+        <button class="profile" onclick="openForm('datoForm',null), closeForm('romForm',null),closeForm('kansellereForm',null)">Endre dato </button>
     </div>
 
     <div id="kansellereForm">
@@ -68,8 +68,8 @@
             <p>Skriv inn bookingnummer for raskt å avbestille ordren</p>
             Bookingnummer: <input type="text" name="orderid"><br>
 
-            <br> <input type="submit" name="action" value="Kansellere">
-            <input onclick="closeForm('kansellereForm',null)" type="button" value="Avbryt">
+            <br> <input class="profile"  type="submit" name="action" value="Kansellere">
+            <input class="profile" onclick="closeForm('kansellereForm',null)" type="button" value="Avbryt">
         </form>
     </div>
 
@@ -82,8 +82,8 @@
             <option value="fr">Familierom</option>
             <option value="zj">Suite</option>
         </select>
-            <input type="submit" name="action" value="Endre rom">
-            <input onclick="closeForm('romForm',null) " type="button" value="Avbryt">
+            <input class="profile"  type="submit" name="action" value="Endre rom">
+            <input class="profile" onclick="closeForm('romForm',null) " type="button" value="Avbryt">
         </form>
     </div>
 
@@ -92,8 +92,8 @@
             Bookingnummer: <input type="text" name="orderid"><br>
             Checkin du vil endre til: <input type="date" name="checkin"><br>
             Checkout du vil endre til: <input type="date" name="checkout">
-            <input type="submit" name="action" value="Endre dato">
-            <input onclick="closeForm('datoForm',null)" type="button" value="Avbryt">
+            <input class="profile" type="submit" name="action" value="Endre dato">
+            <input class="profile" onclick="closeForm('datoForm',null)" type="button" value="avbryt">
         </form>
     </div>
 

@@ -72,7 +72,7 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.equals("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-                cusFun.alterBonusPoints(customerID, bonuspointsAquired);
+               cusFun.alterBonusPoints(customerID, bonuspointsAquired);
             }
             // If the user paid with bonuspoints, remove the points from the user:
             if (paymentType.equals("bonuspoints")) {
