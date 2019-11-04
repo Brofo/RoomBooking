@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.sql.SQLException;
 
 
 import static java.lang.Integer.parseInt;
@@ -22,7 +22,7 @@ import static java.lang.Integer.parseInt;
         urlPatterns = {"/servlets.cancelServlets.CancelPage"}
 )
 public class CancelPage extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
@@ -71,7 +71,7 @@ public class CancelPage extends HttpServlet {
                     out.close();
                 }
             }
-            destroy();
+
 
         }
     }
@@ -82,6 +82,8 @@ public class CancelPage extends HttpServlet {
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             destroy();
@@ -94,6 +96,8 @@ public class CancelPage extends HttpServlet {
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             destroy();
