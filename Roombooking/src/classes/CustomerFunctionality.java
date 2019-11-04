@@ -139,20 +139,21 @@ public class CustomerFunctionality {
      * @param customerPreferences any special preferences the customer has submitted.
      * @return the order_id of the order recorded.
      */
-    public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
+    public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences, String paymentType) {
         try {
             java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
             java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
             GenerateID idGenerator = new GenerateID();
             String orderId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Orders");
 
-            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES (?, ?, ?, ?, ?, ?, ?)");
             pst.setString(1, orderId);
             pst.setString(2, room_id);
             pst.setString(3, cus_id);
             pst.setDate(4, new java.sql.Date(checkInDatePR.getTime()));
             pst.setDate(5, new java.sql.Date(checkOutDatePR.getTime()));
             pst.setString(6, customerPreferences);
+            pst.setString(7, paymentType);
 
             int orderCount = pst.executeUpdate();
             if(orderCount == 1) {
@@ -180,14 +181,14 @@ public class CustomerFunctionality {
      * @param checkOutDate
      * @param preferences
      */
-    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) throws ParseException {
+    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences, String paymentType) throws ParseException {
         String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
         if(roomId == null){
             out.println("No available rooms of chosen type available for this period.");
             out.println("Try different type or different period.");
         }
         else{
-            createBooking(name, email, phone, roomId, checkInDate, checkOutDate, preferences);
+            createBooking(name, email, phone, roomId, checkInDate, checkOutDate, preferences, paymentType);
         }
 
     }
@@ -205,7 +206,7 @@ public class CustomerFunctionality {
      * @param checkInDate
      * @param checkOutDate
      */
-    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences) {    GenerateID idGenerator = new GenerateID();
+    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences, String paymentType) {    GenerateID idGenerator = new GenerateID();
         HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
         String customerId;
         if(usedPersonalInfoMap.isEmpty()) {
@@ -215,7 +216,7 @@ public class CustomerFunctionality {
         else{
             customerId = usedPersonalInfoMap.get(email);
         }
-        String orderId = inputRecordInOrders(roomId, customerId, checkInDate, checkOutDate, preferences);
+        String orderId = inputRecordInOrders(roomId, customerId, checkInDate, checkOutDate, preferences, paymentType);
         out.println(getOrderInfo(orderId));
     }
 
@@ -277,7 +278,8 @@ public class CustomerFunctionality {
                                         "Customer ID: "     + orderInfoRS.getString(3) +
                                         "Check In Date: "   + orderInfoRS.getString(4) +
                                         "Check Out Date: "  + orderInfoRS.getString(5) +
-                                        "Preferences: "     + orderInfoRS.getString(6);
+                                        "Preferences: "     + orderInfoRS.getString(6) +
+                                        "Payment type: "    + orderInfoRS.getString(7);
             return orderInfoString;
         }
         catch(SQLException e){

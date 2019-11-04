@@ -57,7 +57,7 @@ public class BookingServlet2 extends HttpServlet {
             String customerID = existingCookies[0].getValue();
 
             // Just register the order, using the users Customer ID.
-            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
+            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
 
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
@@ -109,7 +109,7 @@ public class BookingServlet2 extends HttpServlet {
             //Then use the customer ID of this customer to register an order.
             String customerID = reg.getCustomerAndUserID(out);
             reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences);
+            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
         }
 
         request.setAttribute("roomType", roomType);

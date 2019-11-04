@@ -8,7 +8,7 @@
   Dette er siden som skal kunne lagre og vise anmeldelser fra kunder. Kanskje mulighet for stjerner også.
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false"%>
 <%@include  file="link.html"%>
 <html>
 <head>
