@@ -26,11 +26,9 @@ public class CustomerFunctionality {
 
     public CustomerFunctionality(PrintWriter out) {
         this.out = out;
-        con = new DbTool().logIn(out);
-
         //Dette under her kommer jeg antageligvis til å fjerne. Brukte det når dette var en CustomerFunctionality,
         //men nå er det vel mest en start på DBFunctionality, i mine øyne i alle fall.
-     /*   try {
+      /*  try {
             st = con.createStatement();
         }
         catch (SQLException sqlEx){
@@ -158,6 +156,7 @@ public class CustomerFunctionality {
      * @return the order_id of the order recorded.
      */
     public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences, String paymentType) {
+        con = new DbTool().logIn(out);
         try {
             java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
             java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
@@ -199,7 +198,7 @@ public class CustomerFunctionality {
      * @param checkOutDate
      * @param preferences
      */
-    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences, String paymentType) throws ParseException , SQLException {
+    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences, String paymentType) throws ParseException, SQLException {
         con = new DbTool().logIn(out);
         String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
         if(roomId == null){
@@ -225,7 +224,8 @@ public class CustomerFunctionality {
      * @param checkInDate
      * @param checkOutDate
      */
-    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences, String paymentType) {
+    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences, String paymentType) throws SQLException {
+        con = new DbTool().logIn(out);
         GenerateID idGenerator = new GenerateID();
         HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
         String customerId;
