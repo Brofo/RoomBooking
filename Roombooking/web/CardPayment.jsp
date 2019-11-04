@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Checkout Form</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
@@ -31,7 +31,6 @@
     <div class="checkout-header">
         <h1 class="checkout-title">
             Checkout
-            <span class="checkout-price">$10</span>
         </h1>
     </div>
     <p>
@@ -48,16 +47,5 @@
     </p>
 </form>
 
-<div class="about">
-    <p class="about-links">
-        <a href="http://www.cssflow.com/snippets/checkout-form" target="_parent">View Article</a>
-        <a href="http://www.cssflow.com/snippets/checkout-form.zip" target="_parent">Download</a>
-    </p>
-    <p class="about-author">
-        &copy; 2013 <a href="http://thibaut.me" target="_blank">Thibaut Courouble</a> -
-        <a href="http://www.cssflow.com/mit-license" target="_blank">MIT License</a><br>
-        Original PSD by <a href="http://dribbble.com/shots/960330-Checkout-Form-PSD" target="_blank">Umar Irshad</a>
-    </p>
-</div>
 </body>
 </html>
