@@ -15,7 +15,7 @@
 </head>
 <body>
 <form class="finishedBooking">
-<h2>Booking successful!</h2>
+<h2>Booking successful!</h2><br>
     You have booked a <text style="color:firebrick;"><b>${roomType}</b></text><br><br>
     from <text style="color:firebrick;"><b>${checkInDate}</b></text>
     until <text style="color:firebrick;"><b>${checkOutDate}</b></text><br><br>
