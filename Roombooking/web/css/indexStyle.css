@@ -5,9 +5,6 @@ form{
     font-family: 'Roboto', sans-serif;
     font-size: 150%;
 }
-form.bookingCustomer{
-    height: 13%;
-}
 
 h1{
     margin-block-start: 3em;

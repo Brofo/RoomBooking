@@ -29,7 +29,7 @@
     </form>
 
     <form class="cancelPage" action="servlets.cancelServlets.CancelPage">
-        <input  class="profile" type="submit" name="action" value="Cancel/Change order">
+        <input  class="profile" type="submit" name="action" value="Manage account & bookings">
     </form>
 </body>
 </html>

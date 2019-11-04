@@ -26,9 +26,6 @@ public class CustomerFunctionality {
 
     public CustomerFunctionality(PrintWriter out) {
         this.out = out;
-        con = new DbTool().logIn(out);
-
-
         //Dette under her kommer jeg antageligvis til å fjerne. Brukte det når dette var en CustomerFunctionality,
         //men nå er det vel mest en start på DBFunctionality, i mine øyne i alle fall.
       /*  try {
@@ -52,7 +49,7 @@ public class CustomerFunctionality {
      * @param phone
      * @return a hashmap with the search results.
      */
-    public HashMap<String, String> checkForCustomer(String name, String email, String phone) {
+    public HashMap<String, String> checkForCustomer(String name, String email, String phone) throws SQLException {
         String cus_id;
         String[] columnArray = {"cus_name", "cus_email", "cus_phone"};
         String[] searchValueArray = {name, email, phone};
@@ -74,7 +71,7 @@ public class CustomerFunctionality {
      * @param whereParameter the exact value of the condition used for the matching.
      * @return a String that contains the value of the record found.
      */
-    public String getField(String whatToSelect, String tableToSearch, String whereCondition, String whereParameter) {
+    public String getField(String whatToSelect, String tableToSearch, String whereCondition, String whereParameter) throws SQLException {
         con = new DbTool().logIn(out);
         try {
             String stmt =   "SELECT " + whatToSelect +
@@ -92,6 +89,14 @@ public class CustomerFunctionality {
         }
         catch (SQLException e){
             out.println("Exeption in getField: " + e);
+        }finally {
+            if (out != null) {
+            }
+            if (con != null){
+                con.close();
+            }
+
+
         }
         return null;
     }
@@ -109,7 +114,8 @@ public class CustomerFunctionality {
      * @param password
      * @param bonuspoints
      */
-    public void inputRecordInCustomer(String cus_id, String name, String phone, String email, String password, String bonuspoints) {
+    public void inputRecordInCustomer(String cus_id, String name, String phone, String email, String password, String bonuspoints) throws SQLException {
+        con = new DbTool().logIn(out);
         try {
             PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Customer VALUES (?, ?, ?, ?, ?, ?)");
             pst.setString(1, cus_id);
@@ -129,6 +135,14 @@ public class CustomerFunctionality {
         }
         catch (SQLException e) {
             out.println("Exeption in inputRecordInCustomer: " + e);
+        } finally {
+            if (out != null) {
+               out.close();
+            }
+            if (con != null){
+                con.close();
+            }
+
         }
     }
     /**
@@ -142,13 +156,14 @@ public class CustomerFunctionality {
      * @return the order_id of the order recorded.
      */
     public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences) {
+        con = new DbTool().logIn(out);
         try {
             java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
             java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
             GenerateID idGenerator = new GenerateID();
             String orderId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Orders");
 
-            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.orders VALUES (?, ?, ?, ?, ?, ?)");
             pst.setString(1, orderId);
             pst.setString(2, room_id);
             pst.setString(3, cus_id);
@@ -182,7 +197,8 @@ public class CustomerFunctionality {
      * @param checkOutDate
      * @param preferences
      */
-    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) throws ParseException {
+    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences) throws ParseException, SQLException {
+        con = new DbTool().logIn(out);
         String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
         if(roomId == null){
             out.println("No available rooms of chosen type available for this period.");
@@ -207,7 +223,9 @@ public class CustomerFunctionality {
      * @param checkInDate
      * @param checkOutDate
      */
-    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences) {    GenerateID idGenerator = new GenerateID();
+    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences) throws SQLException {
+        con = new DbTool().logIn(out);
+        GenerateID idGenerator = new GenerateID();
         HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
         String customerId;
         if(usedPersonalInfoMap.isEmpty()) {
@@ -230,6 +248,7 @@ public class CustomerFunctionality {
      * @return a string with one of the available rooms.
      */
     public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate) throws ParseException {
+        con = new DbTool().logIn(out);
         java.util.Date checkIndatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
         java.util.Date checkOutdatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
 

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.String;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 @WebServlet(
@@ -35,7 +36,7 @@ public class CreateBooking extends HttpServlet {
         if (action.contains("Create Booking")) {
             try {
                 cusFunc.checkIfRoomAvailable(name, email, phone, roomType, checkIn, checkOut, preferences);
-            } catch (ParseException e) {
+            } catch (ParseException | SQLException e) {
                 e.printStackTrace();
             }
         }

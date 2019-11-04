@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(
         name = "servlets.userServlets.LogInServlet1",
@@ -37,7 +38,12 @@ public class LogInServlet1 extends HttpServlet {
             // The user is already logged in, and will be sent directly to their profile.
             String firstname = existingCookies[0].getName();
             String cID = existingCookies[0].getValue();
-            String bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+            String bonus = null;
+            try {
+                bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
             request.setAttribute("firstname", firstname);
             request.setAttribute("bonus",bonus);

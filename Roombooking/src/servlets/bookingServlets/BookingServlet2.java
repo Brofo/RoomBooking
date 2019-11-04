@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "servlets.bookingServlets.BookingServlet2",
         urlPatterns = {"/servlets.bookingServlets.BookingServlet2"}
@@ -89,8 +90,13 @@ public class BookingServlet2 extends HttpServlet {
                 }
 
                 // Check if the customer has enough bonuspoints for the order.
-                int currentBonuspoints = Integer.parseInt(cusFun.getField("cus_bonuspoints",
-                        "customer", "cus_id", customerID));
+                int currentBonuspoints = 0;
+                try {
+                    currentBonuspoints = Integer.parseInt(cusFun.getField("cus_bonuspoints",
+                            "customer", "cus_id", customerID));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 if (currentBonuspoints < bonuspointsPrice) {
                     //The user does not have enough points.
                     request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
