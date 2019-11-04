@@ -5,6 +5,8 @@
 <!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+    <title>Paying with card</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/CancelCulture.css" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Checkout Form</title>
