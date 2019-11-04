@@ -31,11 +31,12 @@ public class CreateBooking extends HttpServlet {
         String checkIn = req.getParameter("checkin");
         String checkOut = req.getParameter("checkout");
         String preferences = ("her skal formen til Dan og Erlend inn.").toLowerCase();
+        String paymentType = req.getParameter("paymentType");
         String action = req.getParameter("createBooking");
 
         if (action.contains("Create Booking")) {
             try {
-                cusFunc.checkIfRoomAvailable(name, email, phone, roomType, checkIn, checkOut, preferences);
+                cusFunc.checkIfRoomAvailable(name, email, phone, roomType, checkIn, checkOut, preferences, paymentType);
             } catch (ParseException | SQLException e) {
                 e.printStackTrace();
             }
