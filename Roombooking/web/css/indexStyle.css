@@ -123,8 +123,18 @@ button{
     width:549px;
     height:314px;
 }
+.checkout-box{
+    width: 25%;
+    padding-bottom: 1px;
+    margin-left: 37%;
+    background-color: lightgray;
+
+    -webkit-box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 5px #000000;
+    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 5px #000000;
+
+
+}
 .checkout-input {
-    float: left;
     padding: 0 7px;
     height: 32px;
     color: #525864;
@@ -140,10 +150,10 @@ button{
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.5);
 }
 .checkout-input:focus {
-    border-color: #46aefe;
+    border-color: #fafcfe;
     outline: none;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px #46aefe;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px #46aefe;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px crimson;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px crimson;
 }
 .checkout-name {
     width: 150px;
@@ -155,6 +165,34 @@ button{
 
 .checkout-exp,
 .checkout-cvc {
-    margin-left: 15px;
+
     width: 45px;
+}
+.checkout-paragraph{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+}
+.checkout-btn {
+    width: 100%;
+    height: 34px;
+    padding-bottom: 5%;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+    border: 1px solid;
+    border-color: #9b8614 #b98711 #c8990e;
+    background: #1993fb;
+    border-radius: 4px;
+    background-image: -webkit-linear-gradient(top, #fafe30, #d4b63e 40%, #b58d2b);
+    background-image: -moz-linear-gradient(top, #fafe30, #d4b63e 40%, #b58d2b);
+    background-image: -o-linear-gradient(top, #fafe30, #b5a041 40%, #b58d2b);
+    background-image: linear-gradient(to bottom, #fafe30, #b5a041 40%, #b58d2b);
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.checkout-header {
+    position: relative;
+    margin: -75px -15px 15px;
 }

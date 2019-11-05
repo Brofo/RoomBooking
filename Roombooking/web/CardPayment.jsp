@@ -6,7 +6,6 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
     <title>Paying with card</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/CancelCulture.css" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Checkout Form</title>
@@ -33,18 +32,20 @@
             Checkout
         </h1>
     </div>
-    <p>
+    <div class="checkout-box">
+
+    <p class="checkout-paragraph">
+
+        <input type="text" class="checkout-input checkout-card" placeholder="4111 1111 1111 1111">
+        <input type="text" class="checkout-input checkout-cvc" placeholder="CVC">
         <input type="text" class="checkout-input checkout-name" placeholder="Card holder name" autofocus>
         <input type="text" class="checkout-input checkout-exp" placeholder="MM">
         <input type="text" class="checkout-input checkout-exp" placeholder="YY">
     </p>
     <p>
-        <input type="text" class="checkout-input checkout-card" placeholder="4111 1111 1111 1111">
-        <input type="text" class="checkout-input checkout-cvc" placeholder="CVC">
-    </p>
-    <p>
         <input type="submit" value="Purchase" class="checkout-btn">
     </p>
+    </div>
 </form>
 
 </body>
