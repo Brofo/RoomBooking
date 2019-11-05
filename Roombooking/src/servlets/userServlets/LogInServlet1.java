@@ -31,7 +31,6 @@ public class LogInServlet1 extends HttpServlet {
 
         Cookie existingCookies[] = request.getCookies();
         if (existingCookies != null) {
-            System.out.println(existingCookies);
             PrintWriter out = response.getWriter();
             CustomerFunctionality cusFun = new CustomerFunctionality(out);
 
