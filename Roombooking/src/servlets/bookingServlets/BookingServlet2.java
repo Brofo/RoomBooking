@@ -113,9 +113,10 @@ public class BookingServlet2 extends HttpServlet {
         else {
             //The customer is not logged in. Register the customer in the database.
             //Then use the customer ID of this customer to register an order.
-            String customerID = reg.getCustomerAndUserID(out);
-            reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+
+                String customerID = reg.getCustomerAndUserID(out);
+                reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
+                cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
         }
 
         request.setAttribute("roomType", roomType);

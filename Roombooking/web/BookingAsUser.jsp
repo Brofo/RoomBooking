@@ -38,8 +38,8 @@
         <option name="uponArrival">Pay Upon Arrival</option>
         <option name="bonuspoints">Bonuspoints</option>
     </select><br>
-
-    Preferences (optional):<br>
+    <span style="color: red; "> ${errorMessage} </span>
+    <br>Preferences (optional):<br>
     <textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
     <input type="submit" name="createBooking" value="Book room">
