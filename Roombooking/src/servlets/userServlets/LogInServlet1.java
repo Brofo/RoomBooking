@@ -1,6 +1,6 @@
 package servlets.userServlets;
 
-import classes.CustomerFunctionality;
+import classes.DbLib;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,14 +33,14 @@ public class LogInServlet1 extends HttpServlet {
         if (existingCookies != null) {
             System.out.println(existingCookies);
             PrintWriter out = response.getWriter();
-            CustomerFunctionality cusFun = new CustomerFunctionality(out);
+            DbLib fun = new DbLib(out);
 
             // The user is already logged in, and will be sent directly to their profile.
             String firstname = existingCookies[0].getName();
             String cID = existingCookies[0].getValue();
             String bonus = null;
             try {
-                bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+                bonus = fun.getField("cus_bonuspoints","customer","cus_id",cID);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

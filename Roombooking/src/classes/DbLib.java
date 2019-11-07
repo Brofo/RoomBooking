@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * CustomerFunctionality provides the functionality related to the Customer entity.
+ * DbLib provides the functionality related to the Customer entity.
  * @author Karl Martin Lund
  * @version 1.0
  * @since
  */
 
-public class CustomerFunctionality {
+public class DbLib {
     private PrintWriter out;
     private Connection con;
     private Statement st;
@@ -24,9 +24,9 @@ public class CustomerFunctionality {
 
 
 
-    public CustomerFunctionality(PrintWriter out) {
+    public DbLib(PrintWriter out) {
         this.out = out;
-        //Dette under her kommer jeg antageligvis til å fjerne. Brukte det når dette var en CustomerFunctionality,
+        //Dette under her kommer jeg antageligvis til å fjerne. Brukte det når dette var en DbLib,
         //men nå er det vel mest en start på DBFunctionality, i mine øyne i alle fall.
       /*  try {
             st = con.createStatement();

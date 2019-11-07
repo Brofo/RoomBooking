@@ -1,8 +1,6 @@
 package servlets.cancelServlets;
 
-import classes.AlterOrder;
-import classes.CustomerFunctionality;
-import classes.DbTool;
+import classes.DbLib;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,16 +27,16 @@ public class CancelPage extends HttpServlet {
         request.getRequestDispatcher("link.html").include(request, response);
         Throwable var4 = null;
         Cookie userCookie[] = request.getCookies();
-        CustomerFunctionality cusFun = new CustomerFunctionality(out);
+        DbLib fun = new DbLib(out);
 
         try {
             if(userCookie != null){
                 String cID = userCookie[0].getValue();
 
-                String firstName = cusFun.getField("cus_firstname","customer","cus_id", cID);
-                String lastName = cusFun.getField("cus_lastname", "customer","cus_id", cID);
-                String eMail = cusFun.getField("cus_email","customer","cus_id", cID);
-                String phone = cusFun.getField("cus_phone","customer","cus_id", cID);
+                String firstName = fun.getField("cus_firstname","customer","cus_id", cID);
+                String lastName = fun.getField("cus_lastname", "customer","cus_id", cID);
+                String eMail = fun.getField("cus_email","customer","cus_id", cID);
+                String phone = fun.getField("cus_phone","customer","cus_id", cID);
 
 
                 request.setAttribute("firstname", firstName);

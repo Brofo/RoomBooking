@@ -1,6 +1,6 @@
 package servlets.bookingServlets;
 
-import classes.CustomerFunctionality;
+import classes.DbLib;
 import classes.Register;
 
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class BookingServlet2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
-        CustomerFunctionality cusFun = new CustomerFunctionality(out);
+        DbLib fun = new DbLib(out);
         Register reg = new Register();
 
         // Henter menyen på toppen av websiden.
@@ -58,7 +58,7 @@ public class BookingServlet2 extends HttpServlet {
             String customerID = existingCookies[0].getValue();
 
             // Just register the order, using the users Customer ID.
-            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
 
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
@@ -73,7 +73,7 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-               cusFun.alterBonusPoints(customerID, bonuspointsAquired);
+               fun.alterBonusPoints(customerID, bonuspointsAquired);
             }
             // If the user paid with bonuspoints, remove the points from the user:
             if (paymentType.contains("Bonuspoints")) {
@@ -92,7 +92,7 @@ public class BookingServlet2 extends HttpServlet {
                 // Check if the customer has enough bonuspoints for the order.
                 int currentBonuspoints = 0;
                 try {
-                    currentBonuspoints = Integer.parseInt(cusFun.getField("cus_bonuspoints",
+                    currentBonuspoints = Integer.parseInt(fun.getField("cus_bonuspoints",
                             "customer", "cus_id", customerID));
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -104,7 +104,7 @@ public class BookingServlet2 extends HttpServlet {
                 } else {
                     //The uses does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
-                    cusFun.alterBonusPoints(customerID, bonuspointsPrice);
+                    fun.alterBonusPoints(customerID, bonuspointsPrice);
                 }
             }
 
@@ -115,7 +115,7 @@ public class BookingServlet2 extends HttpServlet {
             //Then use the customer ID of this customer to register an order.
             String customerID = reg.getCustomerAndUserID(out);
             reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-            cusFun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
         }
 
         request.setAttribute("roomType", roomType);

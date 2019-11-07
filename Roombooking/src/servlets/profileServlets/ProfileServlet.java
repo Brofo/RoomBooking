@@ -1,6 +1,6 @@
 package servlets.profileServlets;
 
-import classes.CustomerFunctionality;
+import classes.DbLib;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,14 +31,14 @@ public class ProfileServlet extends HttpServlet {
             // The user is logged in, because a cookie was detected. The user is welcomed
             // with their own name, and will have access to their personal data.
             PrintWriter out = response.getWriter();
-            CustomerFunctionality cusFun = new CustomerFunctionality(out);
+            DbLib fun = new DbLib(out);
 
             String cID = ck[0].getValue();
             String firstname = ck[0].getName();
             //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
             String bonus = null;
             try {
-                bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+                bonus = fun.getField("cus_bonuspoints","customer","cus_id",cID);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
