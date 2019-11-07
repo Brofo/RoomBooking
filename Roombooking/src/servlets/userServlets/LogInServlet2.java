@@ -1,6 +1,7 @@
 package servlets.userServlets;
 
-import classes.CustomerFunctionality;
+import classes.DbLib;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -27,7 +28,7 @@ public class LogInServlet2 extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        CustomerFunctionality cusFun = new CustomerFunctionality(out);
+        DbLib fun = new DbLib(out);
 
         // Henter inn menyen på toppen av websiden.
         request.getRequestDispatcher("link.html").include(request, response);
@@ -45,10 +46,10 @@ public class LogInServlet2 extends HttpServlet {
         String bonus = null;
 
         try {
-            customerID = cusFun.getField("cus_id", "Customer", "cus_email", email);
-            correctPassword = cusFun.getField("cus_password", "Customer", "cus_id", customerID);
-            customerFirstName = cusFun.getField("cus_firstname", "Customer", "cus_id", customerID);
-            bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",customerID);
+            customerID = fun.getField("cus_id", "Customer", "cus_email", email);
+            correctPassword = fun.getField("cus_password", "Customer", "cus_id", customerID);
+            customerFirstName = fun.getField("cus_firstname", "Customer", "cus_id", customerID);
+            bonus = fun.getField("cus_bonuspoints","customer","cus_id",customerID);
 
         } catch (SQLException e) {
             e.printStackTrace();

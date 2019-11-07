@@ -1,7 +1,6 @@
 package servlets.cancelServlets;
 
 import classes.AlterOrder;
-import classes.CustomerFunctionality;
 import classes.DbTool;
 
 import javax.servlet.ServletException;
