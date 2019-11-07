@@ -1,3 +1,5 @@
+package servlets;
+
 import classes.DbTool;
 import classes.Reviews;
 
@@ -12,8 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebServlet(name = "servlets.Review",
-        urlPatterns = {"/servlets.Review"})
+@WebServlet(name = "servlets.servlets.Review",
+        urlPatterns = {"/servlets.servlets.Review"})
 public class Review extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
