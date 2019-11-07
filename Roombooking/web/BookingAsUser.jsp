@@ -26,14 +26,20 @@
     <br>
 </form>
 
-<form class="bookingUser" action="servlets.bookingServlets.BookingServlet2" method="post">
+<form class="bookingUser" action="servlets.bookingServlets.BookingServletNavigator" method="post">
 
     <input type="hidden" name="availableRoomID" value="${availableRoomID}">
     <input type="hidden" name="roomType" value="${roomType}">
     <input type="hidden" name="checkInDate" value="${checkInDate}">
     <input type="hidden" name="checkOutDate" value="${checkOutDate}">
-
-    Preferences (optional):<br>
+    Payment method: <select id="paymentMethod" name="paymentType">
+        <option name="empty">Select...</option>
+        <option name="card">Credit Card</option>
+        <option name="uponArrival">Pay Upon Arrival</option>
+        <option name="bonuspoints">Bonuspoints</option>
+    </select><br>
+    <span style="color: red; "> ${errorMessage} </span>
+    <br>Preferences (optional):<br>
     <textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
     <input type="submit" name="createBooking" value="Book room">

@@ -13,10 +13,12 @@ public class Reviews {
         Connection conn = dbtool.logIn(out);
 
         try {
+
             PreparedStatement insert = conn.prepareStatement("INSERT INTO roombookingdb.reviews(reviews) VALUES (?)");
 
             insert.setString(1, reviews);
             insert.executeUpdate();
+            out.println("<p>You wrote " + reviews + "</p>");
         } catch (SQLException ex) {
             out.println("Something went wrong with your attempt to post your review. :(");
         }

@@ -1,7 +1,6 @@
 package servlets.cancelServlets;
 
 import classes.AlterOrder;
-import classes.CustomerFunctionality;
 import classes.DbTool;
 
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 @WebServlet(
         name = "CancelPageUser",
@@ -32,7 +30,6 @@ public class CancelPageUser extends HttpServlet {
         Throwable var4 = null;
 
         Cookie userCookie[] = request.getCookies();
-        CustomerFunctionality cusFun = new CustomerFunctionality(out);
         DbTool dbTool = new DbTool();
         Connection conn = dbTool.logIn(out);
         AlterOrder order = new AlterOrder();
@@ -53,48 +50,45 @@ public class CancelPageUser extends HttpServlet {
         String checkin = request.getParameter("checkin");
         String checkout = request.getParameter("checkout");
         try {
-            if(action.contains("navn")){
+            if(action.contains("name")){
                 order.changeName(out,conn,firstName,lastName,cID);
             }
             else if (action.contains("email")){
                 order.changeEmail(out,conn,email,cID);
 
             }
-            else if(action.contains("telefon")){
+            else if(action.contains("phone")){
                 order.changePhone(out,conn,phone,cID);
 
             }
-            else if(action.contains("rom")){
+            else if(action.contains("room")){
                 if (rom.contains("sr")){
-                    System.out.println("It works");
                     order.changeRoom(out,conn,orderID,"sr01");
-                    out.println("<p> endret rom til Singelrom</p>");
+                    out.println("<p>Changed room to Singelroom</p>");
 
                 }
                 else if(rom.contains("dr")){
-                    System.out.println("It works");
                     order.changeRoom(out,conn,orderID,"dr01");
-                    out.println("<p> endret rom til Dobbeltrom</p>");
+                    out.println("<p> Changed room to Doubleroom</p>");
 
                 }
                 else if(rom.contains("fr")){
-                    System.out.println("It works");
                     order.changeRoom(out,conn,orderID,"fr01");
-                    out.println("<p>  endret rom til Familierom</p>");
+                    out.println("<p>  Changed room to Familyroom</p>");
 
                 }
                 else if(rom.contains("zj")){
                     System.out.println("It works");
                     order.changeRoom(out,conn,orderID,"zj01");
-                    out.println("<p> endret rom til Suite</p>");
+                    out.println("<p> Changed room to Suite</p>");
                 }
             }
-            else if(action.contains("dato")){
+            else if(action.contains("date")){
                 order.changeDate(out,conn,orderID,"checkin",checkin);
                 order.changeDate(out,conn,orderID,"checkout",checkout);
 
             }
-            else if (action.contains("Kansellere")){
+            else if (action.contains("Cancel booking")){
                 order.cancelOrder(out,conn,orderID,cID);
 
             }
@@ -120,7 +114,7 @@ public class CancelPageUser extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-            destroy();
+
         }
     }
 
