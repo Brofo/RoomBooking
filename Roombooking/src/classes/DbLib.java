@@ -19,8 +19,7 @@ import java.util.HashMap;
 public class DbLib {
     private PrintWriter out;
     private Connection con;
-    private Statement st;
-    private ResultSet rs;
+
 
 
 
