@@ -13,7 +13,7 @@ public class Reviews {
         Connection conn = dbtool.logIn(out);
 
         try {
-            PreparedStatement insert = conn.prepareStatement("INSERT INTO roombookingdb.reviews(reviews) VALUES (?)");
+            PreparedStatement insert = conn.prepareStatement("INSERT INTO RoombookingDB.reviews(reviews) VALUES (?)");
 
             insert.setString(1, reviews);
             insert.executeUpdate();
@@ -30,7 +30,7 @@ public class Reviews {
         Connection conn = dbtool.logIn(out);
 
         try {
-            String query = "SELECT * FROM roombookingdb.reviews";
+            String query = "SELECT * FROM RoombookingDB.reviews";
             Statement st = conn.createStatement();
 
             ResultSet rs = st.executeQuery(query);
