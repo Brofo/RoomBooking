@@ -36,7 +36,7 @@ public class AlterOrder {
                 Stat.setString(1, firstname);
                 Stat.setString(2, customerID);
                 Stat.executeUpdate();
-                out.println("<p> Endret navn  til " + firstname + "</p>");
+                out.println("<p> Changed firstname to " + firstname + "</p>");
 
 
             } else if (firstname == "" && lastname != "") {
@@ -46,7 +46,7 @@ public class AlterOrder {
                 Stat.setString(1, lastname);
                 Stat.setString(2, customerID);
                 Stat.executeUpdate();
-                out.println("<p> Endret navn  til " + lastname + "</p>");
+                out.println("<p> Changed lastname to " + lastname + "</p>");
 
             } else if (firstname != "" && lastname != "") {
 
@@ -56,15 +56,15 @@ public class AlterOrder {
                 Stat.setString(2, lastname);
                 Stat.setString(3, customerID);
                 Stat.executeUpdate();
-                out.println("<p> Endret navn  til " + firstname + " " + lastname + "</p>");
+                out.println("<p> Changed fullname to " + firstname + " " + lastname + "</p>");
 
             } else {
-                out.println("<p>Du må skrive inn navnet du vil endre i det tilhørende feltet</p>");
+                out.println("<p>You have to write atleast one name into the field</p>");
             }
 
 
         } catch (SQLException ex) {
-            out.println("Kunne ikke finne navn error: " + ex);
+            out.println("Couldnt find name error: " + ex);
         } finally {
             if (Stat != null) {
                 Stat.close();
@@ -88,11 +88,11 @@ public class AlterOrder {
             Stat.setString(2,cID);
             Stat.executeUpdate();
 
-            out.println("Endret E-mail  til " + mail);
+            out.println("<p> Changed email to " + mail + "</p>");
 
         }
         catch (SQLException ex) {
-            out.println("Kunne ikke finne E-mail error: " + ex);
+            out.println("Couldnt find email error: " + ex);
         }
         finally {
             if (Stat != null) {
@@ -121,11 +121,11 @@ public class AlterOrder {
 
             Stat.executeUpdate();
 
-            out.println("Endret E-mail fra  til " + phone);
+            out.println("<p>Changed phone to " + phone);
 
         }
         catch (SQLException ex) {
-            out.println("Kunne ikke finne telefon error: " + ex);
+            out.println("Couldnt find phone error: " + ex);
         } finally {
             if (Stat != null) {
                 Stat.close();
@@ -143,7 +143,7 @@ public class AlterOrder {
         final String sql_name = "UPDATE RoombookingDB.orders set room_id = ? where order_id = ?;";
         PreparedStatement Stat = null;
         try{
-            out.println("<p> endret rom </p>");
+            out.println("<p> Changed room </p>");
             Stat = conn.prepareStatement(sql_name);
 
             Stat.setString(1,RomID);
@@ -151,11 +151,11 @@ public class AlterOrder {
 
             Stat.executeUpdate();
 
-            out.println("<p> På bestilling " + orderID+"</p>");
+            out.println("<p> On order " + orderID+"</p>");
 
         }
         catch (SQLException ex) {
-            out.println("Kunne ikke finne rom error: " + ex);
+            out.println("Couldnt find room error: " + ex);
         } finally {
             if (Stat != null) {
                 Stat.close();
@@ -190,11 +190,11 @@ public class AlterOrder {
             Stat.setString(2,orderID);
             Stat.executeUpdate();
 
-            out.println("<p> Endret dato til " + date1  + " i ordre: " + orderID + "</p>");
+            out.println("<p> Changed date to " + date1  + " in order: " + orderID + "</p>");
 
         }
         catch (SQLException ex) {
-            out.println("Kunne ikke finne navn error: " + ex);
+            out.println("Couldnt change date error: " + ex);
         } finally {
             if (Stat != null) {
                 Stat.close();
@@ -216,11 +216,11 @@ public class AlterOrder {
 
             Stat.executeUpdate();
 
-            out.println("<p> Kansellert " + orderID  + " <br> Ha en fin dag! </p>");
+            out.println("<p> Cancelled  " + orderID  + " <br> Have a nice day! </p>");
 
         }
         catch (SQLException ex) {
-            out.println("Kunne ikke finne navn error: " + ex);
+            out.println("Couldnt Cancel error: " + ex);
         }
         finally {
             if (Stat != null) {

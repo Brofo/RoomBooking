@@ -13,10 +13,12 @@ public class Reviews {
         Connection conn = dbtool.logIn(out);
 
         try {
-            PreparedStatement insert = conn.prepareStatement("INSERT INTO RoombookingDB.reviews(reviews) VALUES (?)");
+
+            PreparedStatement insert = conn.prepareStatement("INSERT INTO roombookingdb.reviews(reviews) VALUES (?)");
 
             insert.setString(1, reviews);
             insert.executeUpdate();
+            out.println("<p>You wrote " + reviews + "</p>");
         } catch (SQLException ex) {
             out.println("Something went wrong with your attempt to post your review. :(");
         }
@@ -30,7 +32,7 @@ public class Reviews {
         Connection conn = dbtool.logIn(out);
 
         try {
-            String query = "SELECT * FROM RoombookingDB.reviews";
+            String query = "SELECT * FROM roombookingdb.reviews";
             Statement st = conn.createStatement();
 
             ResultSet rs = st.executeQuery(query);

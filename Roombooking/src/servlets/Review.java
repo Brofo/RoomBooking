@@ -14,10 +14,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebServlet(name = "servlets.servlets.Review",
-        urlPatterns = {"/servlets.servlets.Review"})
+@WebServlet(name = "servlets.Review",
+        urlPatterns = {"/servlets.Review"})
 public class Review extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Reviews rw = new Reviews();
         String review = request.getParameter("review");
@@ -27,10 +28,9 @@ public class Review extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Reviews re = new Reviews();
-        String review = request.getParameter("review");
         out.println(re.getReviews(out));
     }
 }

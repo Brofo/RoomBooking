@@ -1,8 +1,6 @@
 package servlets.bookingServlets;
 
-import classes.CustomerFunctionality;
-import classes.DbTool;
-import classes.Register;
+import classes.DbLib;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.text.ParseException;
 
 @WebServlet(name = "servlets.bookingServlets.BookingServlet1",
@@ -31,7 +28,7 @@ public class BookingServlet1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
-        CustomerFunctionality cusFun = new CustomerFunctionality(out);
+        DbLib fun = new DbLib(out);
 
         // Verdiene fra parameterne.
         String checkInDate = request.getParameter("checkin");
@@ -57,7 +54,7 @@ public class BookingServlet1 extends HttpServlet {
 
         String availableRoomID = null;
         try {
-            availableRoomID = cusFun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
+            availableRoomID = fun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
