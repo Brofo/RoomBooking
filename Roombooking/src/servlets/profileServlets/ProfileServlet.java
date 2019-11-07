@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "servlets.profileServlets.ProfileServlet",
             urlPatterns = "/servlets.profileServlets.ProfileServlet")
@@ -35,7 +36,12 @@ public class ProfileServlet extends HttpServlet {
             String cID = ck[0].getValue();
             String firstname = ck[0].getName();
             //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
-            String bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+            String bonus = null;
+            try {
+                bonus = cusFun.getField("cus_bonuspoints","customer","cus_id",cID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             request.setAttribute("firstname", firstname);
             request.setAttribute("bonus", bonus);
             request.getRequestDispatcher("Profile.jsp").forward(request, response);

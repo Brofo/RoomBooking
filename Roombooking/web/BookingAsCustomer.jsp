@@ -41,16 +41,18 @@
     <input type="hidden" name="checkInDate" value="${checkInDate}">
     <input type="hidden" name="checkOutDate" value="${checkOutDate}">
 
-    First name: <input type="text" name="firstname"><br>
-    Last name: <input type="text" name="lastname"><br>
-    Email: <input type="email" name="email"><br>
-    Phone number: <input type="tel" name="phone"><br>
+    First name: <input type="text" name="firstname" value="${firstname}"><br>
+    Last name: <input type="text" name="lastname" value="${lastname}"><br>
+    Email: <input type="email" name="email" value="${email}"><br>
+    Phone number: <input type="tel" name="phone" value="${phone}"><br>
     Payment method: <select id="paymentMethod" name="paymentType">
                         <option name="empty">Select...</option>
                         <option name="creditCard">Credit Card</option>
                         <option name="uponArrival">Pay Upon Arrival</option>
-    </select>
-    Preferences (optional): <br><textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
+    </select><br>
+    <span style="color: red; "> ${errorMessage} </span>
+   <br>Preferences (optional): <br>
+    <textarea name="preferences" rows="10" cols="50" maxlength = "500" placeholder="Write here..."></textarea><br>
 
     <input type="submit" name="createBooking" value="Book room">
 </form>

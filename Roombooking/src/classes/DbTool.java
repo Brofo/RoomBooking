@@ -26,10 +26,13 @@ public class DbTool {
             // Step 1: Allocate a database 'Connection' object
             Context cont = new InitialContext();
             DataSource ds = (DataSource)cont.lookup("java:comp/env/jdbc/localhost");
-
-
             conn = ds.getConnection();
-            return conn;
+            if(conn != null){
+                return conn;
+            } else{
+                conn = ds.getConnection();
+            }
+
 
         }
         catch (SQLException ex ) {
