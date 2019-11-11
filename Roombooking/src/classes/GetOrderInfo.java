@@ -25,24 +25,26 @@ public class GetOrderInfo {
             String orderInfo = "<h1>All Order information: </h1>";
             while(orderInfoRS.next())
             {
-                        String roomID = "<p>"+ orderInfoRS.getString(2) + "</p><br>";
-                        String checkInDate = "<p> Check in date: " + orderInfoRS.getString(4) + "</p>";
+                        String orderID = "<p>Order ID:"+ orderInfoRS.getString(1) + "</p>";
+                        String roomID = "<p>Room type:"+ orderInfoRS.getString(2) + "</p>";
+                        String checkInDate = "<p>Check in date: " + orderInfoRS.getString(4) + "</p>";
                         String checkOutDate = "<p>Check out date: " + orderInfoRS.getString(5) + "</p>";
+                        String paymentMethod = "<p>Payment method:" + orderInfoRS.getString(7) + "</p>";
                         String preferences = "<p>Preferences: " + orderInfoRS.getString(6) + "</p><br>";
 
                         if (roomID.contains("sr")) {
-                                roomID = "<p> Room type: <h4>Single room</h4> </p>";
+                                roomID = "<p> Room type: Single room</> </p>";
                             }
                         else if (roomID.contains("dr")) {
-                                roomID = "<p> Room type: <h4>Double room</h4> </p>";
+                                roomID = "<p> Room type: <Double room</> </p>";
                             }
                         else if (roomID.contains("fr")) {
-                                roomID = "<p> Room type: <h4>Family room</h4> </p>";
+                                roomID = "<p> Room type: <Family room</> </p>";
                             }
                         else if (roomID.contains("zj")) {
-                                roomID = "<p> Room type: <h4>Suite</h4> </p>";
+                                roomID = "<p> Room type: Suite</> </p>";
                             }
-                    orderInfo = orderInfo + "<br>" + roomID + checkInDate + checkOutDate + preferences;
+                    orderInfo = orderInfo + "<br>" + orderID + roomID + checkInDate + checkOutDate + paymentMethod + preferences;
                  }
             return orderInfo;
         }

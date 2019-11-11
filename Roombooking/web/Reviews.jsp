@@ -15,7 +15,7 @@
     <title>Reviews</title>
 </head>
 <body>
-<form action="servlets.servlets.Review" method="post">
+<form action="servlets.Review" method="post">
     <h1>Reviews</h1>
 
     If you have stayed at our hotel, and wish to share your experiences and thoughts, please make a review.
@@ -25,7 +25,7 @@
     <input type="submit" name="createReview" value="Post review">
 </form>
 
-<form action="servlets.servlets.Review" method="get">
+<form action="servlets.Review" method="get">
     <h3>Other peoples reviews</h3>
     <br>
     <input type="submit" name="getReviews" value="See reviews">
