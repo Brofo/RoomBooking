@@ -19,27 +19,12 @@ import java.util.HashMap;
 public class DbLib {
     private PrintWriter out;
     private Connection con;
-    private Statement st;
-    private ResultSet rs;
+
 
 
 
     public DbLib(PrintWriter out) {
         this.out = out;
-        //Dette under her kommer jeg antageligvis til å fjerne. Brukte det når dette var en DbLib,
-        //men nå er det vel mest en start på DBFunctionality, i mine øyne i alle fall.
-      /*  try {
-            st = con.createStatement();
-        }
-        catch (SQLException sqlEx){
-            out.println("Connection.createStatement failed: " + sqlEx);
-        }
-        try {
-            rs = st.executeQuery("SELECT * FROM RoombookingDB.Customer");
-        }
-        catch (SQLException sqlEx){
-            out.println("Filling resultset failed: " + sqlEx);
-        }*/
     }
     /**
      * checkForCustomer checks if there's a customer registered by either the name, email or phone submitted
@@ -188,59 +173,6 @@ public class DbLib {
     }
 
     /**
-     * checkIfAvailableRoom will check if the chosen room type is available for the time period and call createBooking
-     * with the order information if it is.
-     * @param name
-     * @param email
-     * @param phone
-     * @param wantedRoomType
-     * @param checkInDate
-     * @param checkOutDate
-     * @param preferences
-     */
-    public void checkIfRoomAvailable(String name, String email, String phone, String wantedRoomType, String checkInDate, String checkOutDate, String preferences, String paymentType) throws ParseException, SQLException {
-        con = new DbTool().logIn(out);
-        String roomId = getAvailableRoomBetween(wantedRoomType, checkInDate, checkOutDate);
-        if(roomId == null){
-            out.println("No available rooms of chosen type available for this period.");
-            out.println("Try different type or different period.");
-        }
-        else{
-            createBooking(name, email, phone, roomId, checkInDate, checkOutDate, preferences, paymentType);
-        }
-
-    }
-
-    /**
-     * createBooking will use checkForCustomer if some of the information is already used. If it is not it will call
-     *  idGenerator to get a new cus_id and call inputRecordInCustomer with the new cus_id and the rest of the info.
-     *  If the info is used it will use the cus_id related to the email used. (Preferably it would check if there is
-     *  different cus_ids related to the different data but it doesn't do that yet.) At last it will call
-     *  inputRecordInOrders with the info and either the used cus_id or the newly generated one.
-     *  At last it prints out the string returned from getOrderInfo.
-     * @param name
-     * @param email
-     * @param phone
-     * @param checkInDate
-     * @param checkOutDate
-     */
-    public void createBooking(String name, String email, String phone, String roomId, String checkInDate, String checkOutDate, String preferences, String paymentType) throws SQLException {
-        con = new DbTool().logIn(out);
-        GenerateID idGenerator = new GenerateID();
-        HashMap<String, String> usedPersonalInfoMap = checkForCustomer(name, email, phone);
-        String customerId;
-        if(usedPersonalInfoMap.isEmpty()) {
-            customerId = idGenerator.getID(out,  "SELECT count(*) FROM RoombookingDB.Customer");
-            inputRecordInCustomer(customerId, name, phone, email, null, null);
-        }
-        else{
-            customerId = usedPersonalInfoMap.get(email);
-        }
-        String orderId = inputRecordInOrders(roomId, customerId, checkInDate, checkOutDate, preferences, paymentType);
-        out.println(getOrderInfo(orderId));
-    }
-
-    /**
      * getAvailableRoomBetween finds the id of rooms of wanted type that is free in the selected period.
      * @param roomTypeId is the prefix of the room_id. E.g. if doubleroom is wanted pass the string "dr%"
      *                   to get all double rooms. If any type pass the string "%".
@@ -310,34 +242,6 @@ public class DbLib {
     }
 
     /**
-     * De to metodene under her klarer jeg ikke se noen bruk for til nå, men jeg lar de stå i tilfelle noe dukker opp.
-     * Si gjerne i fra til Karl Martin om noen har bruk for de så jeg ikke plutselig fjerner de.
-     */
-
-    /**
-     * getBookedRooms will take the date in question and create a ResultSet
-     * with the room_id of all booked rooms for this date.
-     * Unsure whether we will use this for anything, but here it is.
-     * Can be made to return the whole ResultSet or just the room_ids or print them or what ever.
-     * @param dateInQuestion the date on which you want to know which rooms are booked.
-     */
-    public void getBookedRooms(String dateInQuestion){
-        try{
-            ResultSet bookedRoomsResultSet = st.executeQuery("SELECT room_id " +
-                                                                    "FROM roombookingdb.Orders " +
-                                                                    "WHERE order_checkindate <= " + dateInQuestion +
-                                                                    " AND order_checkoutdate > " + dateInQuestion);
-            while(bookedRoomsResultSet.next()){
-
-            }
-        }
-        catch(SQLException e){
-            out.println("Exeption in getBookedRooms" + e);
-        }
-    }
-
-
-    /**
      * This method is used to alter the bonus points of a user.
      * @param customerID The ID of the customer that will have the points altered.
      * @param bonuspoints The amount of bonus points that will be altered.
@@ -355,34 +259,5 @@ public class DbLib {
         }
     }
 
-    /**
-     * getFreeRooms will find all free rooms for one date.
-     * @param roomType wanted roomtype. In this you need to use room_type from Room and not room_id. E.g. "doubleroom".
-     * @param dateInQuestion the date you want to see free rooms at.
-     * @return an ArrayList with all free rooms.
-     */
-  /*  public ArrayList getFreeRooms(String roomType, String dateInQuestion){
-        try{
-            String stmt = "SELECT room_id FROM RoombookingDB.Room WHERE room_type = ? AND room_id NOT IN(" +
-                                "SELECT room_id FROM RoombookingDB.Orders " +
-                                "WHERE order_checkindate <= ?" +
-                                "AND order_checkoutdate > ?)";
 
-            PreparedStatement preparedStatement = con.prepareStatement(stmt);
-            preparedStatement.setString(1, roomType);
-            preparedStatement.setString(2, dateInQuestion);
-            preparedStatement.setString(3, dateInQuestion);
-            ResultSet freeRoomsResultSet = preparedStatement.executeQuery();
-
-            ArrayList<String> freeRoomIds = new ArrayList<>();
-            while(freeRoomsResultSet.next()){
-                freeRoomIds.add(freeRoomsResultSet.getString(1));
-            }
-            return freeRoomIds;
-        }
-        catch(SQLException e){
-            out.println("Exeption in getFreeRooms: " + e);
-        }
-        return null;
-    }*/
 }
