@@ -51,18 +51,15 @@ public class BookingServlet2 extends HttpServlet {
         // Requesting cookie to check if a user is logged in
         Cookie existingCookies[] = request.getCookies();
 
-
+        try {
         //Check whether the customer is logged in or not.
         if (existingCookies != null) {
             // The user is logged in. Fetch CustomerID from cookie:
             String customerID = existingCookies[0].getValue();
 
             // Just register the order, using the users Customer ID.
-            try {
+
                 fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
@@ -77,11 +74,9 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-                try {
+
                     fun.alterBonusPoints(customerID, bonuspointsAquired);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
             }
             // If the user paid with bonuspoints, remove the points from the user:
             if (paymentType.contains("Bonuspoints")) {
@@ -112,11 +107,9 @@ public class BookingServlet2 extends HttpServlet {
                 } else {
                     //The uses does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
-                    try {
-                        fun.alterBonusPoints(customerID, bonuspointsPrice);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+
+                    fun.alterBonusPoints(customerID, bonuspointsPrice);
+
                 }
             }
 
@@ -125,19 +118,11 @@ public class BookingServlet2 extends HttpServlet {
         else {
             //The customer is not logged in. Register the customer in the database.
             //Then use the customer ID of this customer to register an order.
-            String customerID = null;
-            try {
+                 String customerID = null;
                 customerID = reg.getCustomerAndUserID(out);
                 reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
                 fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
         }
 
         request.setAttribute("roomType", roomType);
@@ -145,5 +130,9 @@ public class BookingServlet2 extends HttpServlet {
         request.setAttribute("checkOutDate", checkOutDate);
         request.setAttribute("paymentType", paymentType);
         request.getRequestDispatcher("BookingFinished.jsp").forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

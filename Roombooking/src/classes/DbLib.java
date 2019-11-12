@@ -169,13 +169,7 @@ public class DbLib {
         catch (SQLException | ParseException e) {
             out.println("Exeption in createOrder: " + e);
         } finally {
-            if (out != null) {
-                out.close();
-            }
-            if (con != null){
-                con.close();
-            }
-
+            con.close();
         }
         return null;
     }
@@ -211,59 +205,21 @@ public class DbLib {
 
             if(availableRooms.next()){
                 return availableRooms.getString(1);
+
             }
             else{
                 return null;
+
             }
         }
         catch(SQLException e){
             out.println("Exeption thrown from getAvailableRoomBetween: " + e);
         } finally {
-            if (out != null) {
-                out.close();
-            }
-            if (con != null){
-                con.close();
-            }
+            con.close();
         }
         return null;
     }
 
-
-    /**
-     * getOrderInfo will return a string the info of the order related to the orderId passed to this method.
-     * @param orderId
-     * @return a string with the values of each column related to the orderId
-     */
-    public String getOrderInfo(String orderId) throws SQLException {
-        try{
-            String stmt = "SELECT * FROM RoombookingDB.Orders WHERE order_id = ?";
-            PreparedStatement getOrderInfoStatement = con.prepareStatement(stmt);
-            getOrderInfoStatement.setString(1, orderId);
-            ResultSet orderInfoRS = getOrderInfoStatement.executeQuery();
-            orderInfoRS.next();
-            String orderInfoString =    "Order ID: "        + orderId +
-                                        "Room ID: "         + orderInfoRS.getString(2) +
-                                        "Customer ID: "     + orderInfoRS.getString(3) +
-                                        "Check In Date: "   + orderInfoRS.getString(4) +
-                                        "Check Out Date: "  + orderInfoRS.getString(5) +
-                                        "Preferences: "     + orderInfoRS.getString(6) +
-                                        "Payment type: "    + orderInfoRS.getString(7);
-            return orderInfoString;
-        }
-        catch(SQLException e){
-            out.println("Exeption in getOrderInfo: " + e);
-        }finally {
-            if (out != null) {
-                out.close();
-            }
-            if (con != null){
-                con.close();
-            }
-
-        }
-        return null;
-    }
 
     /**
      * This method is used to alter the bonus points of a user.
@@ -280,14 +236,6 @@ public class DbLib {
         }
         catch (SQLException ex) {
             out.println("Could not alter bonuspoints + " + ex);
-        }finally {
-            if (out != null) {
-                out.close();
-            }
-            if (con != null){
-                con.close();
-            }
-
         }
     }
 

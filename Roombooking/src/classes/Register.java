@@ -53,9 +53,9 @@ public class Register {
             catch (SQLException ex) {
                 out.println("Could not register the customer. " + ex);
             } finally {
-                if (conn != null){
+
                     conn.close();
-                }
+
             }
 
         }
@@ -87,9 +87,8 @@ public class Register {
         catch (SQLException ex) {
             out.println("Could not register the user. " + ex);
         } finally {
-            if (conn != null){
-                conn.close();
-            }
+            conn.close();
+
         }
 
     }
@@ -120,9 +119,9 @@ public class Register {
         catch (SQLException ex) {
                 out.println(("Could not register the order " + ex));
             } finally {
-            if (conn != null){
+
                 conn.close();
-            }
+
         }
         }
     }
