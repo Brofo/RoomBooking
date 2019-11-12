@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+
 import classes.DbTool;
 import classes.Register;
 
@@ -48,8 +50,13 @@ public class CreateUserServlet extends HttpServlet {
 
             //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
             //blir puttet inn i databasen, slik at brukeren blir opprettet.
+        try {
             regUser.registerUser(out, firstname, lastname, email, phone, password);
             request.getRequestDispatcher("LogIn.jsp").include(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
 
     }

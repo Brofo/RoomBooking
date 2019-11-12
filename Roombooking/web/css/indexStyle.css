@@ -198,3 +198,6 @@ button{
     position: relative;
     margin: -75px -15px 15px;
 }
+.reviewDato{
+    float: left;
+}

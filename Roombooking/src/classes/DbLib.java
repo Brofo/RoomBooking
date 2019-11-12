@@ -140,7 +140,7 @@ public class DbLib {
      * @param customerPreferences any special preferences the customer has submitted.
      * @return the order_id of the order recorded.
      */
-    public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences, String paymentType) {
+    public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences, String paymentType) throws SQLException {
         con = new DbTool().logIn(out);
         try {
             java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
@@ -168,6 +168,14 @@ public class DbLib {
         }
         catch (SQLException | ParseException e) {
             out.println("Exeption in createOrder: " + e);
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+            if (con != null){
+                con.close();
+            }
+
         }
         return null;
     }
@@ -180,7 +188,7 @@ public class DbLib {
      * @param checkOutDate is the wanted date for checking out.
      * @return a string with one of the available rooms.
      */
-    public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate) throws ParseException {
+    public String getAvailableRoomBetween(String roomTypeId, String checkInDate, String checkOutDate) throws ParseException, SQLException {
         con = new DbTool().logIn(out);
         java.util.Date checkIndatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
         java.util.Date checkOutdatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
@@ -219,7 +227,7 @@ public class DbLib {
      * @param orderId
      * @return a string with the values of each column related to the orderId
      */
-    public String getOrderInfo(String orderId){
+    public String getOrderInfo(String orderId) throws SQLException {
         try{
             String stmt = "SELECT * FROM RoombookingDB.Orders WHERE order_id = ?";
             PreparedStatement getOrderInfoStatement = con.prepareStatement(stmt);
@@ -237,6 +245,14 @@ public class DbLib {
         }
         catch(SQLException e){
             out.println("Exeption in getOrderInfo: " + e);
+        }finally {
+            if (out != null) {
+                out.close();
+            }
+            if (con != null){
+                con.close();
+            }
+
         }
         return null;
     }
@@ -246,7 +262,7 @@ public class DbLib {
      * @param customerID The ID of the customer that will have the points altered.
      * @param bonuspoints The amount of bonus points that will be altered.
      */
-    public void alterBonusPoints(String customerID, int bonuspoints) {
+    public void alterBonusPoints(String customerID, int bonuspoints) throws SQLException {
         try {
             PreparedStatement pst = con.prepareStatement("UPDATE RoombookingDB.customer " +
                     "SET cus_bonuspoints = (cus_bonuspoints + (?)) WHERE cus_id = (?)");
@@ -256,6 +272,14 @@ public class DbLib {
         }
         catch (SQLException ex) {
             out.println("Could not alter bonuspoints + " + ex);
+        }finally {
+            if (out != null) {
+                out.close();
+            }
+            if (con != null){
+                con.close();
+            }
+
         }
     }
 

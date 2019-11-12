@@ -58,7 +58,11 @@ public class BookingServlet2 extends HttpServlet {
             String customerID = existingCookies[0].getValue();
 
             // Just register the order, using the users Customer ID.
-            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            try {
+                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
@@ -73,7 +77,11 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-               fun.alterBonusPoints(customerID, bonuspointsAquired);
+                try {
+                    fun.alterBonusPoints(customerID, bonuspointsAquired);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             // If the user paid with bonuspoints, remove the points from the user:
             if (paymentType.contains("Bonuspoints")) {
@@ -104,7 +112,11 @@ public class BookingServlet2 extends HttpServlet {
                 } else {
                     //The uses does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
-                    fun.alterBonusPoints(customerID, bonuspointsPrice);
+                    try {
+                        fun.alterBonusPoints(customerID, bonuspointsPrice);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -113,9 +125,19 @@ public class BookingServlet2 extends HttpServlet {
         else {
             //The customer is not logged in. Register the customer in the database.
             //Then use the customer ID of this customer to register an order.
-            String customerID = reg.getCustomerAndUserID(out);
-            reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            String customerID = null;
+            try {
+                customerID = reg.getCustomerAndUserID(out);
+                reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         request.setAttribute("roomType", roomType);
