@@ -32,7 +32,7 @@ public class BookingServlet2 extends HttpServlet {
         // Henter menyen på toppen av websiden.
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("link.html").include(request, response);
-        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
+         out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
 
         // Verdiene fra parameterne:
         String availableRoomID = request.getParameter("availableRoomID");

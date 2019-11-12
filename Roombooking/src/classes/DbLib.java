@@ -218,9 +218,17 @@ public class DbLib {
         }
         catch(SQLException e){
             out.println("Exeption thrown from getAvailableRoomBetween: " + e);
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+            if (con != null){
+                con.close();
+            }
         }
         return null;
     }
+
 
     /**
      * getOrderInfo will return a string the info of the order related to the orderId passed to this method.
