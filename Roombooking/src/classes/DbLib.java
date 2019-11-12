@@ -228,14 +228,15 @@ public class DbLib {
      */
     public void alterBonusPoints(String customerID, int bonuspoints) throws SQLException {
         try {
-            PreparedStatement pst = con.prepareStatement("UPDATE RoombookingDB.customer " +
-                    "SET cus_bonuspoints = (cus_bonuspoints + (?)) WHERE cus_id = (?)");
+            PreparedStatement pst = con.prepareStatement("UPDATE RoombookingDB.customer SET cus_bonuspoints = (cus_bonuspoints + (?)) WHERE cus_id = (?)");
             pst.setInt(1, bonuspoints);
             pst.setString(2, customerID);
             pst.executeUpdate();
         }
         catch (SQLException ex) {
             out.println("Could not alter bonuspoints + " + ex);
+        } finally {
+            con.close();
         }
     }
 

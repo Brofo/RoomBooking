@@ -59,7 +59,7 @@ public class BookingServlet2 extends HttpServlet {
 
             // Just register the order, using the users Customer ID.
 
-                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
 
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
@@ -74,8 +74,8 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-
-                    fun.alterBonusPoints(customerID, bonuspointsAquired);
+                System.out.println(bonuspointsAquired);
+                fun.alterBonusPoints(customerID, bonuspointsAquired);
 
             }
             // If the user paid with bonuspoints, remove the points from the user:
@@ -94,12 +94,10 @@ public class BookingServlet2 extends HttpServlet {
 
                 // Check if the customer has enough bonuspoints for the order.
                 int currentBonuspoints = 0;
-                try {
+
                     currentBonuspoints = Integer.parseInt(fun.getField("cus_bonuspoints",
                             "customer", "cus_id", customerID));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
                 if (currentBonuspoints < bonuspointsPrice) {
                     //The user does not have enough points.
                     request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
