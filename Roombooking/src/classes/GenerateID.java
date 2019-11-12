@@ -52,7 +52,7 @@ public class GenerateID {
      * Metoden skal sjekke om verdien som opprettes for ID allerede finnes i databasen.
      * Hvis den ikke finnes, blir verdien returnert og brukt i registrering av customer eller order.
      */
-    public String getID(PrintWriter out, String sqlTable) {
+    public String getID(PrintWriter out, String sqlTable) throws SQLException {
 
         String ID = generateID(sqlTable, out);
         DbTool dbtool = new DbTool();
@@ -74,6 +74,10 @@ public class GenerateID {
         } catch (SQLException ex) {
             out.println("Kunne ikke opprette ID " + ID + ex);
             return null;
+        }finally {
+            if (conn != null){
+                conn.close();
+            }
         }
     }
 }

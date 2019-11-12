@@ -54,6 +54,7 @@
 <div>
 
     <text style="color:firebrick;"><h3>Recent reviews from our guests</h3></text>
+
     <font size="+2"> ${reviewdata2}  </font> <font size ="+10"> <span style="color: goldenrod;"><b>${reviewdata1}</b></span> </font> <br> ${reviewdata0}<br><br><br>
     <font size="+2"> ${reviewdata5}  </font> <font size ="+10"> <span style="color: goldenrod;"><b>${reviewdata4}</b></span> </font> <br> ${reviewdata3}<br><br><br>
     <font size="+2"> ${reviewdata8}  </font> <font size ="+10"> <span style="color: goldenrod;"><b>${reviewdata7}</b></span> </font> <br> ${reviewdata6}<br><br><br>
@@ -64,6 +65,7 @@
     <font size="+2"> ${reviewdata23}  </font> <font size ="+10"> <span style="color: goldenrod;"><b>${reviewdata22}</b></span> </font> <br> ${reviewdata21}<br><br><br>
     <font size="+2"> ${reviewdata26}  </font> <font size ="+10"> <span style="color: goldenrod;"><b>${reviewdata25}</b></span> </font> <br> ${reviewdata24}<br><br><br>
     <font size="+2"> ${reviewdata29}  </font> <font size ="+10"> <span style="color: goldenrod;"><b>${reviewdata28}</b></span> </font> <br> ${reviewdata27}<br><br><br>
-</div>
+
+    </div>
 </body>
 </html>

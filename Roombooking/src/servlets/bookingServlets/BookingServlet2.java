@@ -32,7 +32,7 @@ public class BookingServlet2 extends HttpServlet {
         // Henter menyen på toppen av websiden.
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("link.html").include(request, response);
-        out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
+         out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
 
         // Verdiene fra parameterne:
         String availableRoomID = request.getParameter("availableRoomID");
@@ -51,13 +51,14 @@ public class BookingServlet2 extends HttpServlet {
         // Requesting cookie to check if a user is logged in
         Cookie existingCookies[] = request.getCookies();
 
-
+        try {
         //Check whether the customer is logged in or not.
         if (existingCookies != null) {
             // The user is logged in. Fetch CustomerID from cookie:
             String customerID = existingCookies[0].getValue();
 
             // Just register the order, using the users Customer ID.
+
             fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
 
             //If the user paid with card, add bonuspoints to the user:
@@ -73,7 +74,9 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-               fun.alterBonusPoints(customerID, bonuspointsAquired);
+                System.out.println(bonuspointsAquired);
+                fun.alterBonusPoints(customerID, bonuspointsAquired);
+
             }
             // If the user paid with bonuspoints, remove the points from the user:
             if (paymentType.contains("Bonuspoints")) {
@@ -91,12 +94,10 @@ public class BookingServlet2 extends HttpServlet {
 
                 // Check if the customer has enough bonuspoints for the order.
                 int currentBonuspoints = 0;
-                try {
+
                     currentBonuspoints = Integer.parseInt(fun.getField("cus_bonuspoints",
                             "customer", "cus_id", customerID));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
                 if (currentBonuspoints < bonuspointsPrice) {
                     //The user does not have enough points.
                     request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
@@ -104,7 +105,9 @@ public class BookingServlet2 extends HttpServlet {
                 } else {
                     //The uses does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
+
                     fun.alterBonusPoints(customerID, bonuspointsPrice);
+
                 }
             }
 
@@ -113,9 +116,11 @@ public class BookingServlet2 extends HttpServlet {
         else {
             //The customer is not logged in. Register the customer in the database.
             //Then use the customer ID of this customer to register an order.
-            String customerID = reg.getCustomerAndUserID(out);
-            reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+                 String customerID = null;
+                customerID = reg.getCustomerAndUserID(out);
+                reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
+                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+
         }
 
         request.setAttribute("roomType", roomType);
@@ -123,5 +128,9 @@ public class BookingServlet2 extends HttpServlet {
         request.setAttribute("checkOutDate", checkOutDate);
         request.setAttribute("paymentType", paymentType);
         request.getRequestDispatcher("BookingFinished.jsp").forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
