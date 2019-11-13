@@ -74,7 +74,6 @@ public class BookingServlet2 extends HttpServlet {
                 } else if (roomType.contains("Suite")) {
                     bonuspointsAquired = 10000;
                 }
-                System.out.println(bonuspointsAquired);
                 fun.alterBonusPoints(customerID, bonuspointsAquired);
 
             }

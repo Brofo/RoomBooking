@@ -227,6 +227,7 @@ public class DbLib {
      * @param bonuspoints The amount of bonus points that will be altered.
      */
     public void alterBonusPoints(String customerID, int bonuspoints) throws SQLException {
+        con = new DbTool().logIn(out);
         try {
             PreparedStatement pst = con.prepareStatement("UPDATE RoombookingDB.customer SET cus_bonuspoints = (cus_bonuspoints + (?)) WHERE cus_id = (?)");
             pst.setInt(1, bonuspoints);
@@ -234,7 +235,8 @@ public class DbLib {
             pst.executeUpdate();
         }
         catch (SQLException ex) {
-            out.println("Could not alter bonuspoints + " + ex);
+            System.out.println("Could not alter bonuspoints:  " + ex);
+
         } finally {
             con.close();
         }
