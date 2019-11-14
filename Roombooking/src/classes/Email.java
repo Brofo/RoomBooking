@@ -12,7 +12,7 @@ public class Email
 {
     public static void sendMail(String recipient) throws Exception
     {
-        System.out.println("skal sende email");
+        System.out.println("Trying to send mail");
         Properties properties = new Properties();
 
         properties.put("mail.smtp.auth", "true");
@@ -35,7 +35,7 @@ public class Email
         Message message = prepareMessage(session, myAccountEmail, recipient);
 
         Transport.send(message);
-        System.out.println("Message er sendt");
+        System.out.println("Message is sent");
     }
     private static Message prepareMessage(Session session, String myAccountEmail, String recipient)
     {
@@ -45,7 +45,7 @@ public class Email
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO , new InternetAddress(recipient));
             message.setSubject("Du har nå registerert en bruker");
-            message.setText("Registrert bruker");
+            message.setText("Gratulerer med registrert bruker i vår hotell kjede");
             return message;
         }
         catch (Exception ex)
