@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "servlets.reviewServlets.ReviewServletPost",
         urlPatterns = {"/servlets.reviewServlets.ReviewServletPost"}
@@ -32,7 +33,11 @@ public class ReviewServletPost extends HttpServlet {
             request.setAttribute("errorMessage", "Please select a rating score.");
             request.getRequestDispatcher("servlets.reviewServlets.ReviewServletGet").forward(request, response);
         } else {
-            rw.registerReview(out, review, rating, displayname);
+            try {
+                rw.registerReview(out, review, rating, displayname);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             request.getRequestDispatcher("servlets.reviewServlets.ReviewServletGet").forward(request, response);
         }
     }

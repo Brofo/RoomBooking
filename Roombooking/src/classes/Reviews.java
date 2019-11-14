@@ -2,7 +2,6 @@ package classes;
 
 import java.sql.*;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +15,7 @@ public class Reviews {
     /**
      * Method that register a review in the database.
      */
-    public void registerReview (PrintWriter out, String review, String rating, String displayname) {
+    public void registerReview (PrintWriter out, String review, String rating, String displayname) throws SQLException {
         DbTool dbtool = new DbTool();
         Connection conn = dbtool.logIn(out);
 
@@ -29,6 +28,10 @@ public class Reviews {
 
         } catch (SQLException ex) {
             out.println("Something went wrong with your attempt to post your review. " + ex);
+        } finally {
+            if (conn != null){
+                conn.close();
+            }
         }
     }
     /**
@@ -36,7 +39,7 @@ public class Reviews {
      * The array is returned with the values from every row in the database.
      * Row 1 will be indexed with 0-2. Row 2 will be indexed 3-5. Row 3 will be indexed 6-8. And so on.
      */
-    public ArrayList<String> getReviewArrays (PrintWriter out) {
+    public ArrayList<String> getReviewArrays (PrintWriter out) throws SQLException {
 
         DbTool dbtool = new DbTool();
         Connection conn = dbtool.logIn(out);
@@ -64,13 +67,17 @@ public class Reviews {
         catch (SQLException e) {
             System.err.println("Could not find reviews");
 
+        } finally {
+            if (conn != null){
+                conn.close();
+            }
         }
         return null;
     }
     /**
       * This metod will calculate the average rating from the database, and return this value.
     **/
-    public String getAverageReview(PrintWriter out) {
+    public String getAverageReview(PrintWriter out) throws SQLException {
         DbTool dbtool = new DbTool();
         Connection conn = dbtool.logIn(out);
 
@@ -108,6 +115,10 @@ public class Reviews {
         }
         catch (SQLException ex) {
             System.err.println("Problem with finding average review " + ex);
+        } finally {
+            if (conn != null){
+                conn.close();
+            }
         }
         return null;
     }

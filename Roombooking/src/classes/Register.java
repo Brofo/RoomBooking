@@ -24,7 +24,7 @@ public class Register {
      * and the Users.
      * @return a generated Customer ID.
      */
-    public String getCustomerAndUserID(PrintWriter out) {
+    public String getCustomerAndUserID(PrintWriter out) throws SQLException {
         customerAndUserID = id.getID(out, sqlCustomerTable);
         return customerAndUserID;
     }
@@ -34,11 +34,12 @@ public class Register {
      * It uses Class getID to register an ID automatically.
      */
     public void registerCustomer(PrintWriter out, String customerID, String firstname,
-                                 String lastname, String email, String phone) {
+                                 String lastname, String email, String phone) throws SQLException {
+          DbTool dbtool = new DbTool();
+          Connection conn = dbtool.logIn(out);
 
             try {
-                DbTool dbtool = new DbTool();
-                Connection conn = dbtool.logIn(out);
+
 
              PreparedStatement insert = conn.prepareStatement
                     ("INSERT INTO RoombookingDB.Customer(cus_id, cus_firstname, cus_lastname, cus_email, cus_phone) VALUES(?,?,?,?,?)");
@@ -51,6 +52,10 @@ public class Register {
             }
             catch (SQLException ex) {
                 out.println("Could not register the customer. " + ex);
+            } finally {
+
+                    conn.close();
+
             }
 
         }
@@ -60,13 +65,13 @@ public class Register {
      * an account on the website. Password will be included when creating an account.
      */
     public void registerUser(PrintWriter out, String firstname, String lastname,
-                             String email, String phone, String password) {
+                             String email, String phone, String password) throws SQLException {
 
         String customerID = id.getID(out, sqlCustomerTable);
-
+        DbTool dbtool = new DbTool();
+        Connection conn = dbtool.logIn(out);
         try {
-            DbTool dbtool = new DbTool();
-            Connection conn = dbtool.logIn(out);
+
 
             PreparedStatement insert = conn.prepareStatement
                     ("INSERT INTO RoombookingDB.Customer(cus_id, cus_firstname, cus_lastname, " +
@@ -81,6 +86,9 @@ public class Register {
         }
         catch (SQLException ex) {
             out.println("Could not register the user. " + ex);
+        } finally {
+            conn.close();
+
         }
 
     }
@@ -90,7 +98,7 @@ public class Register {
      * It uses Class getID to register an ID automatically.
      */
     public void registerOrder(PrintWriter out, String roomID, String customerID,
-                              String checkInDate, String checkOutDate, String preferences) {
+                              String checkInDate, String checkOutDate, String preferences) throws SQLException {
 
         String orderID = id.getID(out, sqlOrderTable);
         DbTool dbtool = new DbTool();
@@ -110,6 +118,10 @@ public class Register {
         }
         catch (SQLException ex) {
                 out.println(("Could not register the order " + ex));
-            }
+            } finally {
+
+                conn.close();
+
+        }
         }
     }
