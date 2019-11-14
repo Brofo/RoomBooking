@@ -24,7 +24,7 @@
     <option name="Empty">Select...</option>
     <option name="Single room">Single room</option>
     <option name="Double room">Double room</option>
-    <option name="Family room">Family room</option>
+    <option name="Family room">Family room</option>6
     <option name="Suite">Suite</option>
   </select>
 
