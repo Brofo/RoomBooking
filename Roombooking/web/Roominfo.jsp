@@ -61,7 +61,7 @@ your room at night. We have had many celebrities living in our doublerooms and t
     <br>
 <p>Whats up fam! Are you lucky enough to have a family? If the answer is yes then you will enjoy our family rooms. Here you
 will find a king sized double bed and two single beds for the kids. Your kids will love watching their favourite tv shows
-    on our below average tvs. bla bla kommer ikke på mer.</p>
+    on our below average tvs.</p>
 
 
 <div>
