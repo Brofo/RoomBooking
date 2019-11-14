@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import classes.Reviews;
@@ -30,8 +31,11 @@ public class ReviewServletGet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        averageReview = rewFunc.getAverageReview(out);
-        ArrayList<String> reviewArray = rewFunc.getReviewArrays(out);
+        try {
+            averageReview = rewFunc.getAverageReview(out);
+            ArrayList<String> reviewArray = rewFunc.getReviewArrays(out);
+
+
 
         // This loop will create several parameter values that can be accessed in the
         // Reviews.jsp file.
@@ -43,5 +47,8 @@ public class ReviewServletGet extends HttpServlet {
 
         request.setAttribute("averageReview", averageReview);
         request.getRequestDispatcher("Reviews.jsp").forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

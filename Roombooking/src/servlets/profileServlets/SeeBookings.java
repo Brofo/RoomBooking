@@ -34,6 +34,10 @@ public class SeeBookings extends HttpServlet {
         Cookie userCookie[] = request.getCookies();
         String customerID = userCookie[0].getValue();
 
-        out.println(ordInfo.getOrderFromCustomerId(customerID, out));
+        try {
+            out.println(ordInfo.getOrderFromCustomerId(customerID, out));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

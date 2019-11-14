@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import classes.DbTool;
-import classes.Email;
 import classes.Register;
 
 @WebServlet(
@@ -32,7 +32,7 @@ import classes.Register;
 public class CreateUserServlet extends HttpServlet {
     private Register regUser;
 
-    public CreateUserServlet() throws Exception {
+    public CreateUserServlet() {
         regUser = new Register();
     }
 
@@ -48,24 +48,18 @@ public class CreateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
-        //blir puttet inn i databasen, slik at brukeren blir opprettet.
-        regUser.registerUser(out, firstname, lastname, email, phone, password);
-        request.getRequestDispatcher("LogIn.jsp").include(request, response);
-
-
-        try
-        {
-            System.out.println("før sendEmail");
-            Email.sendMail(email);
-            System.out.println("etter SendMail");
+            //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
+            //blir puttet inn i databasen, slik at brukeren blir opprettet.
+        try {
+            regUser.registerUser(out, firstname, lastname, email, phone, password);
+            request.getRequestDispatcher("LogIn.jsp").include(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-            catch (Exception ex)
-            {
-                System.out.println("i catch");
-                ex.printStackTrace();
-            }
+
+
 
     }
 
-    }
+
+}

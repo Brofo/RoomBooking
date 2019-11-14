@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 @WebServlet(name = "servlets.bookingServlets.BookingServlet1",
@@ -55,7 +56,7 @@ public class BookingServlet1 extends HttpServlet {
         String availableRoomID = null;
         try {
             availableRoomID = fun.getAvailableRoomBetween(roomTypeID, checkInDate, checkOutDate);
-        } catch (ParseException e) {
+        } catch (ParseException | SQLException e) {
             e.printStackTrace();
         }
 

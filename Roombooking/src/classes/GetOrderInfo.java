@@ -10,8 +10,7 @@ public class GetOrderInfo {
         om order til alle orders som inneholder denne Customer ID.
          "Customer ID: "     + orderInfoRS.getString(3) +
      */
-    public String getOrderFromCustomerId(String customerID, PrintWriter out)
-    {
+    public String getOrderFromCustomerId(String customerID, PrintWriter out) throws SQLException {
         DbTool dbtool = new DbTool();
         Connection conn = dbtool.logIn(out);
 
@@ -49,6 +48,10 @@ public class GetOrderInfo {
         catch(SQLException ex)
         {
             out.println("Exeption in getOrderFromCustomerID: " + ex);
+        }finally {
+            if (conn != null){
+                conn.close();
+            }
         }
         return null;
     }
