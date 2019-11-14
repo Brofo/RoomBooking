@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import classes.Email;
 import classes.DbTool;
 import classes.Register;
 
@@ -56,6 +57,19 @@ public class CreateUserServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try
+        {
+            System.out.println("før sendEmail");
+            Email.sendMail(email);
+            System.out.println("etter SendMail");
+        }
+        catch (Exception ex)
+        {
+            System.out.println("i catch");
+            ex.printStackTrace();
+        }
+
 
 
 
