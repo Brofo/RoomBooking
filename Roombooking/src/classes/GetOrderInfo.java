@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class GetOrderInfo {
 
-    /*
+    /**
         Denne metoden skal ta inn customer ID som parameter, og bruke denne til å printe ut informasjon
         om order til alle orders som inneholder denne Customer ID.
          "Customer ID: "     + orderInfoRS.getString(3) +
