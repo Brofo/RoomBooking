@@ -11,6 +11,7 @@
 <head>
     <title>Account Information</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/CancelCulture.css" />
+
 </head>
 <body>
     <p>Name: ${firstname} ${lastname}</p>
@@ -56,6 +57,21 @@
     <div id="telefonKnapp" >
         <button class="profile"  onclick="openForm('telefonForm','telefonKnapp')">Change phone</button>
     </div>
+    <p>Password</p>
+    <div id="passwordForm">
+        <form action="servlets.cancelServlets.CancelPageUser"  method="post"  >
+            Old Password: <input type="password" name="oldpassword" required><br>
+            New Password: <input type="password" name="newpassword" required>
+            <br>
+            <input class="profile"  type="submit" name="action" value="Press here to change password?">
+            <input class="profile" onclick="closeForm('passwordForm','passwordKnapp')" type="button" value="cancel">
+
+        </form>
+    </div>
+    <div id="passwordKnapp">
+        <button class="profile"  onclick="openForm('passwordForm','passwordKnapp')">Change password</button>
+    </div>
+
     <br>
     <div>
         <button class="profile" onclick="openForm('kansellereForm',null), closeForm('romForm',null),closeForm('datoForm',null)">Cancel order</button>
