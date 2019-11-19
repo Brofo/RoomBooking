@@ -61,7 +61,7 @@ public class CreateUserServlet extends HttpServlet {
         try
         {
             System.out.println("før sendEmail");
-            Email.sendMail(email);
+            Email.sendMailUser(email);
             System.out.println("etter SendMail");
         }
         catch (Exception ex)
@@ -69,9 +69,6 @@ public class CreateUserServlet extends HttpServlet {
             System.out.println("i catch");
             ex.printStackTrace();
         }
-
-
-
 
     }
 

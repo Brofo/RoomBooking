@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Email
 {
-    public static void sendMail(String recipient) throws Exception
+    public static void sendMailUser(String recipient) throws Exception
     {
         System.out.println("Trying to send mail");
         Properties properties = new Properties();
