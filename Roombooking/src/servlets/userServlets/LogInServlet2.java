@@ -51,6 +51,7 @@ public class LogInServlet2 extends HttpServlet {
             customerFirstName = fun.getField("cus_firstname", "Customer", "cus_id", customerID);
             bonus = fun.getField("cus_bonuspoints","customer","cus_id",customerID);
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,14 +62,20 @@ public class LogInServlet2 extends HttpServlet {
                 request.getRequestDispatcher("LogIn.jsp").forward(request, response);
             }
             else if (password.equals(correctPassword)) {
-                // Passordet som er skrevet inn matcher passordet i databasen.
-                // Oppretter derfor en informasjonskapsel (cookie), slik at brukeren
+            // Passordet som er skrevet inn matcher passordet i databasen.
+
+            //Cookies liker ikke whitespace (Vanlige mellomrom). Da klikker systemet.
+            //Derfor erstattes whitespace med understrek.
+            assert customerFirstName != null;
+            customerFirstName = customerFirstName.replaceAll("\\s+","_");
+
+                // Oppretter en informasjonskapsel (cookie), slik at brukeren
                 // Forblir innlogget.
                 Cookie makeCookie = new Cookie(customerFirstName, customerID);
                 response.addCookie(makeCookie);
 
 
-            //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
+                //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
                 // Saves the customer's name in the session.
                 request.setAttribute("firstname", customerFirstName);
                 request.setAttribute("bonus", bonus);

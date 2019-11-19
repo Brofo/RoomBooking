@@ -49,31 +49,29 @@ public class CreateUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-            //Informasjonen fra parameterne, altså tekstfeltene som brukeren skriver i,
-            //blir puttet inn i databasen, slik at brukeren blir opprettet.
-        try {
-            regUser.registerUser(out, firstname, lastname, email, phone, password);
-            request.getRequestDispatcher("LogIn.jsp").include(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        //Check if the user  inserted all the correct values.
+        if (firstname.equals("") || lastname.equals("") || phone.equals("") || email.equals("") || password.equals("")) {
+            request.setAttribute("errorMessage", "Please do not leave any empty fields");
+            request.getRequestDispatcher("CreateUser.jsp").forward(request, response);
+        } else {
+
+            //Insert the information written by the user into the database.
+            try {
+                regUser.registerUser(out, firstname, lastname, email, phone, password);
+                request.getRequestDispatcher("LogIn.jsp").include(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            //Email
+            try {
+                System.out.println("før sendEmail");
+                Email.sendMail(email);
+                System.out.println("etter SendMail");
+            } catch (Exception ex) {
+                System.out.println("i catch");
+                ex.printStackTrace();
+            }
         }
-
-        try
-        {
-            System.out.println("før sendEmail");
-            Email.sendMail(email);
-            System.out.println("etter SendMail");
-        }
-        catch (Exception ex)
-        {
-            System.out.println("i catch");
-            ex.printStackTrace();
-        }
-
-
-
-
     }
-
-
 }
