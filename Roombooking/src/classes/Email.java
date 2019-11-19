@@ -20,9 +20,10 @@ public class Email
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String myAccountEmail = "cohesionhotell@gmail.com\n";
+        String myAccountEmail = "cohesionhotell@gmail.com";
         String password = "Itgruppa15";
 
+        System.out.println("22");
         Session session = Session.getInstance(properties, new Authenticator()
         {
             @Override
@@ -31,7 +32,7 @@ public class Email
                 return new PasswordAuthentication(myAccountEmail, password);
             }
         });
-
+        System.out.println("23");
         Message message = prepareMessage(session, myAccountEmail, recipient);
 
         Transport.send(message);

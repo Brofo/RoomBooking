@@ -11,6 +11,8 @@
       <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar!/" />
       <root url="file://$PROJECT_DIR$/lib" />
+      <root url="jar://$PROJECT_DIR$/../../../../JarFiles/javax.activation-api-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../JarFiles/javax.mail-api-1.6.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -16,16 +16,15 @@
 <body>
 
 <form action="servlets.userServlets.CreateUserServlet" method="post">
-<br> <span style="color: firebrick;"> <b>Create User</b> </span>
-    <br><br>
+Fill the empty slots in order to create a user.
+    <br>
     First name:       <input type="text" name="firstname">
     Last name:     <input type="text" name="lastname">
     <br><br>
     Phone:    <input type="text" name="phone">
     E-mail:     <input type="text" name ="email">
     Password:    <input type="password" name ="password">
-    <input type="submit" name="action" value="Opprett bruker"><br>
-    <span style="color: red;"> ${errorMessage} </span>
+    <input type="submit" name="action" value="Opprett bruker">
 </form>
 
 </body>
