@@ -29,7 +29,7 @@ public class BookingServlet2 extends HttpServlet {
         DbLib fun = new DbLib(out);
         Register reg = new Register();
 
-        // Henter menyen på toppen av websiden.
+        // Getting menu bar on the top of the website
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("link.html").include(request, response);
          out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
@@ -57,9 +57,6 @@ public class BookingServlet2 extends HttpServlet {
             // The user is logged in. Fetch CustomerID from cookie:
             String customerID = existingCookies[0].getValue();
 
-            // Just register the order, using the users Customer ID.
-            fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
-
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
                 int bonuspointsAquired = 0;
@@ -75,10 +72,13 @@ public class BookingServlet2 extends HttpServlet {
                 }
                 fun.alterBonusPoints(customerID, bonuspointsAquired);
 
-            }
-            // If the user paid with bonuspoints, remove the points from the user:
-            if (paymentType.contains("Bonuspoints")) {
+                // Register the order, using the users Customer ID.
+                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+
+                // If the user paid with bonuspoints, remove the points from the user:
+            } else if (paymentType.contains("Bonuspoints")) {
                 int bonuspointsPrice = 0;
+
                 // Calculate the amount of bonuspoints the user will be charged.
                 if (roomType.contains("Single")) {
                     bonuspointsPrice = 25000;
@@ -101,12 +101,18 @@ public class BookingServlet2 extends HttpServlet {
                     request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
-                    //The uses does have enough points. Subtract bonuspoints from the user.
+                    // The user does have enough points. Subtract bonuspoints from the user.
                     bonuspointsPrice = -bonuspointsPrice;
 
+                    // Register the order, using the users Customer ID.
+                    fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
                     fun.alterBonusPoints(customerID, bonuspointsPrice);
 
                 }
+            } else {
+                // The user selected to pay upon arrival. This requires no further
+                // action than to register the order, using the users Customer ID.
+                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
             }
 
         }
