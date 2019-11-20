@@ -1,8 +1,0 @@
-
-<Context path="jbdc/localhost">
-
-    <Resource name="jdbc/localhost" type="javax.sql.DataSource" auth="Container"
-              username="root" password="passord" driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/">
-    </Resource>
-</Context>
