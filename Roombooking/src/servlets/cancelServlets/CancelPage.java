@@ -19,6 +19,9 @@ import static java.lang.Integer.parseInt;
         name = "CancelPage",
         urlPatterns = {"/servlets.cancelServlets.CancelPage"}
 )
+/**
+ * This Servlet Uses Cookies, Printwriter and Dblib
+ */
 public class CancelPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,6 +33,7 @@ public class CancelPage extends HttpServlet {
         DbLib fun = new DbLib(out);
 
         try {
+            //This if statement sets the variables firstname, lastname, eMail and phone for cancelPageUser.jsp
             if(userCookie != null){
                 String cID = userCookie[0].getValue();
 
