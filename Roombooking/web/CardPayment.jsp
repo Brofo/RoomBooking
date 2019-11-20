@@ -28,7 +28,7 @@
     <input type="hidden" name="paymentType" value="${paymentType}">
 
     <div class="checkout-header">
-        <h1 class="checkout-title">
+        <br><br> <h1 class="checkout-title">
             Checkout
         </h1>
     </div>

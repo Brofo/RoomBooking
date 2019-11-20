@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+
 @WebServlet(
         name = "CancelPageUser",
         urlPatterns = {"/servlets.cancelServlets.CancelPageUser"}
@@ -49,9 +50,15 @@ public class CancelPageUser extends HttpServlet {
         //Dato som skal bli brukt
         String checkin = request.getParameter("checkin");
         String checkout = request.getParameter("checkout");
+        //Passord variabler som skal bli brukt
+        String oldpass = request.getParameter("oldpassword");
+        String newpass = request.getParameter("newpassword");
+
         try {
             if(action.contains("name")){
                 order.changeName(out,conn,firstName,lastName,cID);
+
+
             }
             else if (action.contains("email")){
                 order.changeEmail(out,conn,email,cID);
@@ -61,7 +68,11 @@ public class CancelPageUser extends HttpServlet {
                 order.changePhone(out,conn,phone,cID);
 
             }
+            else if(action.contains("password")){
+                order.changePassword(out,conn,newpass,oldpass,cID);
+            }
             else if(action.contains("room")){
+
                 if (rom.contains("sr")){
                     order.changeRoom(out,conn,orderID,"sr01");
                     out.println("<p>Changed room to Singelroom</p>");
@@ -84,11 +95,13 @@ public class CancelPageUser extends HttpServlet {
                 }
             }
             else if(action.contains("date")){
+
                 order.changeDate(out,conn,orderID,"checkin",checkin);
                 order.changeDate(out,conn,orderID,"checkout",checkout);
 
             }
             else if (action.contains("Cancel booking")){
+
                 order.cancelOrder(out,conn,orderID,cID);
 
             }

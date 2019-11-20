@@ -37,6 +37,9 @@ public class AlterOrder {
                 Stat.setString(2, customerID);
                 Stat.executeUpdate();
                 out.println("<p> Changed firstname to " + firstname + "</p>");
+                out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
+
+
 
 
             } else if (firstname == "" && lastname != "") {
@@ -47,6 +50,7 @@ public class AlterOrder {
                 Stat.setString(2, customerID);
                 Stat.executeUpdate();
                 out.println("<p> Changed lastname to " + lastname + "</p>");
+                out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
 
             } else if (firstname != "" && lastname != "") {
 
@@ -57,6 +61,7 @@ public class AlterOrder {
                 Stat.setString(3, customerID);
                 Stat.executeUpdate();
                 out.println("<p> Changed fullname to " + firstname + " " + lastname + "</p>");
+                out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
 
             } else {
                 out.println("<p>You have to write atleast one name into the field</p>");
@@ -77,6 +82,33 @@ public class AlterOrder {
         }
 
     }
+    public void changePassword(PrintWriter out, Connection conn, String newpass,String oldpass, String cID) throws SQLException {
+        PreparedStatement Stat = null;
+        try {
+            final String sql_name = "UPDATE RoombookingDB.Customer set cus_password = ? where cus_id= ? and cus_password =?;";
+            Stat = conn.prepareStatement(sql_name);
+            Stat.setString(1,newpass);
+            Stat.setString(2,cID);
+            Stat.setString(3,oldpass);
+            Stat.executeUpdate();
+
+            out.println("<p>You will be redirected to the login page, where you will have to login with the new password</p>");
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url=servlets.userServlets.LogOutServlet\">");
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (Stat != null) {
+                Stat.close();
+            }
+            if(out != null){
+                out.close();}
+            if (conn != null){
+                conn.close();
+            }
+        }
+
+
+    }
     public void changeEmail(PrintWriter out, Connection conn, String mail, String cID) throws SQLException {
         //Under ser du sql stringen som oppdaterer den gamle e-mailen med den nye e-mailen, skriver så ut endringene som er blitt gjort
 
@@ -89,6 +121,8 @@ public class AlterOrder {
             Stat.executeUpdate();
 
             out.println("<p> Changed email to " + mail + "</p>");
+            out.print("<p> You will now be logged out </p>");
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url=servlets.userServlets.LogOutServlet\">");
 
         }
         catch (SQLException ex) {
@@ -122,6 +156,7 @@ public class AlterOrder {
             Stat.executeUpdate();
 
             out.println("<p>Changed phone to " + phone);
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
 
         }
         catch (SQLException ex) {
@@ -152,6 +187,7 @@ public class AlterOrder {
             Stat.executeUpdate();
 
             out.println("<p> On order " + orderID+"</p>");
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
 
         }
         catch (SQLException ex) {
@@ -191,6 +227,7 @@ public class AlterOrder {
             Stat.executeUpdate();
 
             out.println("<p> Changed date to " + date1  + " in order: " + orderID + "</p>");
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
 
         }
         catch (SQLException ex) {
@@ -210,6 +247,7 @@ public class AlterOrder {
         final String sql = "DELETE FROM roombookingdb.orders where order_id = ? and cus_id = ?;";
         PreparedStatement Stat = null;
         try{
+
             Stat = conn.prepareStatement(sql);
             Stat.setString(1, orderID);
             Stat.setString(2,cID);
@@ -217,6 +255,7 @@ public class AlterOrder {
             Stat.executeUpdate();
 
             out.println("<p> Cancelled  " + orderID  + " <br> Have a nice day! </p>");
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url= servlets.cancelServlets.CancelPage\">");
 
         }
         catch (SQLException ex) {
