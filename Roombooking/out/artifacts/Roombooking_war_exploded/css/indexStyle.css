@@ -43,6 +43,9 @@ img{
 #romForm{
     display: none;
 }
+#passwordForm{
+    display: none;
+}
 
 
 div{

@@ -32,6 +32,7 @@ public class LogOutServlet extends HttpServlet {
         Cookie existingCookies[] = request.getCookies();
         if (existingCookies != null) {
             out.println("<p>Your are now logged out</p>");
+            out.println("<meta http-equiv=\"Refresh\" content=\"2;url= index.jsp\">");
             existingCookies[0].setMaxAge(0);
             response.addCookie(existingCookies[0]);
         } else {
