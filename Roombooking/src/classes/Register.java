@@ -6,8 +6,11 @@ package classes;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Register {
+    private PrintWriter out;
     private GenerateID id;
     private String customerAndUserID;
     private final String sqlCustomerTable;  // SQL statement.
@@ -20,7 +23,7 @@ public class Register {
     }
 
     /**
-     * This class returns a Customer ID, that will be used by both the Customers
+     * This method returns a Customer ID, that will be used by both the Customers
      * and the Users.
      * @return a generated Customer ID.
      */
@@ -94,34 +97,46 @@ public class Register {
     }
 
     /**
-     * This method will register data into an order.
-     * It uses Class getID to register an ID automatically.
+     * inputRecordInOrders will put in a full record in table Orders. This is essentially the last part of creating
+     * an order this will stay private as it needs only be accessed from createOrder().
+     * @param room_id the id of the room that is ordered
+     * @param cus_id the id of the customer that is ordering.
+     * @param checkInDate the check in-date of the order.
+     * @param checkOutDate the check out-date of the order.
+     * @param customerPreferences any special preferences the customer has submitted.
+     * @return the order_id of the order recorded.
      */
-    public void registerOrder(PrintWriter out, String roomID, String customerID,
-                              String checkInDate, String checkOutDate, String preferences) throws SQLException {
-
-        String orderID = id.getID(out, sqlOrderTable);
-        DbTool dbtool = new DbTool();
-        Connection conn = dbtool.logIn(out);
-
+    public String inputRecordInOrders(String room_id, String cus_id, String checkInDate, String checkOutDate, String customerPreferences, String paymentType) throws SQLException {
+        Connection con = new DbTool().logIn(out);
         try {
-            PreparedStatement insert = conn.prepareStatement
-                    ("INSERT INTO RoombookingDb.Orders(order_id, room_id, cus_id, " +
-                            "order_checkindate, order_checkoutdate, order_preferences) VALUES (?,?,?,?,?,?)");
-            insert.setString(1, orderID);
-            insert.setString(2, roomID);
-            insert.setString(3, customerID);
-            insert.setString(4, checkInDate);
-            insert.setString(5, checkOutDate);
-            insert.setString(6, preferences);
-            insert.executeUpdate();
-        }
-        catch (SQLException ex) {
-                out.println(("Could not register the order " + ex));
-            } finally {
+            java.util.Date checkInDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkInDate);
+            java.util.Date checkOutDatePR = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutDate);
+            GenerateID idGenerator = new GenerateID();
+            String orderId = idGenerator.getID(out, "SELECT count(*) FROM RoombookingDB.Orders");
 
-                conn.close();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO RoombookingDB.Orders VALUES (?, ?, ?, ?, ?, ?, ?)");
+            pst.setString(1, orderId);
+            pst.setString(2, room_id);
+            pst.setString(3, cus_id);
+            pst.setDate(4, new java.sql.Date(checkInDatePR.getTime()));
+            pst.setDate(5, new java.sql.Date(checkOutDatePR.getTime()));
+            pst.setString(6, customerPreferences);
+            pst.setString(7, paymentType);
 
+            int orderCount = pst.executeUpdate();
+            if(orderCount == 1) {
+                //out.println(orderCount + " order created.");
+            }
+            else {
+                // out.println(orderCount + " orders created.");
+            }
+            return orderId;
         }
+        catch (SQLException | ParseException e) {
+            out.println("Exeption in createOrder: " + e);
+        } finally {
+            con.close();
         }
+        return null;
     }
+}

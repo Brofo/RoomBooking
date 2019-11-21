@@ -35,7 +35,7 @@ public class BookingServlet2 extends HttpServlet {
         request.getRequestDispatcher("link.html").include(request, response);
          out.println("<head><link rel='stylesheet' type='text/css' href='css/indexStyle.css'></head>");
 
-        // Verdiene fra parameterne:
+        // Values from parameters
         String availableRoomID = request.getParameter("availableRoomID");
         String checkInDate = request.getParameter("checkInDate");
         String checkOutDate = request.getParameter("checkOutDate");
@@ -49,6 +49,12 @@ public class BookingServlet2 extends HttpServlet {
 
         String roomType = request.getParameter("roomType");
 
+        String customerID;
+
+        // Expression to make sure the payment was successful.
+        // Will only be set to false if the user does not have enough bonus points.
+        boolean paymentSuccess = true;
+
         // Requesting cookie to check if a user is logged in
         Cookie existingCookies[] = request.getCookies();
 
@@ -56,7 +62,7 @@ public class BookingServlet2 extends HttpServlet {
         //Check whether the customer is logged in or not.
         if (existingCookies != null) {
             // The user is logged in. Fetch CustomerID from cookie:
-            String customerID = existingCookies[0].getValue();
+            customerID = existingCookies[0].getValue();
 
             //If the user paid with card, add bonuspoints to the user:
             if (paymentType.contains("Card")) {
@@ -74,7 +80,7 @@ public class BookingServlet2 extends HttpServlet {
                 fun.alterBonusPoints(customerID, bonuspointsAquired);
 
                 // Register the order, using the users Customer ID.
-                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+                reg.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
 
                 // If the user paid with bonuspoints, remove the points from the user:
             } else if (paymentType.contains("Bonuspoints")) {
@@ -99,6 +105,7 @@ public class BookingServlet2 extends HttpServlet {
 
                 if (currentBonuspoints < bonuspointsPrice) {
                     //The user does not have enough points.
+                    paymentSuccess = false;
                     request.setAttribute("errorMessage","You do not have enough bonus points to make this order.");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
@@ -106,14 +113,14 @@ public class BookingServlet2 extends HttpServlet {
                     bonuspointsPrice = -bonuspointsPrice;
 
                     // Register the order, using the users Customer ID.
-                    fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+                    reg.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
                     fun.alterBonusPoints(customerID, bonuspointsPrice);
 
                 }
             } else {
                 // The user selected to pay upon arrival. This requires no further
                 // action than to register the order, using the users Customer ID.
-                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+                reg.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
             }
 
         }
@@ -121,11 +128,25 @@ public class BookingServlet2 extends HttpServlet {
         else {
             //The customer is not logged in. Register the customer in the database.
             //Then use the customer ID of this customer to register an order.
-                 String customerID = null;
                 customerID = reg.getCustomerAndUserID(out);
                 reg.registerCustomer(out, customerID, firstname, lastname, email, phone);
-                fun.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
+                reg.inputRecordInOrders(availableRoomID, customerID, checkInDate, checkOutDate, preferences, paymentType);
 
+        }
+
+        if (paymentSuccess) {
+            //Get email from user:
+            email = fun.getField("cus_email", "Customer", "cus_id", customerID);
+            //Send email confirmation.
+            String subject = "Order Confirmation";
+            String text = "You have successfully created a booking. \n\n" + firstname + " " + lastname + "\n" +
+                    "Room: " + roomType + "\nCheck in date: " + checkInDate + "\n" +
+                    "Check out date: " + checkOutDate + "\n\nThank you for choosing Cohesion Hotel";
+            try {
+                Email.sendMail(email, subject, text);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
 
         request.setAttribute("roomType", roomType);
@@ -135,20 +156,6 @@ public class BookingServlet2 extends HttpServlet {
         request.getRequestDispatcher("BookingFinished.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        //Email
-        String subject = "Order Confirmation";
-        String text = "You have successfully created a booking. \n\n" + firstname + " " + lastname + "\n" +
-                "Room: " + roomType + "\nCheck in date: " + checkInDate + "\n" +
-                "Check out date: " + checkOutDate + "\n\nThank you for choosing Cohesion Hotel";
-        try {
-            System.out.println("før sendEmail");
-            Email.sendMail(email, subject, text);
-            System.out.println("etter SendMail");
-        } catch (Exception ex) {
-            System.out.println("i catch");
-            ex.printStackTrace();
         }
     }
 }
