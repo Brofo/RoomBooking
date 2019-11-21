@@ -137,6 +137,8 @@ public class BookingServlet2 extends HttpServlet {
         if (paymentSuccess) {
             //Get email from user:
             email = fun.getField("cus_email", "Customer", "cus_id", customerID);
+            firstname = fun.getField("cus_firstname", "Customer", "cus_id", customerID);
+            lastname = fun.getField("cus_lastname", "Customer", "cus_id", customerID);
             //Send email confirmation.
             String subject = "Order Confirmation";
             String text = "You have successfully created a booking. \n\n" + firstname + " " + lastname + "\n" +
