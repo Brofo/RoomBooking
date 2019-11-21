@@ -18,8 +18,9 @@ import java.sql.SQLException;
 )
 
 /**
- * LogInServlet2 har sin funksjonalitet når brukeren forsøker å trykke på "Logg Inn"
- * etter å ha fylt inn innloggingsdetaljene i menyen til LogIn.jsp.
+ * This servlet is activated when the user attempts to log in after typing
+ * the log in details. If the details are incorrect, there will be an error.
+ * If the details are correct, a Cookie will be created with the user information.
  */
 public class LogInServlet2 extends HttpServlet {
 
@@ -30,16 +31,15 @@ public class LogInServlet2 extends HttpServlet {
         PrintWriter out = response.getWriter();
         DbLib fun = new DbLib(out);
 
-        // Henter inn menyen på toppen av websiden.
+        // Get the meny bar on the top of the website.
         request.getRequestDispatcher("link.html").include(request, response);
 
-        // Epost og passord er innloggingsdetaljene som brukeren skriver inn.
+        // Get parameters from the log in page.
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Epost brukes til å finne Customer ID.
-        // Passordet som hentes er det som er tilknyttet Customer ID.
-        // Navnet som hentes er tilknyttet Customer ID.
+        // Email is used to find customer ID.
+        // The password, name and bonus points are found from the customers ID.
         String customerID = null;
         String correctPassword = null;
         String customerFirstName = null;
@@ -62,20 +62,18 @@ public class LogInServlet2 extends HttpServlet {
                 request.getRequestDispatcher("LogIn.jsp").forward(request, response);
             }
             else if (password.equals(correctPassword)) {
-            // Passordet som er skrevet inn matcher passordet i databasen.
+            // The password that was written, matches the password in the database.
 
-            //Cookies liker ikke whitespace (Vanlige mellomrom). Da klikker systemet.
-            //Derfor erstattes whitespace med understrek.
+            //Cookies can not handle whitespace. Replace potential whitespace with underline.
             assert customerFirstName != null;
             customerFirstName = customerFirstName.replaceAll("\\s+","_");
 
-                // Oppretter en informasjonskapsel (cookie), slik at brukeren
-                // Forblir innlogget.
+                // Create a Cookie to keep the user logged in.
                 Cookie makeCookie = new Cookie(customerFirstName, customerID);
                 response.addCookie(makeCookie);
 
 
-                //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
+                // Uses the getField method to get cus_bonuspoints from the database and tie it to bonus.
                 // Saves the customer's name in the session.
                 request.setAttribute("firstname", customerFirstName);
                 request.setAttribute("bonus", bonus);

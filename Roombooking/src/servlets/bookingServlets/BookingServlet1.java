@@ -18,11 +18,16 @@ import java.text.ParseException;
 )
 
 /**
- * For å fullføre denne servleten, trengs en metode (beskrevet lenger nede).
+ * This servlet will process the data from the first booking page (index.jsp), and return
+ * a result based on this data.
  *
- * Servleten brukes til å sjekke om et rom er ledig, og så sjekke om den som vil
- * booke rommet er en bruker eller en customer.
+ * This servlet is used to check if:
+ *  - The desired room is available.
+ *  - The person booking the room is a Customer or a User.
  *
+ * If the room is not available, the customer will get an error message.
+ * If the person is a customer, they will be sent to customer booking.
+ * If the person is a user, they will be sent to user booking.
  */
 public class BookingServlet1 extends HttpServlet {
 
@@ -31,7 +36,7 @@ public class BookingServlet1 extends HttpServlet {
         PrintWriter out = response.getWriter();
         DbLib fun = new DbLib(out);
 
-        // Verdiene fra parameterne.
+        // Get values from the first booking page.
         String checkInDate = request.getParameter("checkin");
         String checkOutDate = request.getParameter("checkout");
         String roomType = request.getParameter("roomType");
@@ -61,29 +66,28 @@ public class BookingServlet1 extends HttpServlet {
         }
 
         if (availableRoomID != null && !availableRoomID.equals("")) {
-                // Rommet er ledig. Prøver derfor å finne ut om den som vil booke er en bruker,
-                // eller en customer.
+                // The room is available. Next step is to check whether the person
+                // booking is a customer or a user.
 
-                // Gjør slik at verdiene blir lagret i session. Hvis man sender dem til
-                // neste side kan man bruke dem der.
+                // Save the values as attributes, so that they can be received
+                // In the next booking page.
                 request.setAttribute("checkInDate", checkInDate);
                 request.setAttribute("checkOutDate", checkOutDate);
                 request.setAttribute("roomType", roomType);
                 request.setAttribute("availableRoomID", availableRoomID);
 
-                // Henter cookie
+                // Get Cookie details.
                 Cookie existingCookies[] = request.getCookies();
-                // Sjekker om brukeren er logget inn.
+                // Check if the user is logged in.
                 if (existingCookies != null) {
-                    // Hvis logget inn, sendes den til formen for booking som bruker.
+                    // If the user is logged in, they will be sent to the page for
+                    // booking as user.
                     String username = existingCookies[0].getName();
                     request.setAttribute("username", username);
-
-                    // Henter jsp. filen og tar med verdiene fra request.setAttribute(...).
                     request.getRequestDispatcher("BookingAsUser.jsp").forward(request, response);
                 } else {
-                    // Hvis ikke logget inn, sendes den til formen for booking som customer.
-                    // Henter jsp. filen og tar med verdiene fra request.setAttribute(...).
+                    // If the user is not logged in, they will be sent to the page
+                    // for booking as customer.
                     request.getRequestDispatcher("BookingAsCustomer.jsp").forward(request, response);
                 }
             } else {
@@ -91,7 +95,7 @@ public class BookingServlet1 extends HttpServlet {
                     // Do nothing. Did not choose room type. This error is handled at the beginning of the servlet.
                 }
                 else {
-                    // Rommet er ikke ledig.
+                    // The room is not available, and the customer will receive an error.
                     request.setAttribute("errorMessage","There are no rooms of this room type available for this period.");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }

@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Email
 {
-    public static void sendMail(String recipient) throws Exception
+    public static void sendMail(String recipient, String subject, String text) throws Exception
     {
         System.out.println("Trying to send mail");
         Properties properties = new Properties();
@@ -33,20 +33,20 @@ public class Email
             }
         });
         System.out.println("23");
-        Message message = prepareMessage(session, myAccountEmail, recipient);
+        Message message = prepareMessage(session, myAccountEmail, recipient, subject, text);
 
         Transport.send(message);
         System.out.println("Message is sent");
     }
-    private static Message prepareMessage(Session session, String myAccountEmail, String recipient)
+    private static Message prepareMessage(Session session, String myAccountEmail, String recipient, String subject, String text)
     {
         try
         {
             Message message =  new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO , new InternetAddress(recipient));
-            message.setSubject("Du har nå registerert en bruker");
-            message.setText("Gratulerer med registrert bruker i vår hotell kjede");
+            message.setSubject(subject);
+            message.setText(text);
             return message;
         }
         catch (Exception ex)
