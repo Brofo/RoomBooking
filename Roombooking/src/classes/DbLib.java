@@ -157,13 +157,8 @@ public class DbLib {
             pst.setString(6, customerPreferences);
             pst.setString(7, paymentType);
 
-            int orderCount = pst.executeUpdate();
-            if(orderCount == 1) {
-                //out.println(orderCount + " order created.");
-            }
-            else {
-               // out.println(orderCount + " orders created.");
-            }
+            pst.executeUpdate();
+
             return orderId;
         }
         catch (SQLException | ParseException e) {
