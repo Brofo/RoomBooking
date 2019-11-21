@@ -1,6 +1,7 @@
 package servlets.bookingServlets;
 
 import classes.DbLib;
+import classes.Email;
 import classes.Register;
 
 import javax.servlet.ServletException;
@@ -136,5 +137,18 @@ public class BookingServlet2 extends HttpServlet {
             e.printStackTrace();
         }
 
+        //Email
+        String subject = "Order Confirmation";
+        String text = "You have successfully created a booking. \n\n" + firstname + " " + lastname + "\n" +
+                "Room: " + roomType + "\nCheck in date: " + checkInDate + "\n" +
+                "Check out date: " + checkOutDate + "\n\nThank you for choosing Cohesion Hotel";
+        try {
+            System.out.println("før sendEmail");
+            Email.sendMail(email, subject, text);
+            System.out.println("etter SendMail");
+        } catch (Exception ex) {
+            System.out.println("i catch");
+            ex.printStackTrace();
+        }
     }
 }
