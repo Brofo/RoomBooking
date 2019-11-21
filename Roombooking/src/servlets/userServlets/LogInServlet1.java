@@ -18,9 +18,10 @@ import java.sql.SQLException;
         )
 
 /**
- * LogInServlet1 brukes kun til å sjekke om brukeren allerede er logget inn.
- * Hvis brukeren er logget inn, får den beskjed om dette. Hvis ikke, blir den
- * videresendt til LogIn.jsp, som er formen til innloggingsmenyen.
+ * This servlet is activated when a person tries to access the Log In page.
+ * The functionality it provides, is to check whether this person is already logged in.
+ * If so, they are sent directly to their profile. If not, they are sent to the
+ * Log In page.
  */
 public class LogInServlet1 extends HttpServlet {
 

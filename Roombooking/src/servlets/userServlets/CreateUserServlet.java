@@ -64,12 +64,11 @@ public class CreateUserServlet extends HttpServlet {
             }
 
             //Email
+            String subject = "Created user in Cohesion Hotel";
+            String text = "Congratulations with your new user! \n Now you can log in with your Email and Password.";
             try {
-                System.out.println("før sendEmail");
-                Email.sendMail(email);
-                System.out.println("etter SendMail");
+                Email.sendMail(email, subject, text);
             } catch (Exception ex) {
-                System.out.println("i catch");
                 ex.printStackTrace();
             }
         }
