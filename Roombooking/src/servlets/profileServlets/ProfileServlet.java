@@ -34,11 +34,13 @@ public class ProfileServlet extends HttpServlet {
             DbLib fun = new DbLib(out);
 
             String cID = ck[0].getValue();
-            String firstname = ck[0].getName();
+
             //Uses the getField method to get cus_bonuspoints from the database and tie it to bonus
             String bonus = null;
+            String firstname = null;
             try {
                 bonus = fun.getField("cus_bonuspoints","customer","cus_id",cID);
+                firstname = fun.getField("cus_firstname","customer","cus_id",cID);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

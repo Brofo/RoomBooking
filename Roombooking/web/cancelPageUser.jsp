@@ -83,7 +83,6 @@
         <form action="servlets.cancelServlets.CancelPageUser"  method="post" >
             <p>Write in your bookingnumber in the field down below to cancel your order</p>
             Bookingnumber: <input type="text" name="orderid"><br>
-
             <br> <input class="profile"  type="submit" name="action" value="Cancel booking">
             <input class="profile" onclick="closeForm('kansellereForm',null)" type="button" value="cancel">
         </form>
